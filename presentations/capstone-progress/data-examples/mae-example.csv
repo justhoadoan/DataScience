@@ -1,0 +1,4 @@
+listing_id,split_group,category,source,district_analysis,area_analysis_m2,actual_vnd,raw_prediction_vnd,prediction_vnd,clipped,unseen_district,area_available,residual_vnd,absolute_error_vnd,model,partition,fold
+nt_134753560,listing_nt_134753560,can_ho_chung_cu,nhatot,Thanh Trì,105.0,15000000.0,12649269.283925196,12649269.283925196,False,False,True,-2350730.716074804,2350730.716074804,ablation_C,internal_test,-1
+nt_134385876,listing_nt_134385876,can_ho_chung_cu,nhatot,Thanh Trì,100.0,10000000.0,12330445.312897114,12330445.312897114,False,False,True,2330445.312897114,2330445.312897114,ablation_C,internal_test,-1
+nt_134813821,listing_nt_134813821,can_ho_chung_cu,nhatot,Hà Đông,115.0,11500000.0,14477966.240254413,14477966.240254413,False,False,True,2977966.2402544133,2977966.2402544133,ablation_C,internal_test,-1

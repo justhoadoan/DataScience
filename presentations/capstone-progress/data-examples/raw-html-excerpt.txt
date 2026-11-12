@@ -1,0 +1,7 @@
+<span itemprop='price' content='18000000'>18 triệu /&nbsp;tháng</span>
+<meta itemprop='priceCurrency' content='VND'>
+Diện tích: <span itemprop='value'>116</span> <span itemprop='unitText'>m²</span>
+<span itemprop='value'>3</span> phòng ngủ
+<span itemprop='streetAddress'>Phố Tân Mai</span>
+<span itemprop='addressLocality'>Phường Hoàng Mai</span>
+<span itemprop='addressRegion'>Hà Nội</span>

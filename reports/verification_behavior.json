@@ -1,0 +1,79 @@
+{
+  "model_version": "ec9a7bf02b42ae3b",
+  "behavior": {
+    "contract_version": 2,
+    "checked_rows": 5292,
+    "bedroom_decreases": 0,
+    "area_decreases": 0,
+    "violations": 0,
+    "assumption": "Nondecreasing area/separate bedrooms with other inputs fixed; no ordering between categories."
+  },
+  "code_and_artifact_checksums": "passed",
+  "unchanged_raw_data_and_price_membership": "passed",
+  "unchanged_benchmark_sha256": "9fe8a9f243fe0a687fa03f83862230930651f0c1b35fd0dd434db9b49390e7ee",
+  "train_n": 5301,
+  "benchmark_n": 432,
+  "no_id_or_duplicate_group_overlap": true,
+  "support_rows_development_only": 5301,
+  "state_roundtrip_prediction_and_evidence": "passed",
+  "benchmark": {
+    "n": 432,
+    "mae_vnd": 1544409.341497094,
+    "rmse_vnd": 2779397.044174218,
+    "r2": 0.7354264252158731,
+    "median_ae_vnd": 876580.729851461,
+    "p90_ae_vnd": 3311282.6039155293,
+    "median_price_vnd": 5000000.0,
+    "nmae_pct": 30.88818682994188
+  },
+  "category_metrics": {
+    "can_ho_chung_cu": {
+      "n": 175,
+      "mae_vnd": 2364807.7928523677,
+      "rmse_vnd": 3758672.7595004286,
+      "r2": 0.5776362033512566,
+      "median_ae_vnd": 1788244.2628830709,
+      "p90_ae_vnd": 4354014.207169588,
+      "median_price_vnd": 11000000.0,
+      "nmae_pct": 21.498252662294252
+    },
+    "nha_tro": {
+      "n": 257,
+      "mae_vnd": 985772.2637259936,
+      "rmse_vnd": 1834480.6468496749,
+      "r2": 0.38059921209260095,
+      "median_ae_vnd": 628183.6141424263,
+      "p90_ae_vnd": 2154859.4532605065,
+      "median_price_vnd": 3900000.0,
+      "nmae_pct": 25.276211890410092
+    }
+  },
+  "python_tests": {
+    "passed": 52,
+    "failed": 0
+  },
+  "browser_e2e": {
+    "passed": 4,
+    "failed": 0,
+    "covers": [
+      "area/bedroom validation",
+      "studio zero versus missing null",
+      "nondecreasing bedroom price",
+      "changed-input stale result",
+      "edits during in-flight request",
+      "field-level server errors",
+      "load failure and retry",
+      "mobile navigation and 1440/768/390 overflow",
+      "reduced motion"
+    ]
+  },
+  "frontend_build": "passed Node 22",
+  "http_smoke": "passed",
+  "ui_inspection": {
+    "fail": 0,
+    "warn": 1,
+    "accepted_warning": "Independent form and variable result column have different content heights; do not stretch empty panels."
+  },
+  "docker_build": "not run: existing Docker daemon unavailable",
+  "remote_deployment": "not run: local setup requested"
+}

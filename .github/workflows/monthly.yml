@@ -1,0 +1,79 @@
+name: Monthly data and model evaluation
+on:
+  schedule:
+    # Just after month-end: covers the entire completed month in Vietnam.
+    - cron: '35 0 1 * *'
+      timezone: Asia/Ho_Chi_Minh
+  workflow_dispatch:
+    inputs:
+      since:
+        description: 'First posting date YYYY-MM-DD; blank means start of previous month'
+        required: false
+        type: string
+      until:
+        description: 'Last posting date YYYY-MM-DD; blank means end of previous month'
+        required: false
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: rental-monthly-state
+  cancel-in-progress: false
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    outputs:
+      promoted: ${{ steps.decision.outputs.promoted }}
+      state_tag: ${{ steps.decision.outputs.state_tag }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-dev.lock
+      - run: pip install --require-hashes -r requirements-dev.lock && pip install --no-deps -e .
+      - run: python -m pytest -q
+      - name: Determine the completed month or manual backfill window
+        id: window
+        env:
+          INPUT_SINCE: ${{ inputs.since }}
+          INPUT_UNTIL: ${{ inputs.until }}
+        run: python scripts/month_window.py >> "$GITHUB_OUTPUT"
+      - name: Restore durable dataset, benchmark and registry
+        run: python scripts/github_state.py restore
+      - name: Crawl, audit, EDA, train and apply the promotion policy
+        env:
+          SINCE: ${{ steps.window.outputs.since }}
+          UNTIL: ${{ steps.window.outputs.until }}
+        run: python -m hanoi_rentals.cli refresh --since "$SINCE" --until "$UNTIL" --max-pages 120
+      - name: Record deployment decision
+        id: decision
+        run: |
+          python scripts/workflow_summary.py
+          printf 'state_tag=rental-state-%s-%s\n' "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" >> "$GITHUB_OUTPUT"
+      - name: Preserve updated state even when the candidate is rejected
+        env:
+          STATE_TAG: ${{ steps.decision.outputs.state_tag }}
+        run: python scripts/github_state.py save --tag "$STATE_TAG"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: monthly-evaluation-${{ github.run_id }}
+          path: reports/
+          retention-days: 90
+  publish:
+    needs: evaluate
+    if: needs.evaluate.outputs.promoted == 'true' && vars.ENABLE_IMAGE_PUBLISH == 'true'
+    uses: ./.github/workflows/deploy.yml
+    permissions:
+      contents: read
+      packages: write
+    with:
+      state_tag: ${{ needs.evaluate.outputs.state_tag }}
+    secrets: inherit

@@ -1,0 +1,77 @@
+{
+  "finished_utc": "2026-10-30T17:10:22.204751+00:00",
+  "quality": {
+    "behavior_violations": 0,
+    "development_n": 5301,
+    "exclusion_rate": 0.016620973269362578,
+    "area_missing_rate": 0.41174420630771913,
+    "area_psi": 0.0,
+    "input_mode": "existing_snapshot",
+    "crawl_errors": false,
+    "crawl_incomplete": false
+  },
+  "eligible_rows": 5739,
+  "input_rows": 5836,
+  "evaluation": {
+    "promoted": true,
+    "reasons": [],
+    "baseline_improvement_pct": 40.093486138515,
+    "champion_improvement_pct": 0.9514441039965127,
+    "candidate": "ec9a7bf02b42ae3b",
+    "champion": "ec9a7bf02b42ae3b"
+  },
+  "crawl": null,
+  "latest_collection_report": {
+    "collected_at": "2026-10-30T22:48:01.746968+07:00",
+    "since": "2026-10-01",
+    "until": "2026-10-30",
+    "previous_rows": 2205,
+    "added_rows": 3631,
+    "total_rows": 5836,
+    "added_early_month": 1135,
+    "added_by_source": {
+      "nhatot": 3015,
+      "alonhadat": 616
+    },
+    "coverage": [
+      {
+        "source": "nhatot",
+        "category": "can_ho_chung_cu",
+        "pages": 35,
+        "stop_reason": "end_of_results",
+        "window_boundary_reached": true,
+        "oldest_seen": "2026-09-30"
+      },
+      {
+        "source": "nhatot",
+        "category": "nha_tro",
+        "pages": 34,
+        "stop_reason": "end_of_results",
+        "window_boundary_reached": true,
+        "oldest_seen": "2026-09-30"
+      },
+      {
+        "source": "alonhadat",
+        "category": "can_ho_chung_cu",
+        "pages": 40,
+        "stop_reason": "error",
+        "window_boundary_reached": false,
+        "oldest_seen": "2026-10-14",
+        "error": "Fetch failed after retry: https://alonhadat.com.vn/cho-thue-can-ho-chung-cu/ha-noi/trang-41"
+      },
+      {
+        "source": "alonhadat",
+        "category": "nha_tro",
+        "pages": 0,
+        "stop_reason": "error",
+        "window_boundary_reached": false,
+        "error": "Fetch failed after retry: https://alonhadat.com.vn/cho-thue-phong-tro-nha-tro/ha-noi"
+      }
+    ],
+    "all_boundaries_reached": false,
+    "limit": "Only currently accessible ads; deleted ads and original publication dates cannot be reconstructed.",
+    "raw_manifest": "reports/raw_manifest_latest.json",
+    "raw_manifest_sha256": "d96675cedf32a704490143b02f9df2f1e5be56851be1b895fd5b4891ea25022d",
+    "dropped_implausible_rows": 10
+  }
+}

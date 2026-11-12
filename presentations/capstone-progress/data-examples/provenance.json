@@ -1,0 +1,20 @@
+{
+  "listing_ids": [
+    "nt_135562204",
+    "alo_19180666"
+  ],
+  "raw_snapshot_date": "2026-10-30",
+  "raw_files": {
+    "nhatot-p1.json": {
+      "source": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p1.json",
+      "sha256": "cbc59eacffd85823bef2d84b6afa2eb8d92378b6b7e431894d14809dfcd273a9"
+    },
+    "alonhadat-p1.html": {
+      "source": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p1.html",
+      "sha256": "4d47a07ac225730ae1666bdf9007d069230119993f38364143979b4ce3845aac"
+    }
+  },
+  "collected_csv_source": "data/processed/listings.csv",
+  "analysis_csv_source": "data/analysis/listings_analysis.csv",
+  "display": "Selected original fields; JSON pretty-printed; HTML fragments copied verbatim. CSV projections preserve exact stored values; complete selected rows accompany them."
+}

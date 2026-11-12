@@ -1,0 +1,110 @@
+name: Publish and deploy evaluated web image
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      state_tag:
+        description: 'Versioned state release, or rental-state for the latest approved champion'
+        type: string
+        default: rental-state
+  workflow_call:
+    inputs:
+      state_tag:
+        type: string
+        default: rental-state
+    secrets:
+      DEPLOY_HOST:
+        required: false
+      DEPLOY_USER:
+        required: false
+      DEPLOY_SSH_KEY:
+        required: false
+      DEPLOY_KNOWN_HOSTS:
+        required: false
+permissions:
+  contents: read
+concurrency:
+  group: rental-web-production
+  cancel-in-progress: false
+jobs:
+  image:
+    if: vars.ENABLE_IMAGE_PUBLISH == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      packages: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    outputs:
+      image: ${{ steps.publish.outputs.image }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-dev.lock
+      - run: pip install --require-hashes -r requirements-dev.lock && pip install --no-deps -e .
+      - name: Restore the exact approved model and dataset version
+        env:
+          STATE_TAG: ${{ inputs.state_tag || 'rental-state' }}
+        run: python scripts/github_state.py restore --tag "$STATE_TAG"
+      - run: python -m pytest -q
+      - name: Build, verify and push the evaluated image
+        id: publish
+        run: |
+          image_name="ghcr.io/${GITHUB_REPOSITORY,,}"
+          image_tag="${image_name}:sha-${GITHUB_SHA:0:12}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          docker build --label "org.opencontainers.image.revision=$GITHUB_SHA" -t "$image_tag" .
+          docker run -d --name rental-publish -p 127.0.0.1:8001:8000 "$image_tag"
+          python scripts/smoke.py --url http://127.0.0.1:8001
+          docker rm -f rental-publish
+          printf '%s' "$GH_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          docker push "$image_tag"
+          image_ref="$(docker inspect --format='{{index .RepoDigests 0}}' "$image_tag")"
+          printf 'image=%s\n' "$image_ref" >> "$GITHUB_OUTPUT"
+      - if: always()
+        run: docker logs rental-publish 2>/dev/null || true; docker rm -f rental-publish 2>/dev/null || true
+  rollout:
+    needs: image
+    if: vars.ENABLE_DEPLOY == 'true'
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: read
+      packages: read
+    env:
+      DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+      DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+      DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+      DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+      IMAGE_REF: ${{ needs.image.outputs.image }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PUBLIC_URL: ${{ vars.DEPLOY_URL }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Configure SSH using the supplied host key
+        run: |
+          test -n "$DEPLOY_HOST" && test -n "$DEPLOY_USER" && test -n "$DEPLOY_KNOWN_HOSTS" && test -n "$DEPLOY_SSH_KEY"
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          eval "$(ssh-agent -s)"
+          printf '%s\n' "$DEPLOY_SSH_KEY" | ssh-add -
+          printf 'SSH_AUTH_SOCK=%s\nSSH_AGENT_PID=%s\n' "$SSH_AUTH_SOCK" "$SSH_AGENT_PID" >> "$GITHUB_ENV"
+      - name: Deploy immutable image with automatic readiness rollback
+        id: rollout
+        run: |
+          ssh "$DEPLOY_USER@$DEPLOY_HOST" 'mkdir -p hanoi-rentals'
+          scp deploy/compose.production.yml deploy/Caddyfile deploy/remote-deploy.sh "$DEPLOY_USER@$DEPLOY_HOST:hanoi-rentals/"
+          printf '%s' "$GH_TOKEN" | ssh "$DEPLOY_USER@$DEPLOY_HOST" "docker login ghcr.io -u '$GITHUB_ACTOR' --password-stdin"
+          ssh "$DEPLOY_USER@$DEPLOY_HOST" "bash hanoi-rentals/remote-deploy.sh '$IMAGE_REF'"
+      - name: Check the public HTTPS endpoint when configured
+        if: vars.DEPLOY_URL != ''
+        run: curl --fail --silent --show-error --retry 5 --retry-all-errors --retry-delay 5 "${PUBLIC_URL%/}/api/health"
+      - name: Restore previous image after a failed public health check
+        if: failure() && steps.rollout.outcome == 'success'
+        run: ssh "$DEPLOY_USER@$DEPLOY_HOST" 'bash hanoi-rentals/remote-deploy.sh --rollback'
+      - if: always()
+        run: ssh "$DEPLOY_USER@$DEPLOY_HOST" 'docker logout ghcr.io' 2>/dev/null || true

@@ -1,0 +1,554 @@
+{
+  "crawl_date": "2026-10-30",
+  "scope": [
+    "can_ho_chung_cu",
+    "nha_tro"
+  ],
+  "files": [
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p1.html",
+      "bytes": 140042,
+      "sha256": "4d47a07ac225730ae1666bdf9007d069230119993f38364143979b4ce3845aac"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p10.html",
+      "bytes": 130094,
+      "sha256": "ddfb9bec282e21ed767ab37a426b07c3879d6b4da6541d7488552a90c522d2c7"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p11.html",
+      "bytes": 127551,
+      "sha256": "d749c04c8896e0f1627525610fcb5a7e4b9ad4f04665250a18fa94318bd1cbc5"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p12.html",
+      "bytes": 127628,
+      "sha256": "dce4656e5406a3dc412b7707332dfc5a1785aa7521b5e5580f2af67e7f8e6fa6"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p13.html",
+      "bytes": 127476,
+      "sha256": "3d1c7ce91c590060c36b23934badc3a820a6edd052e1658c522ca89f2b4c06d2"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p14.html",
+      "bytes": 127714,
+      "sha256": "7c504827f76a05044f6a91e8e5169a07a650f3c1d1fb38ccd5ad199faa049230"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p15.html",
+      "bytes": 130108,
+      "sha256": "f1dcad6a04496f2d07cdb604627e9d93e4181eef3291b7747ef41635ae5bd33b"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p16.html",
+      "bytes": 131278,
+      "sha256": "3136b286572febe1d2d99a0184e688f3a5baea250f9a72d0f2f5bca432af48ac"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p17.html",
+      "bytes": 132157,
+      "sha256": "c278520755a72ccbfd6322f775b3f61fe455ce239e0f1e710bc9638073edca83"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p18.html",
+      "bytes": 132257,
+      "sha256": "79e4df56ca1dbdb5cb4aab5e256eb099e750925c3fa3193c4ccc954fcf0c7da0"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p19.html",
+      "bytes": 132137,
+      "sha256": "8b8c3926f0a7447196b15a0daa094dba90df7a514b27bb5cacdc40b8cd2812a0"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p2.html",
+      "bytes": 130010,
+      "sha256": "53830820a458a5099042a15395305906ebef4c0465976510438c5bc09258b258"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p20.html",
+      "bytes": 128683,
+      "sha256": "b4dcc3688570a6d6d23bc0b99ef0f7a419db5477d792064469b29b072afad028"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p21.html",
+      "bytes": 128550,
+      "sha256": "d0c8365d86e2394f29f0e8dd78b111d16f440d48b588f21402bc396a52f9da87"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p22.html",
+      "bytes": 128591,
+      "sha256": "a5b953559c0eb6ebf199c7bc596df88945cbe38428d82ad7111c602abdfc8baf"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p23.html",
+      "bytes": 129012,
+      "sha256": "aa4a4a592034d235cd099cc18d92bb7cf304691d33f36eb24815f5d2ad5b7534"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p24.html",
+      "bytes": 127905,
+      "sha256": "92598966872caf8eb1f7f7c7bd3efdd25bd3b3b6681cbb180d3932ed5478c9e8"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p25.html",
+      "bytes": 128710,
+      "sha256": "6ee7add51a162a395ea50cfa04aa0c879ee6639324fbcad145f91505acf0e43b"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p26.html",
+      "bytes": 129089,
+      "sha256": "3a83f8aacb1dce2a5bcb57a5b1d572adc5f675f77a00252aab8f4a5ba8ff2135"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p27.html",
+      "bytes": 127815,
+      "sha256": "7d4c73d86482acb5f3fed1a9eb662aa24f5427f3901d96f7e9f4cea3972ebc61"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p28.html",
+      "bytes": 129717,
+      "sha256": "38bb2b95d102ba3e2da8fb11d90f028951aa2344c62f9c908fa40274f79662b0"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p29.html",
+      "bytes": 128872,
+      "sha256": "2f89c72d44c029079aa9fc8792b846346a92b3a97f1b6aea8108209bf66cd325"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p3.html",
+      "bytes": 129287,
+      "sha256": "e7ed6cdeaa9f31ad5726d269ce80da390151f2c3d6dfe75b2bf119fbe781dc6f"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p30.html",
+      "bytes": 128826,
+      "sha256": "b9e68a2aa169a59fcd6691f7bab70cb744e44c9bb16c74d122dc1c442694e63f"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p31.html",
+      "bytes": 129891,
+      "sha256": "3a26a5788bf2b824c6cf5424d55968172cb3614ec5289a1a45eab31127ddd244"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p32.html",
+      "bytes": 132021,
+      "sha256": "50aea0c520161e59fc6053b686d01def27d40a937be083fb560153f407e7e742"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p33.html",
+      "bytes": 131799,
+      "sha256": "8f209337e51f5a5a4f9d6698c97f3f069f6b9a55ae79f18adb8698caadf3fe70"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p34.html",
+      "bytes": 131046,
+      "sha256": "e7ca18222e19ed4547b7f5e1263382aec7093fe5595e325ef53dd9fb943e546a"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p35.html",
+      "bytes": 131324,
+      "sha256": "55cf744e3eb7541ff7d8320d14b7f4d4821f8b86f3a7193a74facb5f9d9a22f8"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p36.html",
+      "bytes": 128271,
+      "sha256": "d77d67fb8c065fd0ffa18cc0b2f327ef30809bbf99fa7fd7ba47449eadf2b145"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p37.html",
+      "bytes": 128788,
+      "sha256": "3ff098123035ede31814f0dabcde6df9a26291b04175caf127c03458dabad55c"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p38.html",
+      "bytes": 129230,
+      "sha256": "8f4410a85db5a09137ba499aa4956b2c27d7cf9fff0b7ffec8ec3fa8e719cfef"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p39.html",
+      "bytes": 129319,
+      "sha256": "eee5c0371dd923965cd1ce869a73587039a2f8487cbf07c30f63da8e1287f3a6"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p4.html",
+      "bytes": 128659,
+      "sha256": "314e7d7d6a9638628c6a0d9c32921f1ea977c1ab4a551128c54862e41fbf7495"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p40.html",
+      "bytes": 129273,
+      "sha256": "9db9066469dbc1a701d0781f6a157171f956889117a104fa22a089ed11205161"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p5.html",
+      "bytes": 128466,
+      "sha256": "2e5f50fd0afca59b38597dcb1b6e08dda9d7e1ff1eb9238b9bd019d3fdcd3582"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p6.html",
+      "bytes": 128946,
+      "sha256": "c5831111b32e16bf50dd42c46c40be8df42ba1fd40fa5b7142b0f3d6c4a50c46"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p7.html",
+      "bytes": 128662,
+      "sha256": "a205c327ccb0b9b8a758ae4a4637a4d7b2d648001f0a8dda29b0dc0ec0570055"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p8.html",
+      "bytes": 130537,
+      "sha256": "6a5fdab864b417a136ac7f6665285dc075a977dbc8f46bc353764924e272b10c"
+    },
+    {
+      "path": "data/raw/2026-10-30/alonhadat/can_ho_chung_cu/p9.html",
+      "bytes": 130158,
+      "sha256": "34f366b343358504a05d62f6d591c40131e96f6a19f5e9fa6a8c77c1f7207671"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p1.json",
+      "bytes": 318117,
+      "sha256": "cbc59eacffd85823bef2d84b6afa2eb8d92378b6b7e431894d14809dfcd273a9"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p10.json",
+      "bytes": 270524,
+      "sha256": "92b8f910a055b149bde03e53423af50961a8b696d6b3bf22719eba34c2139d4e"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p11.json",
+      "bytes": 305423,
+      "sha256": "0d49582d8e619df22b3bd5245647e8337b74ee9e935c78dc922c9932e93361b5"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p12.json",
+      "bytes": 260317,
+      "sha256": "c6f596f84027907e625e17f18ae69cf1159370f11a7ad08f25896d4735f1de6f"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p13.json",
+      "bytes": 254985,
+      "sha256": "35ca7ac6129352fb03abf4f9a05f260c4a405a75c9d8447a041b6389e6687784"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p14.json",
+      "bytes": 227760,
+      "sha256": "6eb28d669b4910a6ae87c0463ad768982f7cf0537c8ac5da615461973af21891"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p15.json",
+      "bytes": 247182,
+      "sha256": "6fe8d5dcf78913c4fd9f7ed97e21db857f1f2a68becbdbf55c021f915df4763b"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p16.json",
+      "bytes": 278925,
+      "sha256": "8c5f8ec75a10d95b970aeb860cbcc5e13a7396f2f3bfeb787acd9e531ef7d256"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p17.json",
+      "bytes": 237792,
+      "sha256": "cb8b5a4bdb6d5f6c64ed37fd50519e9d4c04709f63080b7c151cf850d096b3b8"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p18.json",
+      "bytes": 274229,
+      "sha256": "c1cfaaa07a69ba97b40712d21b6e48c2696ab5dfea05813ef711bde1ff449fa6"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p19.json",
+      "bytes": 283635,
+      "sha256": "871ca7f9ed7ad2683caf876457846860b1c22e94b5f304153e208d043df6e353"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p2.json",
+      "bytes": 278737,
+      "sha256": "d4792593f50ec77337d735db208c3384d6e9b66ccde7163f13bbfd559bdaee14"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p20.json",
+      "bytes": 276791,
+      "sha256": "03c6c8dbc4f79b4a1bce2598e308aa0cd972ffc8d25160cb8e9980bd696bdb12"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p21.json",
+      "bytes": 236046,
+      "sha256": "1430884ec92754c21bfd713aa126cf243782f336b9c249228f6ad657a820ae02"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p22.json",
+      "bytes": 233343,
+      "sha256": "29562f80a6c5f023417757c16e162c4888e298d0e306d89b2909755c6047c722"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p23.json",
+      "bytes": 257270,
+      "sha256": "ce0a40fff8bfc66bfecbb9ad02269acd5b8c679fcf6ac90d54833e229535c0da"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p24.json",
+      "bytes": 269979,
+      "sha256": "16a283094793b98e80491c510293c668ee1da43c04c7b37787d12c1d1ce9fe2d"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p25.json",
+      "bytes": 228803,
+      "sha256": "49dc1c3b75607362052cf3d219322962b86d9facc0139c09f73b986f4dab3bb4"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p26.json",
+      "bytes": 240942,
+      "sha256": "e0b2207c9bbf0e9cee810b12e2cd23ee2cd28c01df13310876bbdd8e79e48883"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p27.json",
+      "bytes": 227326,
+      "sha256": "a25c3e5162fde0506d62a306c7bf6577f011e25c51ae4c824078e78817034c99"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p28.json",
+      "bytes": 248229,
+      "sha256": "576c6eb05a115b36a04dc6153a0fe9eb85e989cdeb05e34ed707a5b486661229"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p29.json",
+      "bytes": 240047,
+      "sha256": "1a2e751a3ecc5a5d0afc8637b79b4374d0f32573fc24715de2ccfffcc6e2b922"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p3.json",
+      "bytes": 298389,
+      "sha256": "84d508ce440c92119b4fabb502b590988585c1402e25492c185f57e9a3cc7492"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p30.json",
+      "bytes": 231768,
+      "sha256": "be9f47c783077ed025cb1af11494860cf1c1ca50f0e7823d6c63c200037d16c6"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p31.json",
+      "bytes": 238389,
+      "sha256": "c9ad2f16155c1a8acc0d7e563b97d635af88bbba688b73c765ada524260a231f"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p32.json",
+      "bytes": 233335,
+      "sha256": "2495d19bde6a3edc7ac3f4c160cb4fdcd84cede3354bc6e28bc0ddbacf5684b6"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p33.json",
+      "bytes": 227869,
+      "sha256": "f54f69f6cb3185f699099d089f2e68c02ad99d40da55fec6ba781f09bd18c8c0"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p34.json",
+      "bytes": 223169,
+      "sha256": "4c42d9ebb2747dbcde234997f0a065fb9df5245634112a8da133a7843e80df63"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p35.json",
+      "bytes": 190967,
+      "sha256": "4bee4c8fda39a4272b407600d61f2ffc5fe753d8e6da4bb154cd972cb3821299"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p4.json",
+      "bytes": 250800,
+      "sha256": "2bffba2ec9053317bd639ed73ff42bd37ad6f316e99e1acd077af73792fa5b3d"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p5.json",
+      "bytes": 302120,
+      "sha256": "b6515f07d8071738426d91746cb454371e5e860ca04ee4470b20080e38ec3830"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p6.json",
+      "bytes": 257414,
+      "sha256": "82245e1540465e9b3ad8876659c04f2a057f53808c03e0016568512db3af873c"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p7.json",
+      "bytes": 287216,
+      "sha256": "17bcf6d7759d55f94e5cfa3686c1c0c5d1f2941bfac1b7f0bc78fabd82c2a15f"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p8.json",
+      "bytes": 247312,
+      "sha256": "c3d186473f66d5feacd5bd88fbe584bef296abd05f51c862cacca1372f5a41e0"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/can_ho_chung_cu/p9.json",
+      "bytes": 272607,
+      "sha256": "27a94942e164fcc24ba8ccc4decc54be7a2485a6b462f78565299585f2a24dc6"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p1.json",
+      "bytes": 280391,
+      "sha256": "7f586c55aad9af6a982a47fa6771746500271967ccd596f2b5ca5f457596e2f1"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p10.json",
+      "bytes": 259637,
+      "sha256": "862f3d3d130ff802fda2927aff25f258ab40fa18506fabdb36316656b3f9d387"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p11.json",
+      "bytes": 259652,
+      "sha256": "bf54155bb1b9c84339de9bc648826d6c126056b189cca69945d740ba6d4eaf5b"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p12.json",
+      "bytes": 254003,
+      "sha256": "d691ecea4c9e5850ad0e2ee2036030e800572a4c900db0574cc8474a717b7992"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p13.json",
+      "bytes": 246845,
+      "sha256": "960b9b67e7cd9331991ce9007c6827d012c6623596a8e2fed02295718d654913"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p14.json",
+      "bytes": 235388,
+      "sha256": "572f5d8cd8c8a5438789a675a815deccebeb268eb1cec5eebd90d021d984f22d"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p15.json",
+      "bytes": 251472,
+      "sha256": "9b58dcbb034ed849f3f05447990572aeb641a4b87180c5ce40a131289c4fb9ba"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p16.json",
+      "bytes": 236490,
+      "sha256": "1ab3a94f150a922b8c72186555625609f6317261402f59e8ecb677bf2b5480ee"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p17.json",
+      "bytes": 240944,
+      "sha256": "155283272ada5146fb7c14ca1a4dea751ded25a4829b443f54e6a926d63c7d3b"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p18.json",
+      "bytes": 240474,
+      "sha256": "25b330657b72d6cf3f1903b6f711ea331fcf0f9dea52fde4913a841b2d4d1196"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p19.json",
+      "bytes": 251929,
+      "sha256": "9ad82ca9ab5a25e9ef5497701e3da7d7528227d56a3338e990dc37ae9c8d1207"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p2.json",
+      "bytes": 273917,
+      "sha256": "e6673ecb7ab51cd5cc68f1bc33631dbc63385392f1a608269cbeab554ebb9a06"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p20.json",
+      "bytes": 245733,
+      "sha256": "8003a05c68182bedb8bdd10acc5d31376ebcd4bc30c719551792be1be22ede9e"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p21.json",
+      "bytes": 243196,
+      "sha256": "8f9f7dadc7103efda4a57b765d1c1f21765b34cb1d07e9c2ee40daf4c23e4357"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p22.json",
+      "bytes": 244808,
+      "sha256": "aa77c802e5237b5773bf11f63869bf7676199a1250f89ae22f07d5c4c4ab8d29"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p23.json",
+      "bytes": 260849,
+      "sha256": "2a4089bfb65736b85ba77cce5f5357759d3c4cb5d323089349dde56a86e499e9"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p24.json",
+      "bytes": 236916,
+      "sha256": "5684d7e5d46dabe8161329b204ed11267168171c71f05c693b11f4ef8de6c625"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p25.json",
+      "bytes": 240827,
+      "sha256": "270a573123285808a8f6c0fe984850d03df2565982f42af3a54a4cc2946d8cb6"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p26.json",
+      "bytes": 232583,
+      "sha256": "797c908c5f27fe26ed50fcdc52047022e49f6926addebdaab760f535b5f2809b"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p27.json",
+      "bytes": 235622,
+      "sha256": "96c4c495f006ac985f83fe6b8ea172beb71f8d9c4179d9bf3773ea5a87657ca2"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p28.json",
+      "bytes": 242736,
+      "sha256": "b765a10da51d261846d85df3680aeb28c2555ea01aa1d28f9d9c88573fb339fc"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p29.json",
+      "bytes": 231694,
+      "sha256": "0cc93bfd5239996b29881d562e3b619aba1c500de638da8e34f179e068630f7c"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p3.json",
+      "bytes": 260830,
+      "sha256": "43efcc4aff0f79321f31ce0e2f25a9d6ac680fe97dfc48d65620788cb5722225"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p30.json",
+      "bytes": 245006,
+      "sha256": "b8115345a2eeb8a458f4c81900115dd2826ecc8e08c20c27d13f9fee6ee5ce18"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p31.json",
+      "bytes": 238557,
+      "sha256": "94b7fc0e90006cc8860d94ff583ffe105dc402db507451abcda7f4e369d6587a"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p32.json",
+      "bytes": 233619,
+      "sha256": "60db074a1f76429a41a8dd236296a5bcec041329727f99ecaedaa2d8bdcd279b"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p33.json",
+      "bytes": 232325,
+      "sha256": "d2f13b299d11a5acfb08ba625e53d65460f7ba964dd1881d4a972ca37316fb18"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p34.json",
+      "bytes": 10,
+      "sha256": "f3c689523d23693d898b0fff66ef380027572e1896e28552f0e029a5626dd46b"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p4.json",
+      "bytes": 256696,
+      "sha256": "9157e487c92035c98ad0ea9e7177244dae46e9745c6406e490ef145af0601a11"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p5.json",
+      "bytes": 268189,
+      "sha256": "f4b27122d6421342b51bd58fcb260c2a9bda16f127ab3a928c978ac74230af8c"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p6.json",
+      "bytes": 236300,
+      "sha256": "88a939e6e105a1b475932afa045b773904ebed4ea01dd5e3bc6e0193b3032d4c"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p7.json",
+      "bytes": 266498,
+      "sha256": "f90b26f8b3f4363d93cab08709e6bdadd0ef39cd5ac090fbcb4eb81fd3f72235"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p8.json",
+      "bytes": 239279,
+      "sha256": "8bb62512363a21c2f701fdd737cddb69434666ed9296fadc29f5422dd328476c"
+    },
+    {
+      "path": "data/raw/2026-10-30/nhatot/nha_tro/p9.json",
+      "bytes": 262952,
+      "sha256": "88f138e841df5f577640896cd58c8b38921b3d4857687c8bc0813d7747e6b87f"
+    }
+  ]
+}

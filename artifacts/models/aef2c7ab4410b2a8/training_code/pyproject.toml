@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hanoi-rentals"
+version = "1.0.0"
+description = "Hanoi apartment and room asking-rent estimation with a monthly MLOps pipeline"
+requires-python = ">=3.12"
+dependencies = [
+  "beautifulsoup4>=4.15,<5", "curl-cffi>=0.16,<1", "lxml>=6,<7",
+  "numpy==2.5.3", "pandas==3.0.5", "scipy==1.18.1",
+  "scikit-learn==1.9.1", "joblib==1.6.0",
+  "matplotlib>=3.11,<4", "seaborn>=0.13,<1",
+  "fastapi>=0.115,<1", "uvicorn[standard]>=0.30,<1", "pydantic>=2.10,<3"
+]
+
+[project.optional-dependencies]
+dev = ["httpx>=0.28,<1", "pytest>=8,<10", "PyYAML>=6,<7"]
+
+[project.scripts]
+hanoi-rentals = "hanoi_rentals.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "tests"]

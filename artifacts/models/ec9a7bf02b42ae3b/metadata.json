@@ -1,0 +1,193 @@
+{
+  "run_fingerprint": "ec9a7bf02b42ae3b040550bbd2f982709fbcd1e8cd7340c47cfb8a0ab189f34d",
+  "input": {
+    "data/analysis/listings_analysis.csv": "ac74c2342f2ae466ac58806d0d2c74379d39da763ae615da24f42df418b91ec4",
+    "data/benchmark/ids.csv": "9fe8a9f243fe0a687fa03f83862230930651f0c1b35fd0dd434db9b49390e7ee",
+    "code/modeling.py": "240e2c53ba8a0349104a05136b10379c5189fd4916c384fa27ac0db63d7717cd",
+    "code/eda_audit.py": "26c11238db020a119d8c80f8876538a84cefae93e5d1537b7e2cf381773fc573",
+    "code/layout.py": "219d2e1bf791f2a8deacaad16f7fbb6f0c7951c562e46d89cca267c7d69c6ae3",
+    "versions": {
+      "scikit-learn": "1.9.1",
+      "numpy": "2.5.3",
+      "pandas": "3.0.5",
+      "scipy": "1.18.1",
+      "joblib": "1.6.0"
+    }
+  },
+  "created_utc": "2026-10-30T17:10:19.450660+00:00",
+  "seed": 42,
+  "eligible_n": 5733,
+  "development_n": 5301,
+  "internal_test_n": 432,
+  "split_sha256": "9b00ebcf5e890e5992c0c1e968ea0831a53143af243a39177dfc04bfdaedf433",
+  "split_groups": 5576,
+  "fold_policy": "GroupKFold(shuffle=True, random_state=42)",
+  "fold_balance_rule": "Every training/validation category share >=50% of development share; category-stratified grouped fallback if needed.",
+  "tie_policy": "Candidates within 1% of best OOF MAE: favor Ridge, then fewer features, then MAE.",
+  "clipping_policy": "max(raw_prediction_vnd, 0); non-finite predictions rejected",
+  "serialization_tolerance": "rtol=1e-12, atol=1e-6 VND; floating-point accumulation only",
+  "completion_note": "",
+  "target_units": "VND/month",
+  "feature_schema": [
+    "category",
+    "district_analysis",
+    "area_analysis_m2",
+    "bedrooms_analysis",
+    "furniture_analysis"
+  ],
+  "model_fitted_on": "development only",
+  "internal_test_exposure": "Previously inspected during EDA; not an untouched external test.",
+  "bounded_review": "Persisted audit-queue decisions are applied before splitting, with context validation. Automated audit flags quarantine unresolved cases in the current snapshot. Manual evidence is CSV-only, not webpage verification; no numeric price threshold exclusion.",
+  "selected_model": "ablation_C",
+  "best_source_free_candidate": "ablation_C",
+  "candidate_passes_practical_rule": true,
+  "candidate_oof_improvement_pct": 39.83407392734822,
+  "candidate_category_mae_change_pct": {
+    "can_ho_chung_cu": -47.7603583943814,
+    "nha_tro": -15.638948470968039
+  },
+  "selected_config": {
+    "family": "monotone",
+    "target": "log",
+    "feature_set": "C",
+    "params": {
+      "max_leaf_nodes": 15,
+      "min_samples_leaf": 20
+    },
+    "features": [
+      "category",
+      "district_analysis",
+      "area_analysis_m2",
+      "bedrooms_analysis",
+      "furniture_analysis"
+    ]
+  },
+  "source_diagnostic": "source_diagnostic_D",
+  "sensitivity_model": "dedup_training_sensitivity",
+  "model_sha256": "8438ad3eddcdde17c6551e39c2da4b34e4c290ff0d9caf50fdf17e05c5bdaf99",
+  "version": "ec9a7bf02b42ae3b",
+  "prediction_contract_version": 2,
+  "behavior": {
+    "contract_version": 2,
+    "checked_rows": 5292,
+    "bedroom_decreases": 0,
+    "area_decreases": 0,
+    "violations": 0,
+    "assumption": "Nondecreasing area/separate bedrooms with other inputs fixed; no ordering between categories."
+  },
+  "layout_policy": {
+    "shared_area_m2": 8,
+    "area_per_separate_bedroom_m2": 10,
+    "category_max_bedrooms": {
+      "can_ho_chung_cu": 6,
+      "nha_tro": 2
+    },
+    "bedrooms_meaning": "Separate sleeping rooms; studio/open-plan sleeping area is 0. Unknown stays missing.",
+    "kind": "Product plausibility heuristic, not a legal standard or floor-plan verification"
+  },
+  "category_feature_schema": {
+    "can_ho_chung_cu": [
+      "category",
+      "district_analysis",
+      "area_analysis_m2",
+      "bedrooms_analysis",
+      "furniture_analysis"
+    ],
+    "nha_tro": [
+      "category",
+      "district_analysis",
+      "area_analysis_m2",
+      "furniture_analysis"
+    ]
+  },
+  "benchmark": {
+    "n": 432,
+    "mae_vnd": 1544409.341497094,
+    "rmse_vnd": 2779397.044174218,
+    "r2": 0.7354264252158731,
+    "median_ae_vnd": 876580.729851461,
+    "p90_ae_vnd": 3311282.6039155293,
+    "median_price_vnd": 5000000.0,
+    "nmae_pct": 30.88818682994188
+  },
+  "category_metrics": {
+    "can_ho_chung_cu": {
+      "n": 175,
+      "mae_vnd": 2364807.7928523677,
+      "rmse_vnd": 3758672.7595004286,
+      "r2": 0.5776362033512566,
+      "median_ae_vnd": 1788244.2628830709,
+      "p90_ae_vnd": 4354014.207169588,
+      "median_price_vnd": 11000000.0,
+      "nmae_pct": 21.498252662294252
+    },
+    "nha_tro": {
+      "n": 257,
+      "mae_vnd": 985772.2637259936,
+      "rmse_vnd": 1834480.6468496749,
+      "r2": 0.38059921209260095,
+      "median_ae_vnd": 628183.6141424263,
+      "p90_ae_vnd": 2154859.4532605065,
+      "median_price_vnd": 3900000.0,
+      "nmae_pct": 25.276211890410092
+    }
+  },
+  "supported_districts": [
+    "Ba Đình",
+    "Bắc Từ Liêm",
+    "Chương Mỹ",
+    "Cầu Giấy",
+    "Gia Lâm",
+    "Hai Bà Trưng",
+    "Hoài Đức",
+    "Hoàn Kiếm",
+    "Hoàng Mai",
+    "Hà Đông",
+    "Long Biên",
+    "Mỹ Đức",
+    "Nam Từ Liêm",
+    "Sóc Sơn",
+    "Thanh Trì",
+    "Thanh Xuân",
+    "Thạch Thất",
+    "Tây Hồ",
+    "Đan Phượng",
+    "Đông Anh",
+    "Đống Đa"
+  ],
+  "scope": [
+    "can_ho_chung_cu",
+    "nha_tro"
+  ],
+  "evaluated_at": "2026-10-30T17:10:22.107591+00:00",
+  "quality": {
+    "behavior_violations": 0,
+    "development_n": 5301,
+    "exclusion_rate": 0.016620973269362578,
+    "area_missing_rate": 0.41174420630771913,
+    "area_psi": 0.0,
+    "input_mode": "existing_snapshot",
+    "crawl_errors": false,
+    "crawl_incomplete": false
+  },
+  "dataset": {
+    "rows": 5836,
+    "eligible_rows": 5739,
+    "posting_start": "2026-07-30",
+    "posting_end": "2026-10-30",
+    "source_counts": {
+      "nhatot": 4371,
+      "alonhadat": 1368
+    },
+    "area_distribution": [
+      0.02868150684931507,
+      0.13159246575342465,
+      0.12628424657534246,
+      0.08125,
+      0.12388698630136986,
+      0.09118150684931507,
+      0.008133561643835616,
+      0.40898972602739725
+    ]
+  }
+}

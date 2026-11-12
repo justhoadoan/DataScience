@@ -1,0 +1,22 @@
+.venv/
+.idea/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.work/
+data/raw/
+data/interim/
+frontend/node_modules/
+frontend/dist/
+frontend/test-results/
+frontend/playwright-report/
+frontend/*.tsbuildinfo
+.env
+*.env
+!*.env.example
+.taste-skill/
+
+# Presentation compiler intermediates and previews
+presentations/**/build/

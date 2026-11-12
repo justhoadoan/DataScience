@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-30",
+  "python_tests": {
+    "passed": 42,
+    "failed": 0
+  },
+  "browser_e2e": {
+    "passed": 1,
+    "covers": [
+      "required fields",
+      "optional fields",
+      "real API prediction",
+      "market/model views",
+      "375px mobile overflow",
+      "screenshots"
+    ]
+  },
+  "frontend_build": "passed on Node 22",
+  "launch_script": "passed with automatic Node 22 fallback",
+  "http_smoke": "passed",
+  "real_state_export_restore": "passed",
+  "workflow_actionlint": "passed",
+  "compose_configuration": "passed",
+  "shell_syntax": "passed",
+  "model_fingerprint_and_checksum": "passed",
+  "documentation_links": "passed",
+  "docker_container_build": "not run: Docker Desktop daemon unavailable",
+  "github_actions_execution": "not run remotely",
+  "production_deployment": "not configured: user requested local and guide"
+}

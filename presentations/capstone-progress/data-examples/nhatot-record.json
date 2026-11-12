@@ -1,0 +1,175 @@
+{
+  "account_id": 30206531,
+  "account_name": "Ngọc Đức Vinhomes",
+  "account_oid": "f1f2f166b98f44c82c0fe97c46af8bbf",
+  "ad_features": [],
+  "ad_id": 179801891,
+  "ad_labels": [],
+  "apartment_type": 1,
+  "area": 121,
+  "area_name": "Quận Nam Từ Liêm",
+  "area_v2": 12121,
+  "avatar": "https://cdn.chotot.com/uac2/30206531",
+  "body": "🚩🏢 CHO THUÊ CHUNG CƯ VINHOMES SMART CITY 🏡\n\n✨ Đa dạng căn hộ – Giá thuê hấp dẫn!\n\n🔹 Studio: Nhà nguyên bản 5,5tr | Full đồ 6,5tr\n🔹 1PN+: Nhà nguyên bản 6,5tr | Full đồ 8tr\n🔹 2PN + 1VS: Nhà nguyên bản 7tr | Full đồ 9tr\n🔹 2PN + 2VS: Nhà nguyên bản 8tr | Full đồ 10tr\n🔹 2PN+1 – 2WC: Nhà nguyên bản 8,5tr | Full đồ 11tr\n🔹 3PN: Nhà nguyên bản 9,5tr | Full đồ 12,5tr\n\n✅ Nhiều lựa chọn phù hợp nhu cầu và ngân sách\n🛋️ Có căn nguyên bản và căn full nội thất\n🔑 Hỗ trợ tư vấn, dẫn khách xem nhà thực tế\n\n📲 LIÊN HỆ EM ĐỨC: ***\n💌 Anh/chị cần thuê căn hộ, liên hệ em để được tư vấn và chọn căn phù hợp nhất ạ!",
+  "business_days": [],
+  "category": 1010,
+  "category_name": "Căn hộ/Chung cư",
+  "company_ad": true,
+  "contain_videos": 2,
+  "cta_buttons": [],
+  "date": "14 phút trước",
+  "feature_params": {
+    "compare": {
+      "items": [
+        {
+          "id": "property_legal_document",
+          "label": "Giấy tờ pháp lý",
+          "value": "Sổ hồng riêng"
+        },
+        {
+          "id": "apartment_type",
+          "label": "Loại hình",
+          "value": "Chung cư thương mại"
+        },
+        {
+          "id": "furnishing_sell",
+          "label": "Tình trạng nội thất",
+          "value": "Nội thất cao cấp"
+        }
+      ]
+    },
+    "seo_structure": {
+      "items": [
+        {
+          "id": "size",
+          "label": "Diện tích",
+          "value": "30 m²"
+        },
+        {
+          "id": "rooms",
+          "label": "Số phòng ngủ",
+          "value": "1 PN"
+        },
+        {
+          "id": "furnishing_sell",
+          "label": "Tình trạng nội thất",
+          "value": "Nội thất cao cấp"
+        }
+      ]
+    }
+  },
+  "fee_type": [],
+  "full_name": "Ngọc Đức Vinhomes",
+  "furnishing_sell": 1,
+  "image": "https://cdn.chotot.com/LMU0JnoW52Jw7XEEkN_yFBn6PNDLjrX2xpp9XmoiXoE/preset:listing/plain/4eff82f883de2268bd6bb494fe0c4b52-3008782290769671596.jpg",
+  "image_thumbnails": [
+    {
+      "image": "https://cdn.chotot.com/878I5PE280vJ5SD_-IhvRbTKA9q4Q5MKnwCHqfBLbRI/preset:view/plain/4eff82f883de2268bd6bb494fe0c4b52-3008782290769671596.jpg",
+      "thumbnail": "https://cdn.chotot.com/LMU0JnoW52Jw7XEEkN_yFBn6PNDLjrX2xpp9XmoiXoE/preset:listing/plain/4eff82f883de2268bd6bb494fe0c4b52-3008782290769671596.jpg"
+    },
+    {
+      "image": "https://cdn.chotot.com/H8D5rftiGmyJOiDmd16fbS1VRoXMvvBigV90BF1rKZA/preset:view/plain/e8bda02fb12b45a52309c4bfe27c7329-3008782290785392758.jpg",
+      "thumbnail": "https://cdn.chotot.com/D9BtzyF68G0wmGBHoSgPFr9SKT97TEBvxi7h77h0o5M/preset:listing/plain/e8bda02fb12b45a52309c4bfe27c7329-3008782290785392758.jpg"
+    },
+    {
+      "image": "https://cdn.chotot.com/9W2ZhNRrPdApBK1XvdOaSk4_s8aLsgH2d2Gsb2E9hYk/preset:view/plain/b041bb5ebc76fb3138d966064082cb60-3008782290725722806.jpg",
+      "thumbnail": "https://cdn.chotot.com/zGeRXN3o0LkGYSwl_OfcWM1GoIR_3oqnHjxVUvB4U9M/preset:listing/plain/b041bb5ebc76fb3138d966064082cb60-3008782290725722806.jpg"
+    },
+    {
+      "image": "https://cdn.chotot.com/HUQomww64RVCCPS9Eo6MjRXQGMPQzJcl0pLq2Dyd30w/preset:view/plain/655708f7436e4b54211da2683efa0fcf-3008782291475400980.jpg",
+      "thumbnail": "https://cdn.chotot.com/fUlWqP9zo3_6u0FAe5s17xXRCtDLiJ6mS5WbZ6V4AaQ/preset:listing/plain/655708f7436e4b54211da2683efa0fcf-3008782291475400980.jpg"
+    }
+  ],
+  "images": [
+    "https://cdn.chotot.com/878I5PE280vJ5SD_-IhvRbTKA9q4Q5MKnwCHqfBLbRI/preset:view/plain/4eff82f883de2268bd6bb494fe0c4b52-3008782290769671596.jpg",
+    "https://cdn.chotot.com/H8D5rftiGmyJOiDmd16fbS1VRoXMvvBigV90BF1rKZA/preset:view/plain/e8bda02fb12b45a52309c4bfe27c7329-3008782290785392758.jpg",
+    "https://cdn.chotot.com/9W2ZhNRrPdApBK1XvdOaSk4_s8aLsgH2d2Gsb2E9hYk/preset:view/plain/b041bb5ebc76fb3138d966064082cb60-3008782290725722806.jpg",
+    "https://cdn.chotot.com/HUQomww64RVCCPS9Eo6MjRXQGMPQzJcl0pLq2Dyd30w/preset:view/plain/655708f7436e4b54211da2683efa0fcf-3008782291475400980.jpg",
+    "https://cdn.chotot.com/x9hGMR9w4VlBFYrjj71hHmWp-N_YBFNr1KwZCbXE9is/preset:view/plain/733360bee68e248d20c11ea1b39fc206-3008782290838847792.jpg",
+    "https://cdn.chotot.com/JPTFbift0GsQYfMglA983osTmCAC9v7fVFytEvT-_cU/preset:view/plain/8c6c9f990a889a6dba35fdc71fee4a97-3008782291947473876.jpg",
+    "https://cdn.chotot.com/91UtL3vAJzgQQHGrwMjyXQUE26-I_hx_wjaFULoDkt0/preset:view/plain/c3fbaf5200b2c0c643df325d8c793add-3008782291790856423.jpg"
+  ],
+  "inspection_images": [],
+  "is_price_not_valid": false,
+  "is_shop_verified": false,
+  "is_show_price_diff": false,
+  "is_sticky": false,
+  "is_zalo_show": false,
+  "job_tier": 0,
+  "label_campaigns": [],
+  "latitude": 21.01006,
+  "list_id": 135562204,
+  "list_time": 1793374036386,
+  "location": "21.01006,105.7404",
+  "longitude": 105.7404,
+  "number_of_images": 7,
+  "orig_list_time": 1793374035000,
+  "original_price": 6500000,
+  "original_price_string": "6,5 triệu/tháng",
+  "params": [],
+  "price": 6500000,
+  "price_diff": 0,
+  "price_million_per_m2": 0.21666667,
+  "price_string": "6,5 triệu/tháng",
+  "project_oid": "1217566248",
+  "projectid": 3629,
+  "property_legal_document": 6,
+  "protection_entitlement": false,
+  "pty_characteristics": [],
+  "pty_jupiter": 0,
+  "pty_map": "https://cdn.chotot.com/admincentre/location/21x010860_105x741200_c.jpg",
+  "pty_map_modifier": 0.0008,
+  "pty_map_v2": "https://cdn.chotot.com/admincentre/location/21x010860_105x741200_c_v2.jpg",
+  "pty_project_name": "Vinhomes Smart City",
+  "pty_project_transaction_status": 2,
+  "pty_project_type": 1,
+  "region": 12,
+  "region_name": "Hà Nội",
+  "region_name_v3": "TP Hà Nội",
+  "region_v2": 12000,
+  "rooms": 1,
+  "seller_info": {
+    "avatar": "https://cdn.chotot.com/uac2/30206531",
+    "full_name": "Ngọc Đức Vinhomes",
+    "live_ads": 6
+  },
+  "shop": {
+    "address": "Phường Tây Mỗ, Quận Nam Từ Liêm, Hà Nội",
+    "alias": "N6exqNykszwPOw9",
+    "createdDate": "1787192256",
+    "modifiedDate": 1791344651,
+    "name": "Ngọc Đức Vinhomes",
+    "profileImageUrl": "https://cdn.chotot.com/uac2/30206531",
+    "service_type": "membership",
+    "shopsCategoriesRelationships": [
+      {
+        "categoryId": 1000
+      }
+    ],
+    "status": "accepted",
+    "urls": [
+      {
+        "url": "ngoc-duc-vinhomes"
+      }
+    ],
+    "working_area_display": "Quận Nam Từ Liêm (Hà Nội)"
+  },
+  "shop_alias": "N6exqNykszwPOw9",
+  "size": 30,
+  "size_unit_string": "m²",
+  "special_display_images": [],
+  "specific_service_offered": [],
+  "state": "accepted",
+  "status": "active",
+  "sticky_ad_platinum": 0,
+  "street_name": "Đại Mỗ",
+  "subject": "Cho thuê căn Studio full đồ giá 6tr5 ở Vinhomes Smart City",
+  "thumbnail_image": "https://cdn.chotot.com/LMU0JnoW52Jw7XEEkN_yFBn6PNDLjrX2xpp9XmoiXoE/preset:listing/plain/4eff82f883de2268bd6bb494fe0c4b52-3008782290769671596.jpg",
+  "toilets": 1,
+  "type": "u",
+  "videos": [],
+  "ward": 206,
+  "ward_name": "Phường Tây Mỗ",
+  "ward_name_v3": "Phường Tây Mỗ",
+  "webp_image": "https://cdn.chotot.com/eXToxz95KF87HAP1DVWjoUlHiJmIrc0g9Bj1jt_O6DU/preset:listing/plain/4eff82f883de2268bd6bb494fe0c4b52-3008782290769671596.webp"
+}

@@ -1,0 +1,35 @@
+{
+  "champion": "ec9a7bf02b42ae3b",
+  "history": [
+    {
+      "candidate": "aef2c7ab4410b2a8",
+      "previous_champion": null,
+      "evaluated_at": "2026-10-30T16:07:23.094944+00:00",
+      "promoted": true,
+      "reasons": [],
+      "baseline_improvement_pct": 40.65121346451467,
+      "champion_improvement_pct": null
+    },
+    {
+      "candidate": "542af7cde259efdf",
+      "previous_champion": "aef2c7ab4410b2a8",
+      "evaluated_at": "2026-10-30T17:06:49.675597+00:00",
+      "promoted": false,
+      "reasons": [
+        "Prediction behavior violates area/bedroom monotonicity",
+        "Category regresses against champion: nha_tro"
+      ],
+      "baseline_improvement_pct": 39.06050362844088,
+      "champion_improvement_pct": -0.7564741054530089
+    },
+    {
+      "candidate": "ec9a7bf02b42ae3b",
+      "previous_champion": "aef2c7ab4410b2a8",
+      "evaluated_at": "2026-10-30T17:10:22.107591+00:00",
+      "promoted": true,
+      "reasons": [],
+      "baseline_improvement_pct": 40.093486138515,
+      "champion_improvement_pct": 0.9514441039965127
+    }
+  ]
+}

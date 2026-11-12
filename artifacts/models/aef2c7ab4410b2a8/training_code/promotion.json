@@ -1,0 +1,16 @@
+{
+  "min_development_rows": 500,
+  "min_benchmark_rows": 100,
+  "min_category_rows": 30,
+  "max_mae_vnd": 2500000,
+  "max_category_mae_vnd": {
+    "can_ho_chung_cu": 3500000,
+    "nha_tro": 1500000
+  },
+  "min_baseline_improvement_pct": 10,
+  "min_champion_improvement_pct": 1,
+  "max_category_regression_pct": 5,
+  "max_exclusion_rate": 0.15,
+  "max_area_missing_rate": 0.5,
+  "max_area_psi": 0.25
+}

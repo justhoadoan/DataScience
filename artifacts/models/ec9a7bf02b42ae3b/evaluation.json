@@ -1,0 +1,68 @@
+{
+  "decision": {
+    "promoted": true,
+    "reasons": [],
+    "baseline_improvement_pct": 40.093486138515,
+    "champion_improvement_pct": 0.9514441039965127
+  },
+  "champion_on_same_benchmark": {
+    "overall": {
+      "n": 432,
+      "mae_vnd": 1559244.6831013407,
+      "rmse_vnd": 2897714.5881167143,
+      "r2": 0.7124214450746453,
+      "median_ae_vnd": 880537.4317683594,
+      "p90_ae_vnd": 3337362.7233311194,
+      "median_price_vnd": 5000000.0,
+      "nmae_pct": 31.18489366202681
+    },
+    "categories": {
+      "can_ho_chung_cu": {
+        "n": 175,
+        "mae_vnd": 2461400.3306621015,
+        "rmse_vnd": 4022950.67340304,
+        "r2": 0.5161540977051038,
+        "median_ae_vnd": 1760081.0271610394,
+        "p90_ae_vnd": 4261028.887670918,
+        "median_price_vnd": 11000000.0,
+        "nmae_pct": 22.37636664238274
+      },
+      "nha_tro": {
+        "n": 257,
+        "mae_vnd": 944936.3627778647,
+        "rmse_vnd": 1758993.352967804,
+        "r2": 0.43052602553082786,
+        "median_ae_vnd": 674857.6893597748,
+        "p90_ae_vnd": 2011962.6237558797,
+        "median_price_vnd": 3900000.0,
+        "nmae_pct": 24.229137507124733
+      }
+    },
+    "behavior": {
+      "contract_version": 2,
+      "checked_rows": 5292,
+      "bedroom_decreases": 1275,
+      "area_decreases": 444,
+      "violations": 1719,
+      "assumption": "Nondecreasing area/separate bedrooms with other inputs fixed; no ordering between categories."
+    }
+  },
+  "policy": {
+    "min_development_rows": 500,
+    "min_benchmark_rows": 100,
+    "min_category_rows": 30,
+    "max_mae_vnd": 2500000,
+    "max_category_mae_vnd": {
+      "can_ho_chung_cu": 3500000,
+      "nha_tro": 1500000
+    },
+    "min_baseline_improvement_pct": 10,
+    "min_champion_improvement_pct": 1,
+    "max_category_regression_pct": 5,
+    "max_exclusion_rate": 0.15,
+    "max_area_missing_rate": 0.5,
+    "max_area_psi": 0.25,
+    "max_contract_repair_regression_pct": 10
+  },
+  "benchmark_sha256": "9fe8a9f243fe0a687fa03f83862230930651f0c1b35fd0dd434db9b49390e7ee"
+}
