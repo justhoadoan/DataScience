@@ -16,7 +16,6 @@ A rental-price estimation app for Hanoi, built with FastAPI and React.
 | `data/` | Files used by collection, analysis and training. |
 | `artifacts/` | Saved model bundles and the active-model registry. |
 | `reports/` | Generated reports and figures. |
-| `notebooks/` | Project walkthrough and exploration. |
 | `scripts/` | Local startup and workflow utilities. |
 | `config/` | Model promotion settings. |
 | `deploy/` | Production containers, reverse proxy and deployment scripts. |
