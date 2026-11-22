@@ -23,3 +23,6 @@ docs/presentations/**/*.aux
 docs/presentations/**/*.log
 docs/presentations/**/*.fls
 docs/presentations/**/*.fdb_latexmk
+
+# Local project documentation
+/docs/
