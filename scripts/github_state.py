@@ -10,8 +10,8 @@ import tarfile
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
-from hanoi_rentals.registry import write_json
-from hanoi_rentals.state import export_state, restore_state
+from hanoi_rentals.operations.registry import write_json
+from hanoi_rentals.operations.state import export_state, restore_state
 
 
 def release_exists(repository, tag):

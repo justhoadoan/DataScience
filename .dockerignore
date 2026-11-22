@@ -4,12 +4,9 @@
 .idea
 **/__pycache__
 **/node_modules
-**/test-results
-**/playwright-report
 frontend/dist
 data
 notebooks
 docs
 reports
-tests
 .taste-skill

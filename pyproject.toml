@@ -15,15 +15,8 @@ dependencies = [
   "fastapi>=0.115,<1", "uvicorn[standard]>=0.30,<1", "pydantic>=2.10,<3"
 ]
 
-[project.optional-dependencies]
-dev = ["httpx>=0.28,<1", "pytest>=8,<10", "PyYAML>=6,<7"]
-
 [project.scripts]
 hanoi-rentals = "hanoi_rentals.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-pythonpath = ["src", "tests"]

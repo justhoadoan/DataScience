@@ -1,7 +1,7 @@
 """Command line entry point; run `hanoi-rentals --help`."""
 
 import argparse
-from datetime import date, datetime
+from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -34,15 +34,15 @@ def main():
             args.max_pages,
         )
         if args.command == "refresh":
-            from .pipeline import train
+            from hanoi_rentals.operations.pipeline import train
 
             train(args.root, summary)
     elif args.command == "eda":
-        from .pipeline import eda
+        from hanoi_rentals.operations.pipeline import eda
 
         eda(args.root)
     elif args.command == "train":
-        from .pipeline import train
+        from hanoi_rentals.operations.pipeline import train
 
         train(args.root)
     elif args.command == "serve":
@@ -51,7 +51,10 @@ def main():
 
         os.environ["RENTAL_ROOT"] = str(args.root.resolve())
         uvicorn.run(
-            "hanoi_rentals.api:create_app", factory=True, host=args.host, port=args.port
+            "hanoi_rentals.serving.api:create_app",
+            factory=True,
+            host=args.host,
+            port=args.port,
         )
 
 

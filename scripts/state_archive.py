@@ -2,7 +2,7 @@
 
 import argparse
 from pathlib import Path
-from hanoi_rentals.state import export_state, restore_state
+from hanoi_rentals.operations.state import export_state, restore_state
 
 parser = argparse.ArgumentParser()
 parser.add_argument("action", choices=["export", "restore"])
