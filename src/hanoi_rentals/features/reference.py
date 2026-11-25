@@ -61,4 +61,10 @@ WARD_SCHEMES = (
         "policy": "source_scoped",
         "reference": "Listing ward_name and area_name from the same record",
     },
+    {
+        "source": "phongtro123",
+        "scheme": "phongtro123_ward_v1",
+        "policy": "source_scoped",
+        "reference": "Listing card streetAddress and Hanoi district label",
+    },
 )

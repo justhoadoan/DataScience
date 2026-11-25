@@ -17,7 +17,8 @@ from hanoi_rentals.features.dates import (
     today_hanoi,
 )
 
-from .normalization import adapt_alonhadat, adapt_nhatot, drop_implausible
+from .normalization import SOURCE_ADAPTERS, drop_implausible
+from .phongtro123 import parse_phongtro123
 from .sources import parse_alonhadat, parse_nhatot
 
 
@@ -44,7 +45,7 @@ def record_response(root, path, raw, records, source, evidence):
         return 0
     frame = pd.DataFrame(records)
     source_records = {str(row["listing_id"]): row for row in records}
-    adapted = adapt_nhatot(frame) if source == "nhatot" else adapt_alonhadat(frame)
+    adapted = SOURCE_ADAPTERS[source](frame)
     adapted = drop_implausible(adapted)
     adapted["posted_date"] = adapted.posted_date.dt.strftime("%Y-%m-%d")
     digest = sha256(raw.encode()).hexdigest()
@@ -88,6 +89,8 @@ def record_response(root, path, raw, records, source, evidence):
                     "source_subtype",
                 )
             }
+            if "source_posted_label" in original:
+                attributes["source_posted_label"] = original["source_posted_label"]
             row.update(attributes)
             if observed:
                 row["scraped_at"] = observed
@@ -151,28 +154,34 @@ def replay_archives(root):
         if path.suffix not in (".json", ".html") or path.name.endswith(".meta.json"):
             continue
         source, category = path.parts[-3:-1]
-        if source not in ("nhatot", "alonhadat"):
+        if source not in SOURCE_ADAPTERS:
             continue
         try:
             page = int(path.stem[1:])
             raw = path.read_bytes().decode("utf-8")
-            records = (
-                parse_nhatot(raw, category, (page - 1) * 50)
-                if source == "nhatot"
-                else parse_alonhadat(raw, category, page)
-            )
+            if source == "nhatot":
+                records = parse_nhatot(raw, category, (page - 1) * 50)
+            elif source == "alonhadat":
+                records = parse_alonhadat(raw, category, page)
+            else:
+                records, _ = parse_phongtro123(raw, category, page)
             metadata = path.with_suffix(path.suffix + ".meta.json")
             evidence = (
                 json.loads(metadata.read_text())
                 if metadata.exists()
                 else evidence_by_path.get(str(path.relative_to(root)))
             )
+            if source == "phongtro123" and not evidence:
+                raise ValueError("Missing Phongtro123 collection receipt.")
             since, until = windows.get(path.parts[-4], (str(EPOCH), str(TARGET_END)))
             records = [
                 row
                 for row in records
                 if since <= str(row.get("posted_raw", ""))[:10] <= until
             ]
+            if source == "phongtro123":
+                for row in records:
+                    row["scraped_at"] = evidence["price_observed_date"]
             added += record_response(root, path, raw, records, source, evidence)
         except (ValueError, KeyError, TypeError) as exc:
             errors.append({"path": str(path.relative_to(root)), "error": str(exc)})

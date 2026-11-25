@@ -19,17 +19,19 @@ from hanoi_rentals.features.dates import HOLDOUT_START, TARGET_END, ZONE
 from .http import FetchError, fetch
 from .normalization import (
     COMMON_COLUMNS,
-    adapt_alonhadat,
-    adapt_nhatot,
+    SOURCE_ADAPTERS,
     drop_implausible,
 )
 from .observations import coverage_report, record_response
 from .pagination import parse_page
+from .phongtro123 import page_url as phongtro123_page_url
 from .sources import ALONHADAT_PATHS, NHATOT_CATEGORIES
 from .temporal_policy import ensure_protocol
 
 CATEGORIES = tuple(NHATOT_CATEGORIES)
-SOURCES = ("nhatot", "alonhadat")
+DEFAULT_SOURCES = ("nhatot", "phongtro123")
+SOURCES = tuple(SOURCE_ADAPTERS)
+REQUEST_INTERVALS = {"nhatot": 1.5, "alonhadat": 15.0, "phongtro123": 3.0}
 BLOCKED = {"verification_required", "access_denied", "rate_limited"}
 
 
@@ -58,7 +60,7 @@ class Progress:
             raise ValueError("Snapshot must have unique IDs and supported categories.")
         self.ids = set(old.listing_id)
         self.previous_rows = len(old)
-        self.added = {source: 0 for source in SOURCES}
+        self.added = dict.fromkeys(config.get("sources", SOURCES), 0)
         self.coverage = {}
         self.checkpoint = (
             root / "data/processed/crawl_runs" / (config["run_id"] + ".json")
@@ -80,8 +82,7 @@ class Progress:
     def append(self, rows, source):
         if not rows:
             return 0, 0, 0
-        frame = pd.DataFrame(rows)
-        frame = adapt_nhatot(frame) if source == "nhatot" else adapt_alonhadat(frame)
+        frame = SOURCE_ADAPTERS[source](pd.DataFrame(rows))
         before = len(frame)
         frame = drop_implausible(frame)[COMMON_COLUMNS]
         posted = frame.posted_date.dt.strftime("%Y-%m-%d")
@@ -108,7 +109,7 @@ class Progress:
         return len(new), before - len(frame), int(reserved.sum())
 
 
-def raw_manifest(root, run_id):
+def raw_manifest(root, run_id, categories):
     directory = root / "data/raw" / run_id
     files = [
         {
@@ -122,7 +123,7 @@ def raw_manifest(root, run_id):
     manifest = {
         "run_id": run_id,
         "crawl_date": run_id[:10],
-        "scope": CATEGORIES,
+        "scope": categories,
         "files": files,
     }
     write_json(directory / "_manifest.json", manifest)
@@ -165,12 +166,23 @@ def page_response(session, path, url, params, resume):
     return raw, evidence, False
 
 
-def crawl_source(source, root, since, until, max_pages, run_id, progress, resume=False, categories=CATEGORIES):
+def crawl_source(
+    source,
+    root,
+    since,
+    until,
+    max_pages,
+    run_id,
+    progress,
+    resume=False,
+    categories=CATEGORIES,
+    start_page=1,
+):
     session = requests.Session(impersonate="chrome")
     coverage = []
     blocked = None
     last_request = 0.0
-    interval = 1.5 if source == "nhatot" else 15.0
+    interval = REQUEST_INTERVALS[source]
     try:
         for category in categories:
             info = {
@@ -201,13 +213,14 @@ def crawl_source(source, root, since, until, max_pages, run_id, progress, resume
                 coverage.append(info)
                 continue
             seen, fingerprints, repeated_pages = set(), set(), 0
-            offset, page = 0, 1
-            url = (
-                "https://gateway.chotot.com/v1/public/ad-listing"
-                if source == "nhatot"
-                else "https://alonhadat.com.vn" + ALONHADAT_PATHS[category]
-            )
-            while not max_pages or page <= max_pages:
+            offset, page = 0, start_page
+            if source == "nhatot":
+                url = "https://gateway.chotot.com/v1/public/ad-listing"
+            elif source == "alonhadat":
+                url = "https://alonhadat.com.vn" + ALONHADAT_PATHS[category]
+            else:
+                url = phongtro123_page_url(category, page)
+            while not max_pages or page < start_page + max_pages:
                 info["next_page"] = page
                 progress.save(info)
                 suffix = "json" if source == "nhatot" else "html"
@@ -248,7 +261,8 @@ def crawl_source(source, root, since, until, max_pages, run_id, progress, resume
                     rows, paging = parse_page(
                         raw, source, category, page, offset, info.get("reported_pages")
                     )
-                    info["pages"] = page
+                    info["pages"] += 1
+                    info["last_page"] = page
                     info["parsed_rows"] += len(rows)
                     for key in ("reported_total", "reported_pages"):
                         if paging.get(key) is not None:
@@ -346,28 +360,37 @@ def crawl_source(source, root, since, until, max_pages, run_id, progress, resume
     return coverage
 
 
-def crawl(root, since, until, max_pages=0, *, resume=None, sources=None, categories=None):
+def crawl(
+    root,
+    since,
+    until,
+    max_pages=0,
+    *,
+    resume=None,
+    sources=None,
+    categories=None,
+    start_page=1,
+):
     root = Path(root).resolve()
     lock = root / ".work/crawl.lock"
     lock.parent.mkdir(parents=True, exist_ok=True)
     with lock.open("a") as handle:
         fcntl.flock(handle, fcntl.LOCK_EX)
-        return _crawl(root, since, until, max_pages, resume, sources, categories)
+        return _crawl(
+            root, since, until, max_pages, resume, sources, categories, start_page
+        )
 
 
-def _crawl(root, since, until, max_pages, resume, sources, categories):
+def _crawl(root, since, until, max_pages, resume, sources, categories, start_page):
     since, requested_until = (
         date.fromisoformat(str(since)),
         date.fromisoformat(str(until)),
     )
     today = datetime.now(ZONE).date()
-    if since > requested_until or since > today or max_pages < 0:
+    if since > requested_until or since > today or max_pages < 0 or start_page < 1:
         raise ValueError(
             "Invalid crawl window or page limit (0 means no artificial page cap)."
         )
-    sources = list(dict.fromkeys(sources or SOURCES))
-    if not set(sources).issubset(SOURCES):
-        raise ValueError("Unknown crawl source.")
     categories = list(dict.fromkeys(categories or CATEGORIES))
     if not set(categories).issubset(CATEGORIES):
         raise ValueError("Unknown crawl category.")
@@ -377,11 +400,13 @@ def _crawl(root, since, until, max_pages, resume, sources, categories):
             raise ValueError("Use the run_id from a new crawler checkpoint to resume.")
         checkpoint = root / "data/processed/crawl_runs" / (resume + ".json")
         config = json.loads(checkpoint.read_text())
+        sources = list(dict.fromkeys(sources or config["sources"]))
         if (
             config["since"] != str(since)
             or config["requested_until"] != str(requested_until)
             or config["sources"] != sources
             or config.get("categories", list(CATEGORIES)) != categories
+            or config.get("start_page", 1) != start_page
         ):
             raise ValueError(
                 "Resume parameters differ from the saved run; start a new crawl instead."
@@ -393,7 +418,12 @@ def _crawl(root, since, until, max_pages, resume, sources, categories):
         until = date.fromisoformat(config["until"])
         run_id = resume
     else:
+        sources = list(dict.fromkeys(sources or DEFAULT_SOURCES))
         run_id = datetime.now(ZONE).strftime("%Y-%m-%dT%H%M%S%f")
+    if not set(sources).issubset(SOURCES):
+        raise ValueError("Unknown crawl source.")
+    if start_page != 1 and sources != ["phongtro123"]:
+        raise ValueError("A custom start page requires --sources phongtro123.")
     ensure_protocol(root)
     previous_manifest = root / "reports/raw_manifest_latest.json"
     if previous_manifest.exists():
@@ -413,6 +443,7 @@ def _crawl(root, since, until, max_pages, resume, sources, categories):
         "requested_until": str(requested_until),
         "sources": sources,
         "categories": categories,
+        "start_page": start_page,
     }
     progress = Progress(root, config)
     print(
@@ -432,11 +463,12 @@ def _crawl(root, since, until, max_pages, resume, sources, categories):
                 progress,
                 bool(resume),
                 categories,
+                start_page,
             )
             for source in sources
         ]
         coverage = [entry for job in jobs for entry in job.result()]
-    exhausted = all(c["source_exhausted"] for c in coverage)
+    exhausted = start_page == 1 and all(c["source_exhausted"] for c in coverage)
     summary = {
         **config,
         "collected_at": datetime.now(ZONE).isoformat(),
@@ -465,7 +497,7 @@ def _crawl(root, since, until, max_pages, resume, sources, categories):
         "limit": "Date bounds filter retrieved listings; they do not request archived historical prices. Exhausting live feeds does not establish historical completeness.",
         "checkpoint": str(progress.checkpoint.relative_to(root)),
         "raw_manifest": "reports/raw_manifest_latest.json",
-        "raw_manifest_sha256": raw_manifest(root, run_id),
+        "raw_manifest_sha256": raw_manifest(root, run_id, categories),
     }
     write_json(root / "reports/crawl_latest.json", summary)
     write_json(root / "reports/crawl_runs" / (run_id + ".json"), summary)

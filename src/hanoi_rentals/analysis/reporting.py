@@ -20,7 +20,7 @@ from hanoi_rentals.analysis.audit import (
     markdown_table,
 )
 
-COLORS = {"nhatot": "#2678A6", "alonhadat": "#D17C32"}
+COLORS = {"nhatot": "#2678A6", "alonhadat": "#D17C32", "phongtro123": "#398269"}
 MISSING_COLS = ["area_m2", "bedrooms", "toilets", "furniture"]
 FEATURES = [
     "category",
@@ -104,18 +104,19 @@ def area_missing_comparison(df):
 
 
 def source_comparison(price):
+    active = [source for source in SOURCES if price.source.eq(source).any()]
     usable = price[price.area_band.ne("Unknown") & price.district_analysis.notna()]
     keys = ["category", "district_analysis", "area_band"]
     counts = (
         usable.groupby(keys + ["source"])
         .size()
         .unstack("source", fill_value=0)
-        .reindex(columns=SOURCES, fill_value=0)
+        .reindex(columns=active, fill_value=0)
     )
-    counts["both_sources"] = counts[SOURCES].gt(0).all(axis=1)
-    counts["eligible"] = counts[SOURCES].ge(10).all(axis=1)
-    counts["main"] = counts[SOURCES].ge(30).all(axis=1)
-    counts["n_total"] = counts[SOURCES].sum(axis=1)
+    counts["all_sources"] = len(active) > 1 and counts[active].gt(0).all(axis=1)
+    counts["eligible"] = len(active) > 1 and counts[active].ge(10).all(axis=1)
+    counts["main"] = len(active) > 1 and counts[active].ge(30).all(axis=1)
+    counts["n_total"] = counts[active].sum(axis=1)
     counts = counts.reset_index()
     qualified = usable.merge(counts.loc[counts.eligible, keys], on=keys, how="inner")
     return counts, summarize(qualified, keys + ["source"]), qualified
@@ -258,9 +259,9 @@ def plot_composition(df, root):
     fig, ax = plt.subplots(
         1, 2, figsize=(15, 7), gridspec_kw={"width_ratios": [1, 1.5]}
     )
-    pd.crosstab(df.category, df.source).reindex(CATEGORIES)[SOURCES].rename(
-        index=LABELS
-    ).plot.bar(ax=ax[0], color=[COLORS[s] for s in SOURCES], rot=0)
+    pd.crosstab(df.category, df.source).reindex(
+        index=CATEGORIES, columns=SOURCES, fill_value=0
+    ).rename(index=LABELS).plot.bar(ax=ax[0], color=[COLORS[s] for s in SOURCES], rot=0)
     ax[0].set(
         xlabel="",
         ylabel="Listings",
@@ -374,8 +375,7 @@ def plot_area_price(price, root):
         g = price[price.category.eq(cat)].dropna(
             subset=["area_analysis_m2", "price_million"]
         )
-        for source in SOURCES:
-            s = g[g.source.eq(source)]
+        for source, s in g.groupby("source"):
             ax.scatter(
                 s.area_analysis_m2,
                 s.price_million,
@@ -451,8 +451,7 @@ def plot_sources(price, root):
         for key in keys:
             m &= matched[key].eq(row[key]).to_numpy()
         g = matched[m]
-        for source in SOURCES:
-            s = g[g.source.eq(source)]
+        for source, s in g.groupby("source"):
             sns.ecdfplot(
                 data=s,
                 x="price_million",
@@ -533,14 +532,22 @@ def write_report(df, figures, root=ROOT):
         ),
         "## 2. Key findings",
     ]
-    composition = pd.crosstab(df.source, df.category).reindex(columns=CATEGORIES)
+    composition = pd.crosstab(df.source, df.category).reindex(
+        columns=CATEGORIES, fill_value=0
+    )
     shares = composition.div(composition.sum(axis=1), axis=0) * 100
+    room_shares = ", ".join(
+        f"{source} ({share:.1f}%)" for source, share in shares["nha_tro"].items()
+    )
     body += [
-        f"**1. Sample composition differs between sources.** Rental rooms account for {shares.loc['nhatot', 'nha_tro']:.1f}% of Nhatot listings and {shares.loc['alonhadat', 'nha_tro']:.1f}% of Alonhadat listings. An aggregate price comparison cannot separate this composition difference. See Figure 01."
+        f"**1. Sample composition differs between sources.** Rental room shares by source are {room_shares}. An aggregate price comparison cannot separate this composition difference. See Figure 01."
     ]
     rawmissing = df.groupby("source").area_m2.agg(lambda x: x.isna().mean() * 100)
+    missing_shares = ", ".join(
+        f"{source} ({share:.1f}%)" for source, share in rawmissing.items()
+    )
     body += [
-        f"**2. Area availability differs between sources.** Original area missingness is {rawmissing.loc['nhatot']:.1f}% on Nhatot and {rawmissing.loc['alonhadat']:.1f}% on Alonhadat. The price/m² set contains {df.include_ppm2.sum():,} apartment and room listings with usable area; it does not represent the entire price set. See Figure 02 and the area-availability comparison below."
+        f"**2. Area availability differs between sources.** Original area missingness by source is {missing_shares}. The price/m² set contains {df.include_ppm2.sum():,} apartment and room listings with usable area; it does not represent the entire price set. See Figure 02 and the area-availability comparison below."
     ]
     lines = [
         f"{LABELS[r.category]}: {r.median:.2f} million VND/month, Q1–Q3 {r.q1:.2f}–{r.q3:.2f}, n={r.n}"
@@ -572,7 +579,7 @@ def write_report(df, figures, root=ROOT):
     ]
     qualified_n = int(counts.eligible.sum())
     body += [
-        f"**6. Matched source comparisons have limited coverage.** There are {len(counts)} strata with usable area and district, {int(counts.both_sources.sum())} with both sources, {qualified_n} with ≥10 listings per source, and {int(counts.main.sum())} with ≥30 per source. The ≥10 groups cover {len(matched)}/{len(price)} listings in the price set; the remainder are outside this comparison. See Figure 10."
+        f"**6. Matched source comparisons have limited coverage.** There are {len(counts)} strata with usable area and district, {int(counts.all_sources.sum())} with all represented sources, {qualified_n} with ≥10 listings per source, and {int(counts.main.sum())} with ≥30 per source. The ≥10 groups cover {len(matched)}/{len(price)} listings in the price set; the remainder are outside this comparison. See Figure 10."
     ]
     if qualified_n:
         top = (
@@ -588,10 +595,8 @@ def write_report(df, figures, root=ROOT):
             & source_stats.district_analysis.eq(top.district_analysis)
             & source_stats.area_band.eq(top.area_band)
         ]
-        source_med = t.set_index("source")["median"]
-        pct = (source_med["nhatot"] / source_med["alonhadat"] - 1) * 100
         body += [
-            f"Largest matched group, selected by n: **{LABELS[top.category]} / {top.district_analysis} / {top.area_band} m²**. The Nhatot median differs from Alonhadat by {pct:+.1f}%. This is a source-associated difference after partial matching. Furnishing, location and posting practices may still differ; it is not a causal website effect.",
+            f"Largest matched group, selected by n: **{LABELS[top.category]} / {top.district_analysis} / {top.area_band} m²**. Median rents are shown by source. Furnishing, location and posting practices may still differ within the matched group.",
             markdown_table(t),
         ]
     furniture, stratum = select_controlled(price, "furniture_analysis", True)

@@ -163,3 +163,26 @@ def drop_implausible(df):
             )
         )
     return df[~bad]
+
+
+def adapt_phongtro123(df):
+    context = df["title"].fillna("") + " " + df["body"].fillna("")
+    return df.assign(
+        source="phongtro123",
+        listing_id="pt123_" + df["listing_id"].astype(str),
+        price_vnd=pd.to_numeric(df["price_vnd"], errors="coerce"),
+        area_m2=pd.to_numeric(df["area_m2"], errors="coerce"),
+        district=df["district"].map(strip_admin_prefix),
+        ward=df["ward"].map(strip_admin_prefix),
+        bedrooms=None,
+        toilets=context.map(extract_toilets),
+        furniture=context.map(extract_furniture_full),
+        posted_date=pd.to_datetime(df["posted_raw"], errors="coerce"),
+    )[COMMON_COLUMNS]
+
+
+SOURCE_ADAPTERS = {
+    "nhatot": adapt_nhatot,
+    "alonhadat": adapt_alonhadat,
+    "phongtro123": adapt_phongtro123,
+}

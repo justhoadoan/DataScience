@@ -70,6 +70,22 @@ To continue an interrupted crawl, use its printed run ID and the same date/sourc
 
 Use `--sources nhatot` or `--categories nha_tro` to select a source or category. A verification challenge stops requests to that source and is reported as incomplete collection.
 
+### Phongtro123
+
+Fetch the public Hanoi apartment and room listings with:
+
+```bash
+.venv/bin/python -m hanoi_rentals.cli crawl --sources phongtro123 --since 2025-11-01 --until 2026-11-30
+```
+
+For a targeted crawl, use `--categories`, `--start-page` and `--max-pages`. For example, these options select seven room listing pages starting at page 52:
+
+```bash
+.venv/bin/python -m hanoi_rentals.cli crawl --sources phongtro123 --categories nha_tro --since 2025-11-01 --until 2025-11-30 --start-page 52 --max-pages 7
+```
+
+Page numbers may shift as listings change. The date window filters the displayed listing date, and prices are dated to the day the page was downloaded in Hanoi. To resume a targeted crawl, reuse the starting page along with the source, category, and date options.
+
 ### Manual setup
 
 ```bash

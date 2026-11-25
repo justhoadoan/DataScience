@@ -21,7 +21,7 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.utils.validation import check_is_fitted
 from threadpoolctl import threadpool_limits
 
-from hanoi_rentals.analysis.audit import CATEGORIES, ROOT, SEED, normalize
+from hanoi_rentals.analysis.audit import CATEGORIES, ROOT, SEED, SOURCES, normalize
 from hanoi_rentals.analysis.reporting import load_analysis
 from hanoi_rentals.features.bedrooms import layout_error
 from hanoi_rentals.features.dates import DateFeatures, parse_dates
@@ -178,8 +178,8 @@ class RentalPriceEstimator(RegressorMixin, BaseEstimator):
             ).all()
         ):
             raise ValueError("Furnishing must be Furnished, Unfurnished or Unknown.")
-        if "source" in frame and not frame.source.isin(["nhatot", "alonhadat"]).all():
-            raise ValueError("The source-aware variant requires nhatot or alonhadat.")
+        if "source" in frame and not frame.source.isin(SOURCES).all():
+            raise ValueError(f"The source-aware variant requires one of {SOURCES}.")
         return frame
 
     def fit(self, X, y):

@@ -23,15 +23,27 @@ def main():
             help="Page limit per category; 0 traverses all accessible pages",
         )
         sub.add_argument(
+            "--start-page",
+            type=int,
+            default=1,
+            help="First page to fetch for Phongtro123",
+        )
+        sub.add_argument(
             "--resume",
             default=None,
             help="Resume this run_id using only its verified raw responses",
         )
         sub.add_argument(
-            "--sources", nargs="+", choices=["nhatot", "alonhadat"], default=None
+            "--sources",
+            nargs="+",
+            choices=["nhatot", "alonhadat", "phongtro123"],
+            default=None,
         )
         sub.add_argument(
-            "--categories", nargs="+", choices=["can_ho_chung_cu", "nha_tro"], default=None
+            "--categories",
+            nargs="+",
+            choices=["can_ho_chung_cu", "nha_tro"],
+            default=None,
         )
     commands.add_parser(
         "experiment-improvements",
@@ -77,6 +89,7 @@ def main():
             resume=args.resume,
             sources=args.sources,
             categories=args.categories,
+            start_page=args.start_page,
         )
         if args.command == "refresh":
             from hanoi_rentals.operations.pipeline import train

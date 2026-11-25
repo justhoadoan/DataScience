@@ -3,12 +3,19 @@
 __pycache__/
 *.py[cod]
 .ruff_cache/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.DS_Store
 *.egg-info/
 /build/
 /dist/
 .work/
 data/raw/
 data/interim/
+/data/analysis/*
+!/data/analysis/review_queue.csv
 data/processed/*.sqlite3-journal
 frontend/node_modules/
 frontend/dist/
@@ -30,16 +37,15 @@ docs/presentations/**/*.fdb_latexmk
 
 # Generated collection state and experiment outputs stay local.
 /artifacts/temporal/
+/artifacts/models/*
 /data/processed/observations.sqlite3*
 /data/processed/crawl_runs/
 /data/benchmark/temporal_protocol.json
 /data/benchmark/temporal_holdout_evaluation.json
-/reports/temporal/
-/reports/improvement/
-/reports/crawl_runs/
-/reports/full_window_*.json
-/reports/historical_backfill.json
-/reports/temporal_coverage.json
+/reports/
+
+# Local-only scheduled collection; existing project workflows remain tracked.
+/.github/workflows/daily-observations.yml
 
 # Local reference exports; versioned rules live in features/reference.py.
 /config/project_aliases.csv

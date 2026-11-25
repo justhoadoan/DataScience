@@ -6,6 +6,7 @@ from urllib.parse import urljoin, urlparse
 
 from bs4 import BeautifulSoup
 
+from .phongtro123 import parse_phongtro123
 from .sources import ALONHADAT_PATHS, parse_alonhadat, parse_nhatot
 
 
@@ -33,6 +34,8 @@ def parse_page(raw, source, category, page, offset=0, known_pages=None):
             "exhausted": not ads,
             "next_offset": offset + len(ads),
         }
+    if source == "phongtro123":
+        return parse_phongtro123(raw, category, page)
     soup = BeautifulSoup(raw, "lxml")
     text = soup.get_text(" ", strip=True)
     cards = soup.select("article.property-item")

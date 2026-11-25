@@ -7,11 +7,12 @@ import unicodedata
 import numpy as np
 import pandas as pd
 from hanoi_rentals.features.bedrooms import explicit_bedrooms, maximum_bedrooms
+from hanoi_rentals.ingestion.normalization import SOURCE_ADAPTERS
 from hanoi_rentals.paths import PROJECT_ROOT
 
 ROOT = PROJECT_ROOT
 CATEGORIES = ["can_ho_chung_cu", "nha_tro"]
-SOURCES = ["nhatot", "alonhadat"]
+SOURCES = list(SOURCE_ADAPTERS)
 LABELS = {"can_ho_chung_cu": "Apartments", "nha_tro": "Rental rooms"}
 SEED = 42
 AREA_EDGES = {
@@ -340,6 +341,9 @@ def prepare_analysis(raw, reviews=None):
 
     exclude(df.price_month_vnd.isna(), "price_unverified_or_excluded")
     exclude(pending_scope, "scope_pending")
+    exclude(
+        df.source.eq("phongtro123") & df.district_analysis.isna(), "district_missing"
+    )
     exclude(df.scope_decision.eq("exclude"), "outside_residential_scope")
     exclude(
         df.quality_flags.str.contains("schema_or_city|invalid_or_duplicate_id"),

@@ -106,3 +106,64 @@ class ArchivedPriceTests(TestCase):
         )
         self.assertEqual([r["listing_id"] for r in rows], [19])
         self.assertEqual(rows[0]["posted_raw"], "2025-11-04")
+
+
+class Phongtro123Tests(TestCase):
+    def test_crawl_from_selected_page_replays_without_duplicate_observations(self):
+        import contextlib
+        import io
+
+        from hanoi_rentals.ingestion.crawler import crawl
+        from hanoi_rentals.ingestion.observations import (
+            load_observations,
+            replay_archives,
+        )
+
+        path = "https://phongtro123.com/tinh-thanh/ha-noi"
+        html = f"""<ul class="post__listing"><li>
+          <script type="application/ld+json">{{"address":{{
+            "addressLocality":"Hà Nội","streetAddress":"Ngõ 3, Phường Bồ Đề, Hà Nội"
+          }}}}</script>
+          <h3><a href="/phong-tro-pr600001.html">Phòng trọ</a></h3>
+          <span class="text-green">3.5 triệu/tháng</span>
+          <span class="dot"></span><span>20 m<sup>2</sup></span>
+          <i class="geo-alt"></i><a>Long Biên, Hà Nội</a>
+          <time title="Thứ 3, 08:45 18/11/2025">1 giờ trước</time>
+        </li></ul>
+        <ul class="pagination">
+          <li class="active"><span class="page-link">55</span></li>
+          <li><a rel="next" href="{path}?orderby=moi-nhat&amp;page=345">»»</a></li>
+          <li><a rel="next" href="{path}?orderby=moi-nhat&amp;page=56">Trang sau »</a></li>
+        </ul>"""
+        receipt = {"collected_at": "2026-11-25T09:00:00+07:00", "http_attempts": 1}
+        with TemporaryDirectory() as folder, contextlib.redirect_stdout(io.StringIO()):
+            root = Path(folder)
+            with patch(
+                "hanoi_rentals.ingestion.crawler.fetch", return_value=(html, receipt)
+            ) as network:
+                result = crawl(
+                    root,
+                    "2025-11-01",
+                    "2025-11-30",
+                    1,
+                    sources=["phongtro123"],
+                    categories=["nha_tro"],
+                    start_page=55,
+                )
+                self.assertEqual(
+                    network.call_args.args[1], f"{path}?orderby=moi-nhat&page=55"
+                )
+            self.assertEqual(result["status"], "partial")
+            self.assertEqual(result["coverage"][0]["next_page"], 56)
+            self.assertEqual(result["added_rows"], 1)
+            self.assertEqual(replay_archives(root)["added_observations"], 0)
+            rows = load_observations(root)
+            record = rows.iloc[0]
+            self.assertEqual(record.listing_id, "pt123_600001")
+            self.assertEqual(record.price_vnd, 3_500_000)
+            self.assertEqual(record.area_m2, 20)
+            self.assertEqual(record.posted_date, "2025-11-18")
+            self.assertEqual(record.price_observed_date, "2026-11-25")
+            self.assertEqual(len(rows), 1)
+        with self.assertRaises(ValueError):
+            parse_page(html, "phongtro123", "nha_tro", 56)
