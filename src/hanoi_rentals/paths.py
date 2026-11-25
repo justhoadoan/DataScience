@@ -8,7 +8,10 @@ PROJECT_ROOT = PACKAGE_ROOT.parents[1]
 
 def source_files():
     """Include the complete package so moved modules remain fingerprinted and archived."""
-    return {
+    files = {
         path.relative_to(PACKAGE_ROOT).as_posix(): path
         for path in sorted(PACKAGE_ROOT.rglob("*.py"))
     }
+    for name in ("project_aliases.csv", "location_crosswalk.csv"):
+        files["config/" + name] = PROJECT_ROOT / "config" / name
+    return files

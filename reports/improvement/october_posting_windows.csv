@@ -1,0 +1,10 @@
+cutoff,validation_end,category,training_n,training_collected_on_or_after_cutoff,validation_n,mae_vnd,group_overlap,evaluation_kind
+2026-10-01,2026-10-10,all,1499,0,1027,1896845.6885048337,0,retrospective_posting_window
+2026-10-01,2026-10-10,can_ho_chung_cu,1499,0,561,2654124.2593946736,0,retrospective_posting_window
+2026-10-01,2026-10-10,nha_tro,1499,0,466,985186.2930773661,0,retrospective_posting_window
+2026-10-11,2026-10-20,all,2510,1011,733,1547412.7904803096,0,retrospective_posting_window
+2026-10-11,2026-10-20,can_ho_chung_cu,2510,1011,356,2225532.686156368,0,retrospective_posting_window
+2026-10-11,2026-10-20,nha_tro,2510,1011,377,907066.151592573,0,retrospective_posting_window
+2026-10-21,2026-10-30,all,3226,1727,2036,1852850.8917796924,0,retrospective_posting_window
+2026-10-21,2026-10-30,can_ho_chung_cu,3226,1727,1368,2320282.0277707106,0,retrospective_posting_window
+2026-10-21,2026-10-30,nha_tro,3226,1727,668,895596.7090914996,0,retrospective_posting_window

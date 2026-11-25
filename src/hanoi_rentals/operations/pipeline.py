@@ -13,7 +13,12 @@ from hanoi_rentals.analysis.audit import run_audit
 from hanoi_rentals.analysis.reporting import generate_figures, write_report
 from hanoi_rentals.modeling import run_modeling
 from hanoi_rentals.modeling.reporting import generate_modeling_report
-from hanoi_rentals.operations.registry import area_distribution, read_json, register, write_json
+from hanoi_rentals.operations.registry import (
+    area_distribution,
+    read_json,
+    register,
+    write_json,
+)
 
 
 def area_psi(previous_distribution, current):
@@ -64,7 +69,11 @@ def train(root, crawl_summary=None):
             item.get("error") for item in (crawl_summary or {}).get("coverage", [])
         ),
         "crawl_incomplete": bool(
-            crawl_summary and not crawl_summary.get("all_boundaries_reached")
+            crawl_summary
+            and (
+                not crawl_summary.get("all_boundaries_reached")
+                or crawl_summary.get("status") == "partial"
+            )
         ),
     }
     decision = register(root, run, quality)

@@ -263,6 +263,10 @@ export default function EstimatorWorkspace({
                   {schema?.furnishing.find(
                     (f) => f.value === submitted.furnishing,
                   )?.label || submitted.furnishing}
+                  <br />
+                  Ngày định giá: <time dateTime={estimate.valuation_date}>
+                    {estimate.valuation_date.split("-").reverse().join("/")}
+                  </time> (giờ Việt Nam)
                 </div>
                 <div className="price" data-testid="quote-price">
                   {money(estimate.prediction_vnd_month)}
@@ -276,12 +280,13 @@ export default function EstimatorWorkspace({
                     </strong>
                   </div>
                   <div>
-                    <span>Benchmark đã lưu</span>
+                    <span>{estimate.historical_error.evaluation_kind === "frozen_benchmark"
+                      ? "Benchmark đã lưu" : "Kiểm định theo thời gian"}</span>
                     <strong>{count(estimate.historical_error.n)} tin</strong>
                   </div>
                 </div>
                 <p className="quote-explanation">
-                  Sai số lịch sử không phải khoảng tin cậy cho căn này. Giá thực
+                  {estimate.historical_error.note} Giá thực
                   tế còn phụ thuộc vị trí cụ thể, chất lượng và phí dịch vụ.
                 </p>
                 {estimate.warnings.length > 0 && (

@@ -10,15 +10,19 @@ export default function ModelView({ model }: { model: Model | null }) {
         Mô hình học từ giá chào thuê. Kết quả hỗ trợ tìm hiểu mức giá, cần được
         cân nhắc cùng việc xem căn thực tế.
       </p>
+      {model?.preview_only && <p className="stale-notice" role="status">
+        Bản thử nghiệm có ngày định giá. Kết quả kiểm định theo thời gian dùng để phát triển mô hình;
+        tập đánh giá tháng 12/2026 vẫn được giữ riêng.
+      </p>}
       <div className="model-stats">
         <article>
-          <span>Sai số trung bình trên benchmark</span>
+          <span>{model?.preview_only ? "Sai số kiểm định theo thời gian" : "Sai số trung bình trên benchmark"}</span>
           <strong>
             {model ? money(model.benchmark.mae_vnd) : "—"}
             <small> triệu đ/tháng</small>
           </strong>
           <p>
-            Đơn vị gốc, đo trên {model?.internal_test_n || "—"} tin cố định.
+            Đơn vị gốc, đo trên {model?.internal_test_n || "—"} {model?.preview_only ? "lần quan sát kiểm định." : "tin cố định."}
           </p>
         </article>
         <article>
@@ -63,6 +67,10 @@ export default function ModelView({ model }: { model: Model | null }) {
             ngủ và nội thất được dùng khi phiên bản mô hình có chọn các trường
             này.
           </p>
+          {model?.feature_schema.includes("valuation_date") && <p>
+            Ngày định giá được hệ thống tự lấy theo giờ Việt Nam. Mô hình dùng đặc trưng thời gian
+            đã học từ ngày quan sát giá; thêm ngày không đảm bảo giá luôn tăng theo thời gian.
+          </p>}
           <h2>Mô hình mới được chọn thế nào?</h2>
           <p>
             Luồng định kỳ kiểm tra dữ liệu, huấn luyện các ứng viên và so sánh
@@ -84,8 +92,9 @@ export default function ModelView({ model }: { model: Model | null }) {
             trong tập kiểm tra. Sai số của từng căn có thể lớn hơn con số này.
           </p>
           <p>
-            Benchmark được tái dùng để kiểm tra hồi quy; kết quả chưa chứng minh
-            độ chính xác cho một đợt tin mới trong tương lai.
+            {model?.preview_only
+              ? "Các lần kiểm định huấn luyện bằng quan sát cũ hơn và tách nhóm tin trùng. Chưa có kết quả trên tập tương lai tháng 12."
+              : "Benchmark được tái dùng để kiểm tra hồi quy; kết quả chưa chứng minh độ chính xác cho một đợt tin mới trong tương lai."}
           </p>
           {model &&
             Object.entries(model.category_metrics).map(([c, s]) => (

@@ -50,6 +50,12 @@ def evaluate_gate(candidate, baseline, categories, quality, champion=None, polic
     """Gate saved holdout metrics; never tune candidates against the benchmark."""
     policy = policy or DEFAULT_POLICY
     reasons = []
+    if policy.get("require_valuation_date") and not quality.get(
+        "date_features_in_both_categories"
+    ):
+        reasons.append(
+            "Candidate lacks the required valuation date predictor for both categories"
+        )
     if quality.get("behavior_violations", 0):
         reasons.append("Prediction behavior violates area/bedroom monotonicity")
     if quality["development_n"] < policy["min_development_rows"]:
@@ -206,8 +212,10 @@ def register(root, run_root, quality):
             )
     policy_path = root / "config/promotion.json"
     policy = read_json(policy_path, DEFAULT_POLICY)
-    candidate_behavior = behavior_probe(
-        joblib.load(run_root / "artifacts/rental_price_pipeline.joblib")
+    fitted = joblib.load(run_root / "artifacts/rental_price_pipeline.joblib")
+    candidate_behavior = behavior_probe(fitted)
+    quality["date_features_in_both_categories"] = all(
+        "valuation_date" in fitted.features_for_category(c) for c in categories
     )
     quality = {**quality, "behavior_violations": candidate_behavior["violations"]}
     decision = evaluate_gate(
@@ -253,7 +261,11 @@ def register(root, run_root, quality):
     provenance = destination / "training_code"
     provenance.mkdir(exist_ok=True)
     for name, source in source_files().items():
-        target = provenance / "src/hanoi_rentals" / name
+        target = (
+            provenance / name
+            if name.startswith("config/")
+            else provenance / "src/hanoi_rentals" / name
+        )
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, target)
     for name in ["pyproject.toml", "requirements.lock", "config/promotion.json"]:

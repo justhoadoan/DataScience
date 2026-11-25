@@ -18,6 +18,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field, ValidationInfo, field_validator
 
 from hanoi_rentals.features.bedrooms import LAYOUT_POLICY, layout_error
+from hanoi_rentals.features.dates import today_hanoi
 from hanoi_rentals.operations.registry import champion_directory, read_json
 
 LOGGER = logging.getLogger(__name__)
@@ -31,6 +32,15 @@ class PredictionRequest(BaseModel):
     area_m2: float = Field(gt=5, le=500)
     bedrooms: int | None = Field(default=None, ge=0, le=6, strict=True)
     furnishing: Literal["Unknown", "Furnished", "Unfurnished"] = "Unknown"
+
+    def estimator_inputs(self):
+        return {
+            "category": self.category,
+            "district_analysis": self.district,
+            "area_analysis_m2": self.area_m2,
+            "bedrooms_analysis": self.bedrooms,
+            "furniture_analysis": self.furnishing,
+        }
 
     @field_validator("bedrooms")
     @classmethod
@@ -109,6 +119,7 @@ class ModelService:
         }
 
     def predict(self, payload):
+        valuation_date = today_hanoi().isoformat()
         if payload.district not in self.metadata["supported_districts"]:
             raise HTTPException(
                 422,
@@ -119,15 +130,22 @@ class ModelService:
                     }
                 ],
             )
-        result = self.model.predict_listing(
-            category=payload.category,
-            district=payload.district,
-            area=payload.area_m2,
-            bedrooms=payload.bedrooms,
-            furnishing=payload.furnishing,
-        )
+        inputs = {**payload.estimator_inputs(), "valuation_date": valuation_date}
+        result = self.model.predict_details(pd.DataFrame([inputs])).iloc[0].to_dict()
         warnings = []
         used = self.model.features_for_category(payload.category)
+        if "valuation_date" not in used:
+            warnings.append("Phiên bản hiện tại chưa học ảnh hưởng của ngày định giá.")
+        elif (
+            not self.model.date_range_[0] <= valuation_date <= self.model.date_range_[1]
+        ):
+            warnings.append(
+                "Ngày định giá nằm ngoài thời gian huấn luyện; chưa có bằng chứng về độ chính xác ở thời điểm này."
+            )
+        if self.metadata.get("preview_only"):
+            warnings.append(
+                "Bản thử nghiệm theo thời gian, chưa được duyệt thay thế model đang sử dụng."
+            )
         support = self.local_evidence(payload)
         if (
             support["nearby_training_n"] is not None
@@ -186,18 +204,32 @@ class ModelService:
             "area_analysis_m2": "Diện tích",
             "bedrooms_analysis": "Phòng ngủ riêng",
             "furniture_analysis": "Nội thất",
+            "valuation_date": "Ngày định giá",
         }
+        LOGGER.info(
+            "prediction model=%s valuation_date=%s date_feature_used=%s",
+            self.metadata["version"],
+            valuation_date,
+            "valuation_date" in used,
+        )
         return {
+            "valuation_date": valuation_date,
+            "date_feature_used": "valuation_date" in used,
             "prediction_vnd_month": round(float(result["prediction_vnd_month"]) / 1000)
             * 1000,
             "model_version": self.metadata["version"],
             "warnings": warnings,
             "used_features": [feature_names.get(f, f) for f in used],
             "historical_error": {
+                "evaluation_kind": self.metadata.get(
+                    "evaluation_kind", "frozen_benchmark"
+                ),
                 "mae_vnd": stats["mae_vnd"],
                 "median_ae_vnd": stats["median_ae_vnd"],
                 "n": stats["n"],
-                "note": "Sai số trên benchmark đã lưu, không phải khoảng tin cậy cho căn này.",
+                "note": "Sai số kiểm định theo thời gian trong phát triển, chưa phải đánh giá tương lai độc lập."
+                if self.metadata.get("preview_only")
+                else "Sai số trên benchmark đã lưu, không phải khoảng tin cậy cho căn này.",
             },
             "district_sample": similar,
             "support": support,
@@ -267,6 +299,7 @@ def create_app(root=None):
             "bedrooms_help": "Đếm phòng ngủ riêng có ngăn phòng. Studio/phòng khép kín có giường, bếp và WC nhưng không ngăn phòng ngủ là 0; chưa rõ thì để trống.",
             "area_unit": "m²",
             "currency": "VND/month",
+            "valuation_date": {"source": "server", "timezone": "Asia/Ho_Chi_Minh"},
             "furnishing": [
                 {"value": "Unknown", "label": "Chưa rõ"},
                 {"value": "Furnished", "label": "Đầy đủ"},
@@ -301,6 +334,9 @@ def create_app(root=None):
             {c: value.model.features_for_category(c) for c in CATEGORY_LABELS},
         )
         response["behavior"] = meta.get("behavior")
+        response["preview_only"] = meta.get("preview_only", False)
+        response["date_range"] = meta.get("date_range")
+        response["evaluation_kind"] = meta.get("evaluation_kind", "frozen_benchmark")
         return response
 
     @app.get("/api/market")

@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "reserved_at": "2026-11-23T10:20:55.932819+07:00",
+  "target_since": "2025-11-01",
+  "target_until": "2026-12-31",
+  "holdout_since": "2026-12-01",
+  "holdout_until": "2026-12-31",
+  "reserved_before_collection_window": true,
+  "training_rule": "Only evidenced observations before 2026-12-01. Never use December rows for fitting, feature selection or development validation.",
+  "holdout_rule": "Prospective assessment requires reservation before December and exclusion of properties/duplicate groups used in development or the old benchmark.",
+  "status": "reserved_unscored",
+  "frozen_candidate": "110fedfe13164ed4",
+  "candidate_frozen_at": "2026-11-23T20:35:15.079148+07:00",
+  "candidate_sha256": "2a6f18f72e14631b04aeec643cb09e31bf2daf7036a4e1c3d993a995db68d9bb"
+}

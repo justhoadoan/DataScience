@@ -1,0 +1,12 @@
+source,category,raw_match_status,n
+alonhadat,can_ho_chung_cu,different_or_ambiguous_version,196
+alonhadat,can_ho_chung_cu,exact_version,607
+alonhadat,can_ho_chung_cu,unavailable,172
+alonhadat,nha_tro,different_or_ambiguous_version,18
+alonhadat,nha_tro,unavailable,208
+nhatot,can_ho_chung_cu,different_or_ambiguous_version,111
+nhatot,can_ho_chung_cu,exact_version,1582
+nhatot,can_ho_chung_cu,unavailable,285
+nhatot,nha_tro,different_or_ambiguous_version,161
+nhatot,nha_tro,exact_version,1371
+nhatot,nha_tro,unavailable,584

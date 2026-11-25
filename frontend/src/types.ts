@@ -35,6 +35,9 @@ export type Market = {
   districts: District[];
 };
 export type Model = {
+  preview_only?: boolean;
+  date_range?: [string, string];
+  evaluation_kind?: string;
   version: string;
   evaluated_at: string;
   selected_model: string;
@@ -52,11 +55,14 @@ export type Model = {
   } | null;
 };
 export type Estimate = {
+  valuation_date: string;
+  date_feature_used: boolean;
   prediction_vnd_month: number;
   model_version: string;
   warnings: string[];
   used_features: string[];
   historical_error: {
+    evaluation_kind: string;
     mae_vnd: number;
     median_ae_vnd: number;
     n: number;

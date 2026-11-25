@@ -24,13 +24,16 @@ def parse_nhatot(raw_json, cat, offset):
         if ad.get("type") != RENT_TYPE:
             continue  # skip for-sale ads
         list_time = ad.get("list_time")
-        posted = (
-            datetime.fromtimestamp(list_time / 1000, ZoneInfo("Asia/Ho_Chi_Minh"))
-            .date()
-            .isoformat()
-            if list_time
-            else None
-        )
+        try:
+            posted = (
+                datetime.fromtimestamp(list_time / 1000, ZoneInfo("Asia/Ho_Chi_Minh"))
+                .date()
+                .isoformat()
+                if list_time
+                else None
+            )
+        except (TypeError, OverflowError, ValueError, OSError):
+            posted = None
         rows.append(
             {
                 "listing_id": ad.get("list_id"),
@@ -57,7 +60,14 @@ def parse_nhatot(raw_json, cat, offset):
                 ),
                 "region_name": ad.get("region_name"),
                 "posted_raw": posted,
-                "body": (ad.get("body") or "")[:500],  # keep for debugging/cleaning
+                "source_posted_timestamp_ms": list_time,
+                "source_original_timestamp_ms": ad.get("orig_list_time"),
+                "body": ad.get("body") or "",
+                "source_project_id": ad.get("project_oid") or ad.get("projectid"),
+                "source_project_name": ad.get("pty_project_name"),
+                "source_latitude": ad.get("latitude"),
+                "source_longitude": ad.get("longitude"),
+                "source_subtype": ad.get("apartment_type"),
                 "page_offset": offset,
                 "scraped_at": date.today().isoformat(),
             }
@@ -105,7 +115,7 @@ def parse_alonhadat(html, cat, page):
                 "posted_raw": time_el.get("datetime") if time_el else None,
                 "body": (first_text(card, "p.brief") or "")
                 .replace("<< Xem chi tiết >>", "")
-                .strip()[:500],
+                .strip(),
                 "page": page,
                 "scraped_at": date.today().isoformat(),
             }

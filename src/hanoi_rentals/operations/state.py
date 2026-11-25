@@ -11,8 +11,12 @@ ALLOWED = (
     "artifacts",
     "reports/pipeline_latest.json",
     "reports/crawl_latest.json",
+    "reports/crawl_runs",
+    "reports/historical_backfill.json",
     "reports/state_manifest.json",
     "reports/raw_manifest_latest.json",
+    "reports/temporal_coverage.json",
+    "reports/temporal",
 )
 
 

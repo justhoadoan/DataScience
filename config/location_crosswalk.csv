@@ -1,0 +1,3 @@
+source,scheme,policy,reference
+alonhadat,alonhadat_ward_v1,source_scoped,Listing card addressLocality together with district from old-address
+nhatot,nhatot_ward_v1,source_scoped,Listing ward_name and area_name from the same record

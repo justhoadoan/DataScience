@@ -427,6 +427,9 @@ def markdown_table(df, digits=2):
 def run_audit(root=ROOT):
     root = Path(root)
     raw = pd.read_csv(root / "data/processed/listings.csv")
+    from hanoi_rentals.ingestion.temporal_policy import reserved_rows
+
+    raw = raw.loc[~reserved_rows(raw)].copy()
     dest = root / "data/analysis"
     dest.mkdir(parents=True, exist_ok=True)
     reviews = read_reviews(dest / "review_queue.csv", raw)

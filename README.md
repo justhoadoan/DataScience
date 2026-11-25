@@ -38,6 +38,38 @@ Open the application at **http://127.0.0.1:8000** and the API documentation at *
 
 To use another port, run `PORT=8080 ./scripts/run_local.sh`.
 
+### Temporal-model preview
+
+After local setup, run a small collection and an isolated date-feature experiment:
+
+```bash
+.venv/bin/python -m hanoi_rentals.cli replay-observations
+.venv/bin/python -m hanoi_rentals.cli crawl --since 2025-11-01 --until 2026-12-31 --max-pages 3
+.venv/bin/python -m hanoi_rentals.cli train-temporal
+.venv/bin/python -m hanoi_rentals.cli --root .work/temporal-preview serve --port 8001
+```
+
+Open **http://127.0.0.1:8001** when training reports `preview_ready`. This preview uses its own model registry. The regular app continues to use the approved model.
+
+Use `temporal-coverage` for the collection report. Run `evaluate-temporal-holdout` after December 2026 to evaluate the candidate frozen before December; earlier runs return `pending`.
+
+### Crawl and resume
+
+A new crawl downloads fresh responses. Omit `--max-pages` to traverse all accessible pages:
+
+```bash
+.venv/bin/python -m hanoi_rentals.cli crawl --since 2025-11-01 --until 2026-11-30
+.venv/bin/python -m hanoi_rentals.cli backfill-archives --since 2025-11-01 --until 2026-11-30
+```
+
+To continue an interrupted crawl, use its printed run ID and the same date/source/category options. Keep that run's local raw responses available:
+
+```bash
+.venv/bin/python -m hanoi_rentals.cli crawl --since 2025-11-01 --until 2026-11-30 --resume RUN_ID
+```
+
+Use `--sources nhatot` or `--categories nha_tro` to select a source or category. A verification challenge stops requests to that source and is reported as incomplete collection.
+
 ### Manual setup
 
 ```bash

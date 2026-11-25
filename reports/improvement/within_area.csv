@@ -1,0 +1,777 @@
+category,district_analysis,area_band,variant,n,mae_vnd,bias_vnd
+can_ho_chung_cu,Ba Đình,Unknown,E0_reviewed,5,,
+can_ho_chung_cu,Ba Đình,Unknown,E5,5,,
+can_ho_chung_cu,Ba Đình,Unknown,E6_pooled_log,5,,
+can_ho_chung_cu,Ba Đình,Unknown,E9_bathrooms,5,,
+can_ho_chung_cu,Ba Đình,"[0, 40)",E0_reviewed,15,1040536.2675816107,-390849.4904375849
+can_ho_chung_cu,Ba Đình,"[0, 40)",E5,15,1033961.4691990259,-243812.24386412447
+can_ho_chung_cu,Ba Đình,"[0, 40)",E6_pooled_log,15,1091542.5053542617,-483142.60372567497
+can_ho_chung_cu,Ba Đình,"[0, 40)",E9_bathrooms,15,1114350.8941334556,-548597.7202814047
+can_ho_chung_cu,Ba Đình,"[100, 150)",E0_reviewed,25,5168614.74275393,-773935.2420110889
+can_ho_chung_cu,Ba Đình,"[100, 150)",E5,25,5177228.791500402,-1349271.0157203376
+can_ho_chung_cu,Ba Đình,"[100, 150)",E6_pooled_log,25,4925338.489506182,-1033309.713901828
+can_ho_chung_cu,Ba Đình,"[100, 150)",E9_bathrooms,25,4931152.1960280305,-1020397.8914751774
+can_ho_chung_cu,Ba Đình,"[150, inf)",E0_reviewed,1,,
+can_ho_chung_cu,Ba Đình,"[150, inf)",E5,1,,
+can_ho_chung_cu,Ba Đình,"[150, inf)",E6_pooled_log,1,,
+can_ho_chung_cu,Ba Đình,"[150, inf)",E9_bathrooms,1,,
+can_ho_chung_cu,Ba Đình,"[40, 60)",E0_reviewed,46,2533881.1810529516,-440799.3078519888
+can_ho_chung_cu,Ba Đình,"[40, 60)",E5,46,2556512.4696767097,-535046.6207229664
+can_ho_chung_cu,Ba Đình,"[40, 60)",E6_pooled_log,46,2636541.2452888205,-443661.0689550686
+can_ho_chung_cu,Ba Đình,"[40, 60)",E9_bathrooms,46,2713678.6400958137,-314997.8114117418
+can_ho_chung_cu,Ba Đình,"[60, 80)",E0_reviewed,20,3402125.1737756357,-1170956.8118373347
+can_ho_chung_cu,Ba Đình,"[60, 80)",E5,20,3288642.0665030256,-1335405.1899568043
+can_ho_chung_cu,Ba Đình,"[60, 80)",E6_pooled_log,20,2998760.1599106034,-825856.1948472166
+can_ho_chung_cu,Ba Đình,"[60, 80)",E9_bathrooms,20,2879925.620625179,-767268.2253723326
+can_ho_chung_cu,Ba Đình,"[80, 100)",E0_reviewed,17,3746688.771959918,-494444.84908457485
+can_ho_chung_cu,Ba Đình,"[80, 100)",E5,17,3624664.7693478237,-705112.2413668579
+can_ho_chung_cu,Ba Đình,"[80, 100)",E6_pooled_log,17,3646438.0715769697,-754755.610135242
+can_ho_chung_cu,Ba Đình,"[80, 100)",E9_bathrooms,17,3530343.0575957852,-662819.0631059182
+can_ho_chung_cu,Bắc Từ Liêm,Unknown,E0_reviewed,32,1558577.988343077,-580930.8206222216
+can_ho_chung_cu,Bắc Từ Liêm,Unknown,E5,32,1576941.0176873684,-264957.3934319038
+can_ho_chung_cu,Bắc Từ Liêm,Unknown,E6_pooled_log,32,1724291.0451129344,-413600.68181212316
+can_ho_chung_cu,Bắc Từ Liêm,Unknown,E9_bathrooms,32,1630977.5643442112,-500352.71753131493
+can_ho_chung_cu,Bắc Từ Liêm,"[0, 40)",E0_reviewed,18,723037.8373748483,-308274.9169328013
+can_ho_chung_cu,Bắc Từ Liêm,"[0, 40)",E5,18,640480.3663373744,-318551.98237395985
+can_ho_chung_cu,Bắc Từ Liêm,"[0, 40)",E6_pooled_log,18,700727.5631348711,-510021.2430921199
+can_ho_chung_cu,Bắc Từ Liêm,"[0, 40)",E9_bathrooms,18,712354.8771552001,-518740.6996889564
+can_ho_chung_cu,Bắc Từ Liêm,"[100, 150)",E0_reviewed,35,3661491.5986697096,-380099.1879067505
+can_ho_chung_cu,Bắc Từ Liêm,"[100, 150)",E5,35,3535237.9735602,-1158634.6556055648
+can_ho_chung_cu,Bắc Từ Liêm,"[100, 150)",E6_pooled_log,35,3339578.1731755272,-1119393.3618064318
+can_ho_chung_cu,Bắc Từ Liêm,"[100, 150)",E9_bathrooms,35,3346108.48427079,-1222457.7861781104
+can_ho_chung_cu,Bắc Từ Liêm,"[150, inf)",E0_reviewed,1,,
+can_ho_chung_cu,Bắc Từ Liêm,"[150, inf)",E5,1,,
+can_ho_chung_cu,Bắc Từ Liêm,"[150, inf)",E6_pooled_log,1,,
+can_ho_chung_cu,Bắc Từ Liêm,"[150, inf)",E9_bathrooms,1,,
+can_ho_chung_cu,Bắc Từ Liêm,"[40, 60)",E0_reviewed,12,1270926.007960461,-271610.11607955396
+can_ho_chung_cu,Bắc Từ Liêm,"[40, 60)",E5,12,1061592.6146235906,-199060.34218484894
+can_ho_chung_cu,Bắc Từ Liêm,"[40, 60)",E6_pooled_log,12,1310696.04613242,-391109.38385998085
+can_ho_chung_cu,Bắc Từ Liêm,"[40, 60)",E9_bathrooms,12,1422485.9790302848,-265860.5385479448
+can_ho_chung_cu,Bắc Từ Liêm,"[60, 80)",E0_reviewed,16,2314643.296771443,-711964.3851697019
+can_ho_chung_cu,Bắc Từ Liêm,"[60, 80)",E5,16,2239856.58460233,-501910.4123812022
+can_ho_chung_cu,Bắc Từ Liêm,"[60, 80)",E6_pooled_log,16,1909410.7686766875,94021.7048424065
+can_ho_chung_cu,Bắc Từ Liêm,"[60, 80)",E9_bathrooms,16,2048763.1898988062,133201.092088794
+can_ho_chung_cu,Bắc Từ Liêm,"[80, 100)",E0_reviewed,23,2364647.720535235,457427.5803504031
+can_ho_chung_cu,Bắc Từ Liêm,"[80, 100)",E5,23,2423979.043987487,276409.71339612006
+can_ho_chung_cu,Bắc Từ Liêm,"[80, 100)",E6_pooled_log,23,2253113.476099809,211240.22979973466
+can_ho_chung_cu,Bắc Từ Liêm,"[80, 100)",E9_bathrooms,23,2300640.2417113828,165584.26178021915
+can_ho_chung_cu,Chương Mỹ,"[60, 80)",E0_reviewed,1,,
+can_ho_chung_cu,Chương Mỹ,"[60, 80)",E5,1,,
+can_ho_chung_cu,Chương Mỹ,"[60, 80)",E6_pooled_log,1,,
+can_ho_chung_cu,Chương Mỹ,"[60, 80)",E9_bathrooms,1,,
+can_ho_chung_cu,Cầu Giấy,Unknown,E0_reviewed,38,1603927.0331868932,-449609.8149713274
+can_ho_chung_cu,Cầu Giấy,Unknown,E5,38,1521007.9370917298,-476421.04779455654
+can_ho_chung_cu,Cầu Giấy,Unknown,E6_pooled_log,38,1721021.9855099472,-494082.6549519591
+can_ho_chung_cu,Cầu Giấy,Unknown,E9_bathrooms,38,1799377.0694127397,-486012.62308551214
+can_ho_chung_cu,Cầu Giấy,"[0, 40)",E0_reviewed,31,888893.222832935,-370259.1395211468
+can_ho_chung_cu,Cầu Giấy,"[0, 40)",E5,31,915775.4959551974,-294594.3370206557
+can_ho_chung_cu,Cầu Giấy,"[0, 40)",E6_pooled_log,31,892649.6106006637,-366702.03771433065
+can_ho_chung_cu,Cầu Giấy,"[0, 40)",E9_bathrooms,31,859440.5503044968,-296429.6579319691
+can_ho_chung_cu,Cầu Giấy,"[100, 150)",E0_reviewed,79,2553754.9189372896,-478211.80467608984
+can_ho_chung_cu,Cầu Giấy,"[100, 150)",E5,79,2497921.2261404614,-474964.64893609966
+can_ho_chung_cu,Cầu Giấy,"[100, 150)",E6_pooled_log,79,2599536.53316191,-479402.6248458437
+can_ho_chung_cu,Cầu Giấy,"[100, 150)",E9_bathrooms,79,2685874.743114403,-340089.20818891487
+can_ho_chung_cu,Cầu Giấy,"[150, inf)",E0_reviewed,24,3102681.069725558,1625012.1381291377
+can_ho_chung_cu,Cầu Giấy,"[150, inf)",E5,24,2849155.403424224,1311025.1420151473
+can_ho_chung_cu,Cầu Giấy,"[150, inf)",E6_pooled_log,24,3137200.861983027,1523461.2197827853
+can_ho_chung_cu,Cầu Giấy,"[150, inf)",E9_bathrooms,24,3154297.8464361844,1288878.6757658708
+can_ho_chung_cu,Cầu Giấy,"[40, 60)",E0_reviewed,39,1297197.0878260012,-58657.07929515306
+can_ho_chung_cu,Cầu Giấy,"[40, 60)",E5,39,1214682.8917431396,-53650.38983389783
+can_ho_chung_cu,Cầu Giấy,"[40, 60)",E6_pooled_log,39,1414513.0980685966,86131.83709164799
+can_ho_chung_cu,Cầu Giấy,"[40, 60)",E9_bathrooms,39,1445594.0040139828,-32023.56269558889
+can_ho_chung_cu,Cầu Giấy,"[60, 80)",E0_reviewed,70,1756710.0218811932,-1022972.4031546355
+can_ho_chung_cu,Cầu Giấy,"[60, 80)",E5,70,1697661.5353225046,-940495.2157849892
+can_ho_chung_cu,Cầu Giấy,"[60, 80)",E6_pooled_log,70,1628576.7202767844,-605007.6396689368
+can_ho_chung_cu,Cầu Giấy,"[60, 80)",E9_bathrooms,70,1621210.295803993,-652181.9103122205
+can_ho_chung_cu,Cầu Giấy,"[80, 100)",E0_reviewed,60,2112353.829485444,82799.63811158978
+can_ho_chung_cu,Cầu Giấy,"[80, 100)",E5,60,2172161.21617074,6758.071707648381
+can_ho_chung_cu,Cầu Giấy,"[80, 100)",E6_pooled_log,60,2085095.70662546,-202629.83180124182
+can_ho_chung_cu,Cầu Giấy,"[80, 100)",E9_bathrooms,60,1992934.1463127628,-87500.92220828934
+can_ho_chung_cu,Gia Lâm,Unknown,E0_reviewed,494,1230058.5838586758,-159665.90138290206
+can_ho_chung_cu,Gia Lâm,Unknown,E5,494,1250471.956636902,-121081.46197859569
+can_ho_chung_cu,Gia Lâm,Unknown,E6_pooled_log,494,1228726.5904144517,-172186.8732517224
+can_ho_chung_cu,Gia Lâm,Unknown,E9_bathrooms,494,1180024.469642296,-160808.18787304597
+can_ho_chung_cu,Gia Lâm,"[0, 40)",E0_reviewed,9,,
+can_ho_chung_cu,Gia Lâm,"[0, 40)",E5,9,,
+can_ho_chung_cu,Gia Lâm,"[0, 40)",E6_pooled_log,9,,
+can_ho_chung_cu,Gia Lâm,"[0, 40)",E9_bathrooms,9,,
+can_ho_chung_cu,Gia Lâm,"[100, 150)",E0_reviewed,1,,
+can_ho_chung_cu,Gia Lâm,"[100, 150)",E5,1,,
+can_ho_chung_cu,Gia Lâm,"[100, 150)",E6_pooled_log,1,,
+can_ho_chung_cu,Gia Lâm,"[100, 150)",E9_bathrooms,1,,
+can_ho_chung_cu,Gia Lâm,"[40, 60)",E0_reviewed,13,1309525.1345904795,476864.75170360727
+can_ho_chung_cu,Gia Lâm,"[40, 60)",E5,13,1313918.1871949348,397151.6499498421
+can_ho_chung_cu,Gia Lâm,"[40, 60)",E6_pooled_log,13,1423693.1456271384,523907.17036001873
+can_ho_chung_cu,Gia Lâm,"[40, 60)",E9_bathrooms,13,1303208.9686702495,287477.2649956307
+can_ho_chung_cu,Gia Lâm,"[60, 80)",E0_reviewed,14,1816376.8958611717,-283566.5311351147
+can_ho_chung_cu,Gia Lâm,"[60, 80)",E5,14,1684651.3891090224,-415720.3275629794
+can_ho_chung_cu,Gia Lâm,"[60, 80)",E6_pooled_log,14,1713587.629637568,-478557.4032860268
+can_ho_chung_cu,Gia Lâm,"[60, 80)",E9_bathrooms,14,1741195.889362505,-419312.23544488143
+can_ho_chung_cu,Hai Bà Trưng,Unknown,E0_reviewed,6,,
+can_ho_chung_cu,Hai Bà Trưng,Unknown,E5,6,,
+can_ho_chung_cu,Hai Bà Trưng,Unknown,E6_pooled_log,6,,
+can_ho_chung_cu,Hai Bà Trưng,Unknown,E9_bathrooms,6,,
+can_ho_chung_cu,Hai Bà Trưng,"[0, 40)",E0_reviewed,16,1020720.5410527634,-942642.1354021379
+can_ho_chung_cu,Hai Bà Trưng,"[0, 40)",E5,16,823159.3549611904,-686776.0654131969
+can_ho_chung_cu,Hai Bà Trưng,"[0, 40)",E6_pooled_log,16,872361.6221070347,-680136.979289752
+can_ho_chung_cu,Hai Bà Trưng,"[0, 40)",E9_bathrooms,16,982215.4494821246,-675947.2662326014
+can_ho_chung_cu,Hai Bà Trưng,"[100, 150)",E0_reviewed,6,,
+can_ho_chung_cu,Hai Bà Trưng,"[100, 150)",E5,6,,
+can_ho_chung_cu,Hai Bà Trưng,"[100, 150)",E6_pooled_log,6,,
+can_ho_chung_cu,Hai Bà Trưng,"[100, 150)",E9_bathrooms,6,,
+can_ho_chung_cu,Hai Bà Trưng,"[40, 60)",E0_reviewed,16,2109539.8388735685,220707.9795605194
+can_ho_chung_cu,Hai Bà Trưng,"[40, 60)",E5,16,1978828.794600415,90444.77264539956
+can_ho_chung_cu,Hai Bà Trưng,"[40, 60)",E6_pooled_log,16,2227122.884848219,755802.0412616022
+can_ho_chung_cu,Hai Bà Trưng,"[40, 60)",E9_bathrooms,16,2251931.409654102,539871.3031426077
+can_ho_chung_cu,Hai Bà Trưng,"[60, 80)",E0_reviewed,25,2456948.0978649193,173560.25558461278
+can_ho_chung_cu,Hai Bà Trưng,"[60, 80)",E5,25,2654136.176548786,105649.38181366891
+can_ho_chung_cu,Hai Bà Trưng,"[60, 80)",E6_pooled_log,25,2561416.5633694567,55913.69611246079
+can_ho_chung_cu,Hai Bà Trưng,"[60, 80)",E9_bathrooms,25,2387502.479291013,461259.38996572257
+can_ho_chung_cu,Hai Bà Trưng,"[80, 100)",E0_reviewed,4,,
+can_ho_chung_cu,Hai Bà Trưng,"[80, 100)",E5,4,,
+can_ho_chung_cu,Hai Bà Trưng,"[80, 100)",E6_pooled_log,4,,
+can_ho_chung_cu,Hai Bà Trưng,"[80, 100)",E9_bathrooms,4,,
+can_ho_chung_cu,Hoài Đức,Unknown,E0_reviewed,26,3656128.9131558593,-1067527.5775118184
+can_ho_chung_cu,Hoài Đức,Unknown,E5,26,3270877.2443914446,-1086254.981249987
+can_ho_chung_cu,Hoài Đức,Unknown,E6_pooled_log,26,3514795.15478311,-1171904.9538658932
+can_ho_chung_cu,Hoài Đức,Unknown,E9_bathrooms,26,3661462.064728168,-1101190.6986542663
+can_ho_chung_cu,Hoài Đức,"[0, 40)",E0_reviewed,1,,
+can_ho_chung_cu,Hoài Đức,"[0, 40)",E5,1,,
+can_ho_chung_cu,Hoài Đức,"[0, 40)",E6_pooled_log,1,,
+can_ho_chung_cu,Hoài Đức,"[0, 40)",E9_bathrooms,1,,
+can_ho_chung_cu,Hoài Đức,"[100, 150)",E0_reviewed,2,,
+can_ho_chung_cu,Hoài Đức,"[100, 150)",E5,2,,
+can_ho_chung_cu,Hoài Đức,"[100, 150)",E6_pooled_log,2,,
+can_ho_chung_cu,Hoài Đức,"[100, 150)",E9_bathrooms,2,,
+can_ho_chung_cu,Hoài Đức,"[60, 80)",E0_reviewed,2,,
+can_ho_chung_cu,Hoài Đức,"[60, 80)",E5,2,,
+can_ho_chung_cu,Hoài Đức,"[60, 80)",E6_pooled_log,2,,
+can_ho_chung_cu,Hoài Đức,"[60, 80)",E9_bathrooms,2,,
+can_ho_chung_cu,Hoài Đức,"[80, 100)",E0_reviewed,1,,
+can_ho_chung_cu,Hoài Đức,"[80, 100)",E5,1,,
+can_ho_chung_cu,Hoài Đức,"[80, 100)",E6_pooled_log,1,,
+can_ho_chung_cu,Hoài Đức,"[80, 100)",E9_bathrooms,1,,
+can_ho_chung_cu,Hoàn Kiếm,"[0, 40)",E0_reviewed,13,552285.5570637262,454515.7231763368
+can_ho_chung_cu,Hoàn Kiếm,"[0, 40)",E5,13,459689.46905017545,360779.8046880843
+can_ho_chung_cu,Hoàn Kiếm,"[0, 40)",E6_pooled_log,13,588970.4297023083,-309063.1935074841
+can_ho_chung_cu,Hoàn Kiếm,"[0, 40)",E9_bathrooms,13,549038.7067686545,-61523.309068014416
+can_ho_chung_cu,Hoàn Kiếm,"[40, 60)",E0_reviewed,23,2119592.6390423807,-1401673.698887493
+can_ho_chung_cu,Hoàn Kiếm,"[40, 60)",E5,23,2189856.2792113256,-1285991.6248258925
+can_ho_chung_cu,Hoàn Kiếm,"[40, 60)",E6_pooled_log,23,2100708.069448468,-1238628.1868798614
+can_ho_chung_cu,Hoàn Kiếm,"[40, 60)",E9_bathrooms,23,2105169.555472281,-1271576.1665723736
+can_ho_chung_cu,Hoàn Kiếm,"[60, 80)",E0_reviewed,21,2553708.609037938,-152898.02436265402
+can_ho_chung_cu,Hoàn Kiếm,"[60, 80)",E5,21,3002671.8511979333,-166302.14103665788
+can_ho_chung_cu,Hoàn Kiếm,"[60, 80)",E6_pooled_log,21,2629451.783889763,212829.08644938585
+can_ho_chung_cu,Hoàn Kiếm,"[60, 80)",E9_bathrooms,21,2627078.844510744,35503.595675866876
+can_ho_chung_cu,Hoàn Kiếm,"[80, 100)",E0_reviewed,4,,
+can_ho_chung_cu,Hoàn Kiếm,"[80, 100)",E5,4,,
+can_ho_chung_cu,Hoàn Kiếm,"[80, 100)",E6_pooled_log,4,,
+can_ho_chung_cu,Hoàn Kiếm,"[80, 100)",E9_bathrooms,4,,
+can_ho_chung_cu,Hoàng Mai,Unknown,E0_reviewed,59,1758795.4662006889,-285220.56804923346
+can_ho_chung_cu,Hoàng Mai,Unknown,E5,59,1948706.0691906877,-475442.48118413135
+can_ho_chung_cu,Hoàng Mai,Unknown,E6_pooled_log,59,2011245.150190631,-318314.46880192513
+can_ho_chung_cu,Hoàng Mai,Unknown,E9_bathrooms,59,1849684.9068547655,-405907.7757780841
+can_ho_chung_cu,Hoàng Mai,"[0, 40)",E0_reviewed,16,734615.8864766124,186978.66080581196
+can_ho_chung_cu,Hoàng Mai,"[0, 40)",E5,16,826213.9168360969,24408.48045399238
+can_ho_chung_cu,Hoàng Mai,"[0, 40)",E6_pooled_log,16,737846.3711900704,193337.21237325168
+can_ho_chung_cu,Hoàng Mai,"[0, 40)",E9_bathrooms,16,803010.1601529713,271244.3043231546
+can_ho_chung_cu,Hoàng Mai,"[100, 150)",E0_reviewed,16,2627899.947772038,520127.1608918974
+can_ho_chung_cu,Hoàng Mai,"[100, 150)",E5,16,2741365.3226988544,952969.8847597076
+can_ho_chung_cu,Hoàng Mai,"[100, 150)",E6_pooled_log,16,2656879.4946935056,604912.37682318
+can_ho_chung_cu,Hoàng Mai,"[100, 150)",E9_bathrooms,16,2686959.1894064783,575800.0283923146
+can_ho_chung_cu,Hoàng Mai,"[40, 60)",E0_reviewed,15,1445720.516422954,-735209.1173580594
+can_ho_chung_cu,Hoàng Mai,"[40, 60)",E5,15,1146882.909128045,-632810.7986106334
+can_ho_chung_cu,Hoàng Mai,"[40, 60)",E6_pooled_log,15,1441677.5023931763,-240911.5467520322
+can_ho_chung_cu,Hoàng Mai,"[40, 60)",E9_bathrooms,15,1450557.7569366232,-301422.4875723999
+can_ho_chung_cu,Hoàng Mai,"[60, 80)",E0_reviewed,31,1876651.6600345422,-94329.99408650257
+can_ho_chung_cu,Hoàng Mai,"[60, 80)",E5,31,1711020.4809180042,210580.5810444131
+can_ho_chung_cu,Hoàng Mai,"[60, 80)",E6_pooled_log,31,1831459.7972253677,36953.67156418242
+can_ho_chung_cu,Hoàng Mai,"[60, 80)",E9_bathrooms,31,1996822.210380008,384777.7204125299
+can_ho_chung_cu,Hoàng Mai,"[80, 100)",E0_reviewed,22,1883716.4759543785,-601657.7278612527
+can_ho_chung_cu,Hoàng Mai,"[80, 100)",E5,22,1590195.9140093175,-496476.4969292984
+can_ho_chung_cu,Hoàng Mai,"[80, 100)",E6_pooled_log,22,2014596.1105929695,-454907.9183340654
+can_ho_chung_cu,Hoàng Mai,"[80, 100)",E9_bathrooms,22,1987122.558013794,-411180.52254544006
+can_ho_chung_cu,Hà Đông,Unknown,E0_reviewed,7,,
+can_ho_chung_cu,Hà Đông,Unknown,E5,7,,
+can_ho_chung_cu,Hà Đông,Unknown,E6_pooled_log,7,,
+can_ho_chung_cu,Hà Đông,Unknown,E9_bathrooms,7,,
+can_ho_chung_cu,Hà Đông,"[0, 40)",E0_reviewed,13,677618.2039339081,-553862.6576175735
+can_ho_chung_cu,Hà Đông,"[0, 40)",E5,13,755464.2327150968,-675897.4411445637
+can_ho_chung_cu,Hà Đông,"[0, 40)",E6_pooled_log,13,742374.4533468527,-521323.6590089613
+can_ho_chung_cu,Hà Đông,"[0, 40)",E9_bathrooms,13,768492.8434618291,-580326.4520957283
+can_ho_chung_cu,Hà Đông,"[100, 150)",E0_reviewed,19,2198449.493395219,1359053.7376713413
+can_ho_chung_cu,Hà Đông,"[100, 150)",E5,19,1920368.1010816128,1272874.8826033822
+can_ho_chung_cu,Hà Đông,"[100, 150)",E6_pooled_log,19,2043692.8557099209,899669.4986501936
+can_ho_chung_cu,Hà Đông,"[100, 150)",E9_bathrooms,19,1915078.571328694,707225.5420036954
+can_ho_chung_cu,Hà Đông,"[150, inf)",E0_reviewed,2,,
+can_ho_chung_cu,Hà Đông,"[150, inf)",E5,2,,
+can_ho_chung_cu,Hà Đông,"[150, inf)",E6_pooled_log,2,,
+can_ho_chung_cu,Hà Đông,"[150, inf)",E9_bathrooms,2,,
+can_ho_chung_cu,Hà Đông,"[40, 60)",E0_reviewed,19,1507701.3162497545,-235058.01546063
+can_ho_chung_cu,Hà Đông,"[40, 60)",E5,19,1079269.9760675577,-298148.4771621756
+can_ho_chung_cu,Hà Đông,"[40, 60)",E6_pooled_log,19,1620712.4840160834,-55246.02004250644
+can_ho_chung_cu,Hà Đông,"[40, 60)",E9_bathrooms,19,1575773.5079720533,6707.814522154678
+can_ho_chung_cu,Hà Đông,"[60, 80)",E0_reviewed,33,2233810.4105097353,-305644.7811198291
+can_ho_chung_cu,Hà Đông,"[60, 80)",E5,33,1829424.7876932863,-106698.98995902824
+can_ho_chung_cu,Hà Đông,"[60, 80)",E6_pooled_log,33,2243191.8254642016,-201675.01244214256
+can_ho_chung_cu,Hà Đông,"[60, 80)",E9_bathrooms,33,2292996.170241104,-228461.066741933
+can_ho_chung_cu,Hà Đông,"[80, 100)",E0_reviewed,24,1604697.5598584516,-536301.3781703142
+can_ho_chung_cu,Hà Đông,"[80, 100)",E5,24,1197875.7190716628,-406759.7003362625
+can_ho_chung_cu,Hà Đông,"[80, 100)",E6_pooled_log,24,1718043.0283427213,-359603.11294602294
+can_ho_chung_cu,Hà Đông,"[80, 100)",E9_bathrooms,24,1721382.0325384338,-294180.0004385196
+can_ho_chung_cu,Long Biên,Unknown,E0_reviewed,123,1484760.757468723,-238912.24415317044
+can_ho_chung_cu,Long Biên,Unknown,E5,123,1557948.029858573,-321933.67068698106
+can_ho_chung_cu,Long Biên,Unknown,E6_pooled_log,123,1488648.1993019907,-337741.13079601526
+can_ho_chung_cu,Long Biên,Unknown,E9_bathrooms,123,1411911.1218861481,-339277.52198356553
+can_ho_chung_cu,Long Biên,"[0, 40)",E0_reviewed,20,817003.104939623,-121779.30022240171
+can_ho_chung_cu,Long Biên,"[0, 40)",E5,20,755854.2677112963,-59946.28556707818
+can_ho_chung_cu,Long Biên,"[0, 40)",E6_pooled_log,20,749393.9375409868,34283.33197210184
+can_ho_chung_cu,Long Biên,"[0, 40)",E9_bathrooms,20,694320.3709769913,158970.1152114048
+can_ho_chung_cu,Long Biên,"[100, 150)",E0_reviewed,8,,
+can_ho_chung_cu,Long Biên,"[100, 150)",E5,8,,
+can_ho_chung_cu,Long Biên,"[100, 150)",E6_pooled_log,8,,
+can_ho_chung_cu,Long Biên,"[100, 150)",E9_bathrooms,8,,
+can_ho_chung_cu,Long Biên,"[150, inf)",E0_reviewed,2,,
+can_ho_chung_cu,Long Biên,"[150, inf)",E5,2,,
+can_ho_chung_cu,Long Biên,"[150, inf)",E6_pooled_log,2,,
+can_ho_chung_cu,Long Biên,"[150, inf)",E9_bathrooms,2,,
+can_ho_chung_cu,Long Biên,"[40, 60)",E0_reviewed,11,1073819.018408171,350279.16440898814
+can_ho_chung_cu,Long Biên,"[40, 60)",E5,11,1308240.4526661024,635471.8012042346
+can_ho_chung_cu,Long Biên,"[40, 60)",E6_pooled_log,11,1541779.4221261821,918828.8158046954
+can_ho_chung_cu,Long Biên,"[40, 60)",E9_bathrooms,11,1349441.1623731537,826686.5986811909
+can_ho_chung_cu,Long Biên,"[60, 80)",E0_reviewed,25,1880184.6125625172,133622.07385155733
+can_ho_chung_cu,Long Biên,"[60, 80)",E5,25,1870317.1466827318,70043.10571184919
+can_ho_chung_cu,Long Biên,"[60, 80)",E6_pooled_log,25,1817626.1159567202,217319.37630705637
+can_ho_chung_cu,Long Biên,"[60, 80)",E9_bathrooms,25,1895390.998596711,156904.72397987664
+can_ho_chung_cu,Long Biên,"[80, 100)",E0_reviewed,12,1394474.425717681,327535.0504466803
+can_ho_chung_cu,Long Biên,"[80, 100)",E5,12,1562995.4151002436,386281.6887471558
+can_ho_chung_cu,Long Biên,"[80, 100)",E6_pooled_log,12,1382341.0461540183,357769.8987902754
+can_ho_chung_cu,Long Biên,"[80, 100)",E9_bathrooms,12,1302761.7449494267,-1386.7572899886097
+can_ho_chung_cu,Nam Từ Liêm,Unknown,E0_reviewed,272,2509219.2339325366,-626626.6060880023
+can_ho_chung_cu,Nam Từ Liêm,Unknown,E5,272,2126083.804277734,-494512.2220377321
+can_ho_chung_cu,Nam Từ Liêm,Unknown,E6_pooled_log,272,2499872.4896927187,-687538.8182239456
+can_ho_chung_cu,Nam Từ Liêm,Unknown,E9_bathrooms,272,2454699.6071618125,-685395.571153218
+can_ho_chung_cu,Nam Từ Liêm,"[0, 40)",E0_reviewed,49,890719.6005672609,-140081.80181075318
+can_ho_chung_cu,Nam Từ Liêm,"[0, 40)",E5,49,814556.2804197742,-53583.521785272256
+can_ho_chung_cu,Nam Từ Liêm,"[0, 40)",E6_pooled_log,49,947765.2754802874,-132361.77083742086
+can_ho_chung_cu,Nam Từ Liêm,"[0, 40)",E9_bathrooms,49,962118.5275620176,-64218.41626289158
+can_ho_chung_cu,Nam Từ Liêm,"[100, 150)",E0_reviewed,47,2539829.2380957934,532986.2045178531
+can_ho_chung_cu,Nam Từ Liêm,"[100, 150)",E5,47,2468937.752727676,630477.8614558157
+can_ho_chung_cu,Nam Từ Liêm,"[100, 150)",E6_pooled_log,47,2208342.2457722262,504038.395322625
+can_ho_chung_cu,Nam Từ Liêm,"[100, 150)",E9_bathrooms,47,2278833.765100404,548815.1163548098
+can_ho_chung_cu,Nam Từ Liêm,"[150, inf)",E0_reviewed,3,,
+can_ho_chung_cu,Nam Từ Liêm,"[150, inf)",E5,3,,
+can_ho_chung_cu,Nam Từ Liêm,"[150, inf)",E6_pooled_log,3,,
+can_ho_chung_cu,Nam Từ Liêm,"[150, inf)",E9_bathrooms,3,,
+can_ho_chung_cu,Nam Từ Liêm,"[40, 60)",E0_reviewed,58,1570729.244702783,-545586.2742638051
+can_ho_chung_cu,Nam Từ Liêm,"[40, 60)",E5,58,1493122.914710941,-387026.4348543795
+can_ho_chung_cu,Nam Từ Liêm,"[40, 60)",E6_pooled_log,58,1604965.612491715,-306106.2823764116
+can_ho_chung_cu,Nam Từ Liêm,"[40, 60)",E9_bathrooms,58,1669618.756259508,-335915.1524922601
+can_ho_chung_cu,Nam Từ Liêm,"[60, 80)",E0_reviewed,60,1640922.2309205367,-540784.941828348
+can_ho_chung_cu,Nam Từ Liêm,"[60, 80)",E5,60,1695309.5877056962,-570430.3944116911
+can_ho_chung_cu,Nam Từ Liêm,"[60, 80)",E6_pooled_log,60,1604377.7482100506,-562343.6007030403
+can_ho_chung_cu,Nam Từ Liêm,"[60, 80)",E9_bathrooms,60,1638519.255124252,-547078.2656282781
+can_ho_chung_cu,Nam Từ Liêm,"[80, 100)",E0_reviewed,48,2483668.713552984,-754155.2474557726
+can_ho_chung_cu,Nam Từ Liêm,"[80, 100)",E5,48,2548392.6091374625,-515805.58840016025
+can_ho_chung_cu,Nam Từ Liêm,"[80, 100)",E6_pooled_log,48,2626820.295501523,-1159322.3916975285
+can_ho_chung_cu,Nam Từ Liêm,"[80, 100)",E9_bathrooms,48,2608789.231810579,-1102185.075605232
+can_ho_chung_cu,Thanh Trì,Unknown,E0_reviewed,1,,
+can_ho_chung_cu,Thanh Trì,Unknown,E5,1,,
+can_ho_chung_cu,Thanh Trì,Unknown,E6_pooled_log,1,,
+can_ho_chung_cu,Thanh Trì,Unknown,E9_bathrooms,1,,
+can_ho_chung_cu,Thanh Trì,"[0, 40)",E0_reviewed,3,,
+can_ho_chung_cu,Thanh Trì,"[0, 40)",E5,3,,
+can_ho_chung_cu,Thanh Trì,"[0, 40)",E6_pooled_log,3,,
+can_ho_chung_cu,Thanh Trì,"[0, 40)",E9_bathrooms,3,,
+can_ho_chung_cu,Thanh Trì,"[100, 150)",E0_reviewed,6,,
+can_ho_chung_cu,Thanh Trì,"[100, 150)",E5,6,,
+can_ho_chung_cu,Thanh Trì,"[100, 150)",E6_pooled_log,6,,
+can_ho_chung_cu,Thanh Trì,"[100, 150)",E9_bathrooms,6,,
+can_ho_chung_cu,Thanh Trì,"[40, 60)",E0_reviewed,2,,
+can_ho_chung_cu,Thanh Trì,"[40, 60)",E5,2,,
+can_ho_chung_cu,Thanh Trì,"[40, 60)",E6_pooled_log,2,,
+can_ho_chung_cu,Thanh Trì,"[40, 60)",E9_bathrooms,2,,
+can_ho_chung_cu,Thanh Trì,"[60, 80)",E0_reviewed,13,1841197.0163541299,-229470.89822617732
+can_ho_chung_cu,Thanh Trì,"[60, 80)",E5,13,1807675.408383512,-66261.22517823141
+can_ho_chung_cu,Thanh Trì,"[60, 80)",E6_pooled_log,13,1839727.7581464483,-72545.69873662479
+can_ho_chung_cu,Thanh Trì,"[60, 80)",E9_bathrooms,13,1678381.976499602,-20720.022920175743
+can_ho_chung_cu,Thanh Trì,"[80, 100)",E0_reviewed,6,,
+can_ho_chung_cu,Thanh Trì,"[80, 100)",E5,6,,
+can_ho_chung_cu,Thanh Trì,"[80, 100)",E6_pooled_log,6,,
+can_ho_chung_cu,Thanh Trì,"[80, 100)",E9_bathrooms,6,,
+can_ho_chung_cu,Thanh Xuân,Unknown,E0_reviewed,10,3121347.589147177,961903.7739047569
+can_ho_chung_cu,Thanh Xuân,Unknown,E5,10,2129812.741253504,718777.4797386223
+can_ho_chung_cu,Thanh Xuân,Unknown,E6_pooled_log,10,2367672.563088476,417107.55323138565
+can_ho_chung_cu,Thanh Xuân,Unknown,E9_bathrooms,10,2691113.8211706476,709980.5552192166
+can_ho_chung_cu,Thanh Xuân,"[0, 40)",E0_reviewed,13,1083151.0104967048,-154346.76279508678
+can_ho_chung_cu,Thanh Xuân,"[0, 40)",E5,13,992498.2245873422,-471544.65177844476
+can_ho_chung_cu,Thanh Xuân,"[0, 40)",E6_pooled_log,13,1103059.7810039194,-249069.75436281008
+can_ho_chung_cu,Thanh Xuân,"[0, 40)",E9_bathrooms,13,1078970.1345456257,-339012.2420633202
+can_ho_chung_cu,Thanh Xuân,"[100, 150)",E0_reviewed,107,2601137.3195363823,77141.7582944076
+can_ho_chung_cu,Thanh Xuân,"[100, 150)",E5,107,2589698.151578574,-39807.771123561884
+can_ho_chung_cu,Thanh Xuân,"[100, 150)",E6_pooled_log,107,2620559.677515242,-3596.563403775846
+can_ho_chung_cu,Thanh Xuân,"[100, 150)",E9_bathrooms,107,2540701.1183262025,-1384.3878955425887
+can_ho_chung_cu,Thanh Xuân,"[150, inf)",E0_reviewed,4,,
+can_ho_chung_cu,Thanh Xuân,"[150, inf)",E5,4,,
+can_ho_chung_cu,Thanh Xuân,"[150, inf)",E6_pooled_log,4,,
+can_ho_chung_cu,Thanh Xuân,"[150, inf)",E9_bathrooms,4,,
+can_ho_chung_cu,Thanh Xuân,"[40, 60)",E0_reviewed,15,1538712.5454229056,49159.92070486198
+can_ho_chung_cu,Thanh Xuân,"[40, 60)",E5,15,1183901.810763699,-12159.060568539737
+can_ho_chung_cu,Thanh Xuân,"[40, 60)",E6_pooled_log,15,1610307.7722346953,274235.5892348935
+can_ho_chung_cu,Thanh Xuân,"[40, 60)",E9_bathrooms,15,1278796.2669261666,-129942.4597651263
+can_ho_chung_cu,Thanh Xuân,"[60, 80)",E0_reviewed,83,1950729.9184897451,-1053559.386048173
+can_ho_chung_cu,Thanh Xuân,"[60, 80)",E5,83,1828220.707583311,-892066.613839421
+can_ho_chung_cu,Thanh Xuân,"[60, 80)",E6_pooled_log,83,1692662.5802797806,-859326.8828045256
+can_ho_chung_cu,Thanh Xuân,"[60, 80)",E9_bathrooms,83,1593755.6251580839,-797262.8634769138
+can_ho_chung_cu,Thanh Xuân,"[80, 100)",E0_reviewed,65,1807486.804208185,565685.4859413038
+can_ho_chung_cu,Thanh Xuân,"[80, 100)",E5,65,1711619.6574746675,383187.6522147541
+can_ho_chung_cu,Thanh Xuân,"[80, 100)",E6_pooled_log,65,1665032.9692338577,228816.879463728
+can_ho_chung_cu,Thanh Xuân,"[80, 100)",E9_bathrooms,65,1516446.8343237457,345877.5416133012
+can_ho_chung_cu,Tây Hồ,Unknown,E0_reviewed,24,3158472.8590111807,-1080837.4940295944
+can_ho_chung_cu,Tây Hồ,Unknown,E5,24,2976218.573898529,-1241324.0890444617
+can_ho_chung_cu,Tây Hồ,Unknown,E6_pooled_log,24,3062123.1560460217,-1014561.1911796369
+can_ho_chung_cu,Tây Hồ,Unknown,E9_bathrooms,24,3479361.1700989977,-965081.2457503678
+can_ho_chung_cu,Tây Hồ,"[0, 40)",E0_reviewed,24,1089469.439180259,-200275.57523779807
+can_ho_chung_cu,Tây Hồ,"[0, 40)",E5,24,1241371.5630572152,-262596.5169502329
+can_ho_chung_cu,Tây Hồ,"[0, 40)",E6_pooled_log,24,1173937.0432572172,-374306.2516171926
+can_ho_chung_cu,Tây Hồ,"[0, 40)",E9_bathrooms,24,1254001.201434032,-447692.4244013966
+can_ho_chung_cu,Tây Hồ,"[100, 150)",E0_reviewed,24,3647727.636174234,1581705.8226345845
+can_ho_chung_cu,Tây Hồ,"[100, 150)",E5,24,3732018.2024145112,1477537.2748916808
+can_ho_chung_cu,Tây Hồ,"[100, 150)",E6_pooled_log,24,3601090.380280902,1616565.2670217007
+can_ho_chung_cu,Tây Hồ,"[100, 150)",E9_bathrooms,24,2805802.5902473726,1212052.321807516
+can_ho_chung_cu,Tây Hồ,"[150, inf)",E0_reviewed,10,12995786.689845782,-7629805.766332229
+can_ho_chung_cu,Tây Hồ,"[150, inf)",E5,10,12642562.577530758,-6434498.202454554
+can_ho_chung_cu,Tây Hồ,"[150, inf)",E6_pooled_log,10,13017528.859070968,-7709228.806392876
+can_ho_chung_cu,Tây Hồ,"[150, inf)",E9_bathrooms,10,13150160.112498429,-8139877.730150583
+can_ho_chung_cu,Tây Hồ,"[40, 60)",E0_reviewed,31,2078075.5422583767,-794442.3998626149
+can_ho_chung_cu,Tây Hồ,"[40, 60)",E5,31,2184856.5374577134,-757597.8721827359
+can_ho_chung_cu,Tây Hồ,"[40, 60)",E6_pooled_log,31,2058313.2231390064,-665264.2114907526
+can_ho_chung_cu,Tây Hồ,"[40, 60)",E9_bathrooms,31,1872888.203388572,-627134.1040499897
+can_ho_chung_cu,Tây Hồ,"[60, 80)",E0_reviewed,14,2645813.6814190736,629713.1260310542
+can_ho_chung_cu,Tây Hồ,"[60, 80)",E5,14,2762233.9197812644,886359.9107802939
+can_ho_chung_cu,Tây Hồ,"[60, 80)",E6_pooled_log,14,2602254.944864812,980769.0776826317
+can_ho_chung_cu,Tây Hồ,"[60, 80)",E9_bathrooms,14,2672525.995481357,828132.6157588826
+can_ho_chung_cu,Tây Hồ,"[80, 100)",E0_reviewed,11,4736012.656952457,-2457692.8541680253
+can_ho_chung_cu,Tây Hồ,"[80, 100)",E5,11,4700605.94092797,-2520299.512472577
+can_ho_chung_cu,Tây Hồ,"[80, 100)",E6_pooled_log,11,4875073.519466511,-3052796.271597976
+can_ho_chung_cu,Tây Hồ,"[80, 100)",E9_bathrooms,11,4283802.185384079,-2229403.6635084203
+can_ho_chung_cu,Đông Anh,"[60, 80)",E0_reviewed,5,,
+can_ho_chung_cu,Đông Anh,"[60, 80)",E5,5,,
+can_ho_chung_cu,Đông Anh,"[60, 80)",E6_pooled_log,5,,
+can_ho_chung_cu,Đông Anh,"[60, 80)",E9_bathrooms,5,,
+can_ho_chung_cu,Đống Đa,Unknown,E0_reviewed,8,,
+can_ho_chung_cu,Đống Đa,Unknown,E5,8,,
+can_ho_chung_cu,Đống Đa,Unknown,E6_pooled_log,8,,
+can_ho_chung_cu,Đống Đa,Unknown,E9_bathrooms,8,,
+can_ho_chung_cu,Đống Đa,"[0, 40)",E0_reviewed,35,725806.4854511801,-150971.99145102006
+can_ho_chung_cu,Đống Đa,"[0, 40)",E5,35,830034.7036178876,-192513.56861137445
+can_ho_chung_cu,Đống Đa,"[0, 40)",E6_pooled_log,35,670150.7942258582,-175835.41751979507
+can_ho_chung_cu,Đống Đa,"[0, 40)",E9_bathrooms,35,663979.9788473034,-151613.57112340978
+can_ho_chung_cu,Đống Đa,"[100, 150)",E0_reviewed,21,4895504.04554811,-197584.2778062901
+can_ho_chung_cu,Đống Đa,"[100, 150)",E5,21,4058857.955923823,108056.88250864067
+can_ho_chung_cu,Đống Đa,"[100, 150)",E6_pooled_log,21,5013947.014946211,-191998.16062792196
+can_ho_chung_cu,Đống Đa,"[100, 150)",E9_bathrooms,21,5079373.05038804,12251.371260440865
+can_ho_chung_cu,Đống Đa,"[150, inf)",E0_reviewed,5,,
+can_ho_chung_cu,Đống Đa,"[150, inf)",E5,5,,
+can_ho_chung_cu,Đống Đa,"[150, inf)",E6_pooled_log,5,,
+can_ho_chung_cu,Đống Đa,"[150, inf)",E9_bathrooms,5,,
+can_ho_chung_cu,Đống Đa,"[40, 60)",E0_reviewed,40,2273239.2499527284,-207610.2463568956
+can_ho_chung_cu,Đống Đa,"[40, 60)",E5,40,2071738.2314633064,-394004.10539228795
+can_ho_chung_cu,Đống Đa,"[40, 60)",E6_pooled_log,40,2334788.8501918484,-141491.5859587412
+can_ho_chung_cu,Đống Đa,"[40, 60)",E9_bathrooms,40,2383223.5441973247,-168646.10222113138
+can_ho_chung_cu,Đống Đa,"[60, 80)",E0_reviewed,30,3169349.7279179404,-2131348.4747423995
+can_ho_chung_cu,Đống Đa,"[60, 80)",E5,30,3156941.536646761,-2063639.6785441132
+can_ho_chung_cu,Đống Đa,"[60, 80)",E6_pooled_log,30,3017626.909616068,-1843053.5902848167
+can_ho_chung_cu,Đống Đa,"[60, 80)",E9_bathrooms,30,3032784.452266442,-2182537.674043683
+can_ho_chung_cu,Đống Đa,"[80, 100)",E0_reviewed,24,5324869.93579002,-1274326.8935365162
+can_ho_chung_cu,Đống Đa,"[80, 100)",E5,24,4533755.942027838,-207823.0117886307
+can_ho_chung_cu,Đống Đa,"[80, 100)",E6_pooled_log,24,5325350.302363479,-1173416.310420434
+can_ho_chung_cu,Đống Đa,"[80, 100)",E9_bathrooms,24,5207480.36592131,-1023514.1252185754
+nha_tro,Ba Đình,Unknown,E0_reviewed,19,1056665.1023445074,-266962.6779895038
+nha_tro,Ba Đình,Unknown,E5,19,1020568.078491438,-332619.8731363705
+nha_tro,Ba Đình,Unknown,E6_pooled_log,19,1021251.8406895972,-243490.43539175755
+nha_tro,Ba Đình,Unknown,E9_bathrooms,19,1055705.1816872235,-265626.4125423902
+nha_tro,Ba Đình,"[0, 20)",E0_reviewed,13,515049.9703127993,-71057.86134693338
+nha_tro,Ba Đình,"[0, 20)",E5,13,528899.6301536175,-92113.86912477089
+nha_tro,Ba Đình,"[0, 20)",E6_pooled_log,13,516266.8250495118,-118234.23113319984
+nha_tro,Ba Đình,"[0, 20)",E9_bathrooms,13,518945.1289652055,-108614.60309918443
+nha_tro,Ba Đình,"[20, 30)",E0_reviewed,23,738914.4012870264,-129014.07674929086
+nha_tro,Ba Đình,"[20, 30)",E5,23,581700.3088861726,-26941.44856156508
+nha_tro,Ba Đình,"[20, 30)",E6_pooled_log,23,677650.9460208591,-93349.43679651273
+nha_tro,Ba Đình,"[20, 30)",E9_bathrooms,23,678226.2827515848,-112420.4455627918
+nha_tro,Ba Đình,"[30, 40)",E0_reviewed,8,,
+nha_tro,Ba Đình,"[30, 40)",E5,8,,
+nha_tro,Ba Đình,"[30, 40)",E6_pooled_log,8,,
+nha_tro,Ba Đình,"[30, 40)",E9_bathrooms,8,,
+nha_tro,Ba Đình,"[40, 60)",E0_reviewed,7,,
+nha_tro,Ba Đình,"[40, 60)",E5,7,,
+nha_tro,Ba Đình,"[40, 60)",E6_pooled_log,7,,
+nha_tro,Ba Đình,"[40, 60)",E9_bathrooms,7,,
+nha_tro,Ba Đình,"[60, inf)",E0_reviewed,3,,
+nha_tro,Ba Đình,"[60, inf)",E5,3,,
+nha_tro,Ba Đình,"[60, inf)",E6_pooled_log,3,,
+nha_tro,Ba Đình,"[60, inf)",E9_bathrooms,3,,
+nha_tro,Bắc Từ Liêm,Unknown,E0_reviewed,40,590314.1251682069,-121111.00861934847
+nha_tro,Bắc Từ Liêm,Unknown,E5,40,601149.6841573844,-39248.95936070527
+nha_tro,Bắc Từ Liêm,Unknown,E6_pooled_log,40,549293.4232125235,-98867.13082883155
+nha_tro,Bắc Từ Liêm,Unknown,E9_bathrooms,40,541594.0970348822,-74976.12098313968
+nha_tro,Bắc Từ Liêm,"[0, 20)",E0_reviewed,3,,
+nha_tro,Bắc Từ Liêm,"[0, 20)",E5,3,,
+nha_tro,Bắc Từ Liêm,"[0, 20)",E6_pooled_log,3,,
+nha_tro,Bắc Từ Liêm,"[0, 20)",E9_bathrooms,3,,
+nha_tro,Bắc Từ Liêm,"[20, 30)",E0_reviewed,32,830650.9151476184,-215933.86295216344
+nha_tro,Bắc Từ Liêm,"[20, 30)",E5,32,824232.137064471,-182828.31770295041
+nha_tro,Bắc Từ Liêm,"[20, 30)",E6_pooled_log,32,788753.130672932,-112021.99996612771
+nha_tro,Bắc Từ Liêm,"[20, 30)",E9_bathrooms,32,797123.8301910633,-95303.42334732266
+nha_tro,Bắc Từ Liêm,"[30, 40)",E0_reviewed,16,883960.1454002582,-102512.8129697064
+nha_tro,Bắc Từ Liêm,"[30, 40)",E5,16,825593.9012851178,-198272.1168054441
+nha_tro,Bắc Từ Liêm,"[30, 40)",E6_pooled_log,16,855311.3034796473,-68330.65213782393
+nha_tro,Bắc Từ Liêm,"[30, 40)",E9_bathrooms,16,850142.0175931598,-88837.56528587273
+nha_tro,Bắc Từ Liêm,"[40, 60)",E0_reviewed,14,1514024.2621769246,-125099.97136640492
+nha_tro,Bắc Từ Liêm,"[40, 60)",E5,14,1542464.8616668775,-106556.92392767627
+nha_tro,Bắc Từ Liêm,"[40, 60)",E6_pooled_log,14,1410575.6911211484,-761367.6000178728
+nha_tro,Bắc Từ Liêm,"[40, 60)",E9_bathrooms,14,1445626.7347943748,-810903.2436909949
+nha_tro,Bắc Từ Liêm,"[60, inf)",E0_reviewed,2,,
+nha_tro,Bắc Từ Liêm,"[60, inf)",E5,2,,
+nha_tro,Bắc Từ Liêm,"[60, inf)",E6_pooled_log,2,,
+nha_tro,Bắc Từ Liêm,"[60, inf)",E9_bathrooms,2,,
+nha_tro,Chương Mỹ,"[40, 60)",E0_reviewed,1,,
+nha_tro,Chương Mỹ,"[40, 60)",E5,1,,
+nha_tro,Chương Mỹ,"[40, 60)",E6_pooled_log,1,,
+nha_tro,Chương Mỹ,"[40, 60)",E9_bathrooms,1,,
+nha_tro,Cầu Giấy,Unknown,E0_reviewed,71,1054418.0699017616,-210295.06311479196
+nha_tro,Cầu Giấy,Unknown,E5,71,1056384.941285458,-129841.62322268609
+nha_tro,Cầu Giấy,Unknown,E6_pooled_log,71,1005555.7806765884,-157271.6940880624
+nha_tro,Cầu Giấy,Unknown,E9_bathrooms,71,1007106.9573365089,-168902.9745724271
+nha_tro,Cầu Giấy,"[0, 20)",E0_reviewed,17,537638.7137425737,-195578.38273925288
+nha_tro,Cầu Giấy,"[0, 20)",E5,17,502771.10440325626,-262257.677546908
+nha_tro,Cầu Giấy,"[0, 20)",E6_pooled_log,17,558175.9354158129,-208207.7920879424
+nha_tro,Cầu Giấy,"[0, 20)",E9_bathrooms,17,545479.6627817332,-189028.31891151873
+nha_tro,Cầu Giấy,"[20, 30)",E0_reviewed,67,800336.4600826418,-100518.7458650278
+nha_tro,Cầu Giấy,"[20, 30)",E5,67,774647.2426611754,-85609.55595953717
+nha_tro,Cầu Giấy,"[20, 30)",E6_pooled_log,67,796852.7657017821,-97783.78371069883
+nha_tro,Cầu Giấy,"[20, 30)",E9_bathrooms,67,789352.1202312515,-111530.35087809956
+nha_tro,Cầu Giấy,"[30, 40)",E0_reviewed,28,1014630.5986217788,-191358.1984076309
+nha_tro,Cầu Giấy,"[30, 40)",E5,28,1088012.6524017516,-185876.02650667142
+nha_tro,Cầu Giấy,"[30, 40)",E6_pooled_log,28,1074225.5885442968,-80876.33525921083
+nha_tro,Cầu Giấy,"[30, 40)",E9_bathrooms,28,1115703.7657098183,-69532.51176157803
+nha_tro,Cầu Giấy,"[40, 60)",E0_reviewed,19,2435961.814392809,-654181.7697167628
+nha_tro,Cầu Giấy,"[40, 60)",E5,19,2243369.9390835273,-818406.7173650895
+nha_tro,Cầu Giấy,"[40, 60)",E6_pooled_log,19,2066543.844859562,-1353993.2793590138
+nha_tro,Cầu Giấy,"[40, 60)",E9_bathrooms,19,2058098.6138944556,-1386130.1770560362
+nha_tro,Cầu Giấy,"[60, inf)",E0_reviewed,2,,
+nha_tro,Cầu Giấy,"[60, inf)",E5,2,,
+nha_tro,Cầu Giấy,"[60, inf)",E6_pooled_log,2,,
+nha_tro,Cầu Giấy,"[60, inf)",E9_bathrooms,2,,
+nha_tro,Gia Lâm,Unknown,E0_reviewed,4,,
+nha_tro,Gia Lâm,Unknown,E5,4,,
+nha_tro,Gia Lâm,Unknown,E6_pooled_log,4,,
+nha_tro,Gia Lâm,Unknown,E9_bathrooms,4,,
+nha_tro,Gia Lâm,"[0, 20)",E0_reviewed,1,,
+nha_tro,Gia Lâm,"[0, 20)",E5,1,,
+nha_tro,Gia Lâm,"[0, 20)",E6_pooled_log,1,,
+nha_tro,Gia Lâm,"[0, 20)",E9_bathrooms,1,,
+nha_tro,Gia Lâm,"[20, 30)",E0_reviewed,2,,
+nha_tro,Gia Lâm,"[20, 30)",E5,2,,
+nha_tro,Gia Lâm,"[20, 30)",E6_pooled_log,2,,
+nha_tro,Gia Lâm,"[20, 30)",E9_bathrooms,2,,
+nha_tro,Gia Lâm,"[30, 40)",E0_reviewed,2,,
+nha_tro,Gia Lâm,"[30, 40)",E5,2,,
+nha_tro,Gia Lâm,"[30, 40)",E6_pooled_log,2,,
+nha_tro,Gia Lâm,"[30, 40)",E9_bathrooms,2,,
+nha_tro,Hai Bà Trưng,Unknown,E0_reviewed,71,928690.8563799524,-176384.5357191166
+nha_tro,Hai Bà Trưng,Unknown,E5,71,941810.7404482168,-226568.39237104688
+nha_tro,Hai Bà Trưng,Unknown,E6_pooled_log,71,877696.2924279042,-156922.34448820396
+nha_tro,Hai Bà Trưng,Unknown,E9_bathrooms,71,886500.7731626611,-196270.9455304241
+nha_tro,Hai Bà Trưng,"[0, 20)",E0_reviewed,18,467723.17387729045,44073.23913319271
+nha_tro,Hai Bà Trưng,"[0, 20)",E5,18,487132.83094486716,72169.81039599754
+nha_tro,Hai Bà Trưng,"[0, 20)",E6_pooled_log,18,467734.19495698385,77758.82816517398
+nha_tro,Hai Bà Trưng,"[0, 20)",E9_bathrooms,18,468184.260098795,62033.274012243695
+nha_tro,Hai Bà Trưng,"[20, 30)",E0_reviewed,37,874505.8131464372,-251515.06718005543
+nha_tro,Hai Bà Trưng,"[20, 30)",E5,37,881818.1213355457,-232215.26466454874
+nha_tro,Hai Bà Trưng,"[20, 30)",E6_pooled_log,37,860257.0090881604,-266407.51178655383
+nha_tro,Hai Bà Trưng,"[20, 30)",E9_bathrooms,37,876933.4165254106,-265340.949418628
+nha_tro,Hai Bà Trưng,"[30, 40)",E0_reviewed,11,1551682.4259433167,-637615.4130411408
+nha_tro,Hai Bà Trưng,"[30, 40)",E5,11,1554156.6623770548,-715942.6690164787
+nha_tro,Hai Bà Trưng,"[30, 40)",E6_pooled_log,11,1623099.1943316087,-751809.1911203136
+nha_tro,Hai Bà Trưng,"[30, 40)",E9_bathrooms,11,1629771.3375528248,-781869.4581832916
+nha_tro,Hai Bà Trưng,"[40, 60)",E0_reviewed,10,2905275.662988215,-794697.8742463558
+nha_tro,Hai Bà Trưng,"[40, 60)",E5,10,1846125.3461206655,-339308.98337283847
+nha_tro,Hai Bà Trưng,"[40, 60)",E6_pooled_log,10,1940614.6625556878,-758410.5521336105
+nha_tro,Hai Bà Trưng,"[40, 60)",E9_bathrooms,10,2066348.8289917302,-920393.0056988597
+nha_tro,Hai Bà Trưng,"[60, inf)",E0_reviewed,1,,
+nha_tro,Hai Bà Trưng,"[60, inf)",E5,1,,
+nha_tro,Hai Bà Trưng,"[60, inf)",E6_pooled_log,1,,
+nha_tro,Hai Bà Trưng,"[60, inf)",E9_bathrooms,1,,
+nha_tro,Hoài Đức,Unknown,E0_reviewed,10,434289.0894626256,-124757.71757737538
+nha_tro,Hoài Đức,Unknown,E5,10,408394.4631126098,-115448.89231050624
+nha_tro,Hoài Đức,Unknown,E6_pooled_log,10,352755.8610562555,197138.98823402805
+nha_tro,Hoài Đức,Unknown,E9_bathrooms,10,379611.6280531755,247387.91892817864
+nha_tro,Hoài Đức,"[0, 20)",E0_reviewed,2,,
+nha_tro,Hoài Đức,"[0, 20)",E5,2,,
+nha_tro,Hoài Đức,"[0, 20)",E6_pooled_log,2,,
+nha_tro,Hoài Đức,"[0, 20)",E9_bathrooms,2,,
+nha_tro,Hoài Đức,"[20, 30)",E0_reviewed,30,469542.5195447285,-131554.75864278676
+nha_tro,Hoài Đức,"[20, 30)",E5,30,431359.50313597464,-108883.93457976347
+nha_tro,Hoài Đức,"[20, 30)",E6_pooled_log,30,466627.08114515187,-171541.62303663025
+nha_tro,Hoài Đức,"[20, 30)",E9_bathrooms,30,475093.1541941407,-174685.75918329242
+nha_tro,Hoài Đức,"[30, 40)",E0_reviewed,18,599965.3693196295,-80300.20466604776
+nha_tro,Hoài Đức,"[30, 40)",E5,18,604369.7527828156,-33689.39872030588
+nha_tro,Hoài Đức,"[30, 40)",E6_pooled_log,18,589314.9128771803,72283.70979258938
+nha_tro,Hoài Đức,"[30, 40)",E9_bathrooms,18,584489.2744922452,86627.93971822145
+nha_tro,Hoài Đức,"[40, 60)",E0_reviewed,11,820423.6801678054,89396.09646428487
+nha_tro,Hoài Đức,"[40, 60)",E5,11,827970.6528480944,131864.72948833572
+nha_tro,Hoài Đức,"[40, 60)",E6_pooled_log,11,715235.1665199577,107972.24889633166
+nha_tro,Hoài Đức,"[40, 60)",E9_bathrooms,11,713621.0580251191,73803.38705202217
+nha_tro,Hoài Đức,"[60, inf)",E0_reviewed,2,,
+nha_tro,Hoài Đức,"[60, inf)",E5,2,,
+nha_tro,Hoài Đức,"[60, inf)",E6_pooled_log,2,,
+nha_tro,Hoài Đức,"[60, inf)",E9_bathrooms,2,,
+nha_tro,Hoàn Kiếm,Unknown,E0_reviewed,2,,
+nha_tro,Hoàn Kiếm,Unknown,E5,2,,
+nha_tro,Hoàn Kiếm,Unknown,E6_pooled_log,2,,
+nha_tro,Hoàn Kiếm,Unknown,E9_bathrooms,2,,
+nha_tro,Hoàn Kiếm,"[0, 20)",E0_reviewed,6,,
+nha_tro,Hoàn Kiếm,"[0, 20)",E5,6,,
+nha_tro,Hoàn Kiếm,"[0, 20)",E6_pooled_log,6,,
+nha_tro,Hoàn Kiếm,"[0, 20)",E9_bathrooms,6,,
+nha_tro,Hoàn Kiếm,"[20, 30)",E0_reviewed,14,705526.6192828851,193821.15060106595
+nha_tro,Hoàn Kiếm,"[20, 30)",E5,14,768436.8167374097,240831.86372107753
+nha_tro,Hoàn Kiếm,"[20, 30)",E6_pooled_log,14,700090.093838535,225449.5759387542
+nha_tro,Hoàn Kiếm,"[20, 30)",E9_bathrooms,14,755152.7101050236,276096.7762069533
+nha_tro,Hoàn Kiếm,"[30, 40)",E0_reviewed,3,,
+nha_tro,Hoàn Kiếm,"[30, 40)",E5,3,,
+nha_tro,Hoàn Kiếm,"[30, 40)",E6_pooled_log,3,,
+nha_tro,Hoàn Kiếm,"[30, 40)",E9_bathrooms,3,,
+nha_tro,Hoàn Kiếm,"[40, 60)",E0_reviewed,2,,
+nha_tro,Hoàn Kiếm,"[40, 60)",E5,2,,
+nha_tro,Hoàn Kiếm,"[40, 60)",E6_pooled_log,2,,
+nha_tro,Hoàn Kiếm,"[40, 60)",E9_bathrooms,2,,
+nha_tro,Hoàn Kiếm,"[60, inf)",E0_reviewed,2,,
+nha_tro,Hoàn Kiếm,"[60, inf)",E5,2,,
+nha_tro,Hoàn Kiếm,"[60, inf)",E6_pooled_log,2,,
+nha_tro,Hoàn Kiếm,"[60, inf)",E9_bathrooms,2,,
+nha_tro,Hoàng Mai,Unknown,E0_reviewed,440,960783.6150945985,-207032.9911914349
+nha_tro,Hoàng Mai,Unknown,E5,440,972892.599886308,-204663.88586817676
+nha_tro,Hoàng Mai,Unknown,E6_pooled_log,440,933281.0302372577,-209854.1126436864
+nha_tro,Hoàng Mai,Unknown,E9_bathrooms,440,935733.5291924303,-210122.54937250575
+nha_tro,Hoàng Mai,"[0, 20)",E0_reviewed,27,508898.7946330082,-241954.5278324638
+nha_tro,Hoàng Mai,"[0, 20)",E5,27,496755.0013203189,-210083.67090036478
+nha_tro,Hoàng Mai,"[0, 20)",E6_pooled_log,27,510964.62303542095,-237616.7392770573
+nha_tro,Hoàng Mai,"[0, 20)",E9_bathrooms,27,512904.3039832673,-233049.37287221657
+nha_tro,Hoàng Mai,"[20, 30)",E0_reviewed,59,712813.5226518912,-114945.34035765666
+nha_tro,Hoàng Mai,"[20, 30)",E5,59,693351.0667304399,-42495.932690536254
+nha_tro,Hoàng Mai,"[20, 30)",E6_pooled_log,59,717062.4541840822,-44061.502151743385
+nha_tro,Hoàng Mai,"[20, 30)",E9_bathrooms,59,727643.8326686503,-48077.13696674112
+nha_tro,Hoàng Mai,"[30, 40)",E0_reviewed,27,1093230.6793721677,-393517.4291930524
+nha_tro,Hoàng Mai,"[30, 40)",E5,27,1090327.5714799021,-298470.4159730744
+nha_tro,Hoàng Mai,"[30, 40)",E6_pooled_log,27,1074260.8263498514,-417503.031479124
+nha_tro,Hoàng Mai,"[30, 40)",E9_bathrooms,27,1058036.7896277169,-439307.3227853101
+nha_tro,Hoàng Mai,"[40, 60)",E0_reviewed,7,,
+nha_tro,Hoàng Mai,"[40, 60)",E5,7,,
+nha_tro,Hoàng Mai,"[40, 60)",E6_pooled_log,7,,
+nha_tro,Hoàng Mai,"[40, 60)",E9_bathrooms,7,,
+nha_tro,Hoàng Mai,"[60, inf)",E0_reviewed,5,,
+nha_tro,Hoàng Mai,"[60, inf)",E5,5,,
+nha_tro,Hoàng Mai,"[60, inf)",E6_pooled_log,5,,
+nha_tro,Hoàng Mai,"[60, inf)",E9_bathrooms,5,,
+nha_tro,Hà Đông,Unknown,E0_reviewed,26,852851.4194125831,-55579.65987232086
+nha_tro,Hà Đông,Unknown,E5,26,775110.4060294242,-57661.047038931756
+nha_tro,Hà Đông,Unknown,E6_pooled_log,26,717311.4872361465,-38451.69171554181
+nha_tro,Hà Đông,Unknown,E9_bathrooms,26,714712.3280599178,-44727.684547095974
+nha_tro,Hà Đông,"[0, 20)",E0_reviewed,21,680924.4452723603,-470917.41868927877
+nha_tro,Hà Đông,"[0, 20)",E5,21,647093.5808159849,-407433.44491224876
+nha_tro,Hà Đông,"[0, 20)",E6_pooled_log,21,726164.0098852877,-555898.7691195586
+nha_tro,Hà Đông,"[0, 20)",E9_bathrooms,21,721415.9388936543,-543277.0968697837
+nha_tro,Hà Đông,"[20, 30)",E0_reviewed,40,642312.8004933896,-127024.00758238239
+nha_tro,Hà Đông,"[20, 30)",E5,40,626180.8400748288,-85277.706269887
+nha_tro,Hà Đông,"[20, 30)",E6_pooled_log,40,626054.6897474951,-70851.51152998678
+nha_tro,Hà Đông,"[20, 30)",E9_bathrooms,40,622121.9519745728,-59991.54243878776
+nha_tro,Hà Đông,"[30, 40)",E0_reviewed,14,885066.7901788896,643506.5900639009
+nha_tro,Hà Đông,"[30, 40)",E5,14,767983.689065093,488568.54306259804
+nha_tro,Hà Đông,"[30, 40)",E6_pooled_log,14,903994.2904390246,756778.3006510109
+nha_tro,Hà Đông,"[30, 40)",E9_bathrooms,14,910487.8919676368,762458.8574037658
+nha_tro,Hà Đông,"[40, 60)",E0_reviewed,7,,
+nha_tro,Hà Đông,"[40, 60)",E5,7,,
+nha_tro,Hà Đông,"[40, 60)",E6_pooled_log,7,,
+nha_tro,Hà Đông,"[40, 60)",E9_bathrooms,7,,
+nha_tro,Hà Đông,"[60, inf)",E0_reviewed,2,,
+nha_tro,Hà Đông,"[60, inf)",E5,2,,
+nha_tro,Hà Đông,"[60, inf)",E6_pooled_log,2,,
+nha_tro,Hà Đông,"[60, inf)",E9_bathrooms,2,,
+nha_tro,Long Biên,Unknown,E0_reviewed,5,,
+nha_tro,Long Biên,Unknown,E5,5,,
+nha_tro,Long Biên,Unknown,E6_pooled_log,5,,
+nha_tro,Long Biên,Unknown,E9_bathrooms,5,,
+nha_tro,Long Biên,"[0, 20)",E0_reviewed,11,297060.7993457738,-170469.56869664823
+nha_tro,Long Biên,"[0, 20)",E5,11,346179.0052230656,-185348.14901872133
+nha_tro,Long Biên,"[0, 20)",E6_pooled_log,11,281685.4197391275,-99216.53988098045
+nha_tro,Long Biên,"[0, 20)",E9_bathrooms,11,284312.06462619634,-73218.01236504804
+nha_tro,Long Biên,"[20, 30)",E0_reviewed,13,744149.1295456323,-21816.869949766326
+nha_tro,Long Biên,"[20, 30)",E5,13,699990.9200132777,-65291.2377148228
+nha_tro,Long Biên,"[20, 30)",E6_pooled_log,13,695032.797668776,104319.14209812754
+nha_tro,Long Biên,"[20, 30)",E9_bathrooms,13,695236.399278809,128377.16613102629
+nha_tro,Long Biên,"[30, 40)",E0_reviewed,17,849814.1296140236,-182904.84111444556
+nha_tro,Long Biên,"[30, 40)",E5,17,852823.2573929762,-272054.5411971882
+nha_tro,Long Biên,"[30, 40)",E6_pooled_log,17,888512.8698002975,-184543.79573987142
+nha_tro,Long Biên,"[30, 40)",E9_bathrooms,17,871860.5163880965,-217296.16945599514
+nha_tro,Long Biên,"[40, 60)",E0_reviewed,14,1353043.8434337357,-193990.04612311302
+nha_tro,Long Biên,"[40, 60)",E5,14,1296228.8354621327,352665.43344393454
+nha_tro,Long Biên,"[40, 60)",E6_pooled_log,14,1369861.7117505965,-620216.288675821
+nha_tro,Long Biên,"[40, 60)",E9_bathrooms,14,1324065.8903754165,-594553.1188025343
+nha_tro,Long Biên,"[60, inf)",E0_reviewed,1,,
+nha_tro,Long Biên,"[60, inf)",E5,1,,
+nha_tro,Long Biên,"[60, inf)",E6_pooled_log,1,,
+nha_tro,Long Biên,"[60, inf)",E9_bathrooms,1,,
+nha_tro,Mỹ Đức,Unknown,E0_reviewed,1,,
+nha_tro,Mỹ Đức,Unknown,E5,1,,
+nha_tro,Mỹ Đức,Unknown,E6_pooled_log,1,,
+nha_tro,Mỹ Đức,Unknown,E9_bathrooms,1,,
+nha_tro,Nam Từ Liêm,Unknown,E0_reviewed,63,930075.9700395436,-220475.9319527591
+nha_tro,Nam Từ Liêm,Unknown,E5,63,857562.1308804622,-175494.9902880963
+nha_tro,Nam Từ Liêm,Unknown,E6_pooled_log,63,896908.5355338529,-108363.02198257744
+nha_tro,Nam Từ Liêm,Unknown,E9_bathrooms,63,880274.1114055773,-96501.02936780093
+nha_tro,Nam Từ Liêm,"[0, 20)",E0_reviewed,19,460250.64269228623,-86878.62425248446
+nha_tro,Nam Từ Liêm,"[0, 20)",E5,19,500830.00892561657,-94515.45518977202
+nha_tro,Nam Từ Liêm,"[0, 20)",E6_pooled_log,19,536632.6118999482,-130322.85921749081
+nha_tro,Nam Từ Liêm,"[0, 20)",E9_bathrooms,19,532973.2021696209,-129759.3311716898
+nha_tro,Nam Từ Liêm,"[20, 30)",E0_reviewed,78,635716.2824914984,-220815.94093466655
+nha_tro,Nam Từ Liêm,"[20, 30)",E5,78,667350.1738009731,-233698.56348851344
+nha_tro,Nam Từ Liêm,"[20, 30)",E6_pooled_log,78,638871.4069901953,-213935.979731743
+nha_tro,Nam Từ Liêm,"[20, 30)",E9_bathrooms,78,636877.3334224249,-215522.96185396254
+nha_tro,Nam Từ Liêm,"[30, 40)",E0_reviewed,35,976845.5425270813,-104605.04362778034
+nha_tro,Nam Từ Liêm,"[30, 40)",E5,35,977854.1670102333,-21195.355010971347
+nha_tro,Nam Từ Liêm,"[30, 40)",E6_pooled_log,35,1033924.8851021274,65039.05853658147
+nha_tro,Nam Từ Liêm,"[30, 40)",E9_bathrooms,35,1053034.495066952,81872.03537415226
+nha_tro,Nam Từ Liêm,"[40, 60)",E0_reviewed,11,1619848.424065525,-5227.353212804787
+nha_tro,Nam Từ Liêm,"[40, 60)",E5,11,1277599.7863160071,183698.07592569894
+nha_tro,Nam Từ Liêm,"[40, 60)",E6_pooled_log,11,1371424.245926545,-220467.60264670337
+nha_tro,Nam Từ Liêm,"[40, 60)",E9_bathrooms,11,1425276.0778762929,-194960.86258816152
+nha_tro,Nam Từ Liêm,"[60, inf)",E0_reviewed,1,,
+nha_tro,Nam Từ Liêm,"[60, inf)",E5,1,,
+nha_tro,Nam Từ Liêm,"[60, inf)",E6_pooled_log,1,,
+nha_tro,Nam Từ Liêm,"[60, inf)",E9_bathrooms,1,,
+nha_tro,Sóc Sơn,"[20, 30)",E0_reviewed,1,,
+nha_tro,Sóc Sơn,"[20, 30)",E5,1,,
+nha_tro,Sóc Sơn,"[20, 30)",E6_pooled_log,1,,
+nha_tro,Sóc Sơn,"[20, 30)",E9_bathrooms,1,,
+nha_tro,Thanh Trì,Unknown,E0_reviewed,59,620793.4337597056,-106989.18641102086
+nha_tro,Thanh Trì,Unknown,E5,59,620403.6069600494,-58935.12432767968
+nha_tro,Thanh Trì,Unknown,E6_pooled_log,59,567602.4707846595,-39127.91790048399
+nha_tro,Thanh Trì,Unknown,E9_bathrooms,59,567221.2190675942,-29689.416503821743
+nha_tro,Thanh Trì,"[0, 20)",E0_reviewed,9,,
+nha_tro,Thanh Trì,"[0, 20)",E5,9,,
+nha_tro,Thanh Trì,"[0, 20)",E6_pooled_log,9,,
+nha_tro,Thanh Trì,"[0, 20)",E9_bathrooms,9,,
+nha_tro,Thanh Trì,"[20, 30)",E0_reviewed,16,689689.0193937387,36660.37590961106
+nha_tro,Thanh Trì,"[20, 30)",E5,16,688924.7549481558,64559.03011483309
+nha_tro,Thanh Trì,"[20, 30)",E6_pooled_log,16,632709.1927348255,9611.87786060982
+nha_tro,Thanh Trì,"[20, 30)",E9_bathrooms,16,641396.4561483571,-800.8561251270003
+nha_tro,Thanh Trì,"[30, 40)",E0_reviewed,10,813560.8435459234,-244872.0053426285
+nha_tro,Thanh Trì,"[30, 40)",E5,10,892859.6457325574,-122215.45620624986
+nha_tro,Thanh Trì,"[30, 40)",E6_pooled_log,10,793414.0502641632,-197800.06022102182
+nha_tro,Thanh Trì,"[30, 40)",E9_bathrooms,10,820576.7173432544,-212132.47969616484
+nha_tro,Thanh Trì,"[40, 60)",E0_reviewed,4,,
+nha_tro,Thanh Trì,"[40, 60)",E5,4,,
+nha_tro,Thanh Trì,"[40, 60)",E6_pooled_log,4,,
+nha_tro,Thanh Trì,"[40, 60)",E9_bathrooms,4,,
+nha_tro,Thanh Trì,"[60, inf)",E0_reviewed,1,,
+nha_tro,Thanh Trì,"[60, inf)",E5,1,,
+nha_tro,Thanh Trì,"[60, inf)",E6_pooled_log,1,,
+nha_tro,Thanh Trì,"[60, inf)",E9_bathrooms,1,,
+nha_tro,Thanh Xuân,Unknown,E0_reviewed,125,957687.1021529259,-223284.99796771142
+nha_tro,Thanh Xuân,Unknown,E5,125,918614.5540262195,-180361.21087435313
+nha_tro,Thanh Xuân,Unknown,E6_pooled_log,125,951605.0324496037,-187363.77735503612
+nha_tro,Thanh Xuân,Unknown,E9_bathrooms,125,946235.2816131567,-194858.48234968926
+nha_tro,Thanh Xuân,"[0, 20)",E0_reviewed,19,558148.7819720492,-97245.73488996907
+nha_tro,Thanh Xuân,"[0, 20)",E5,19,560514.8387833638,-98797.04156458874
+nha_tro,Thanh Xuân,"[0, 20)",E6_pooled_log,19,558547.0872112606,-75457.13447147014
+nha_tro,Thanh Xuân,"[0, 20)",E9_bathrooms,19,577895.4413676392,-73524.8389129397
+nha_tro,Thanh Xuân,"[20, 30)",E0_reviewed,57,854167.897583619,-150655.1620259479
+nha_tro,Thanh Xuân,"[20, 30)",E5,57,874580.342763138,-177306.27544918153
+nha_tro,Thanh Xuân,"[20, 30)",E6_pooled_log,57,844727.3528850166,-169364.80082702998
+nha_tro,Thanh Xuân,"[20, 30)",E9_bathrooms,57,838127.6512501938,-162251.8676133412
+nha_tro,Thanh Xuân,"[30, 40)",E0_reviewed,17,1180406.7464215895,-554124.2896948904
+nha_tro,Thanh Xuân,"[30, 40)",E5,17,1187516.1670563226,-653885.8468069306
+nha_tro,Thanh Xuân,"[30, 40)",E6_pooled_log,17,1277895.2363226772,-621754.164873933
+nha_tro,Thanh Xuân,"[30, 40)",E9_bathrooms,17,1268566.0851358683,-614634.0296651309
+nha_tro,Thanh Xuân,"[40, 60)",E0_reviewed,8,,
+nha_tro,Thanh Xuân,"[40, 60)",E5,8,,
+nha_tro,Thanh Xuân,"[40, 60)",E6_pooled_log,8,,
+nha_tro,Thanh Xuân,"[40, 60)",E9_bathrooms,8,,
+nha_tro,Thanh Xuân,"[60, inf)",E0_reviewed,2,,
+nha_tro,Thanh Xuân,"[60, inf)",E5,2,,
+nha_tro,Thanh Xuân,"[60, inf)",E6_pooled_log,2,,
+nha_tro,Thanh Xuân,"[60, inf)",E9_bathrooms,2,,
+nha_tro,Thạch Thất,"[0, 20)",E0_reviewed,1,,
+nha_tro,Thạch Thất,"[0, 20)",E5,1,,
+nha_tro,Thạch Thất,"[0, 20)",E6_pooled_log,1,,
+nha_tro,Thạch Thất,"[0, 20)",E9_bathrooms,1,,
+nha_tro,Tây Hồ,Unknown,E0_reviewed,11,1124069.1525774158,-296705.7615830012
+nha_tro,Tây Hồ,Unknown,E5,11,1042961.1077222823,-366860.8862982966
+nha_tro,Tây Hồ,Unknown,E6_pooled_log,11,1203702.9401009367,149805.83436405295
+nha_tro,Tây Hồ,Unknown,E9_bathrooms,11,1230581.8767028244,144935.4511988952
+nha_tro,Tây Hồ,"[0, 20)",E0_reviewed,10,463022.7150909028,-279958.296130156
+nha_tro,Tây Hồ,"[0, 20)",E5,10,484153.6464263495,-223694.19749933327
+nha_tro,Tây Hồ,"[0, 20)",E6_pooled_log,10,471575.71278408414,-344050.0760094315
+nha_tro,Tây Hồ,"[0, 20)",E9_bathrooms,10,484152.6961564752,-345988.730930873
+nha_tro,Tây Hồ,"[20, 30)",E0_reviewed,26,914073.7320076239,-22194.72366005854
+nha_tro,Tây Hồ,"[20, 30)",E5,26,834672.3972020939,-46792.61240170147
+nha_tro,Tây Hồ,"[20, 30)",E6_pooled_log,26,870579.226179294,-75080.18607341661
+nha_tro,Tây Hồ,"[20, 30)",E9_bathrooms,26,856248.6242478765,-78147.22550248209
+nha_tro,Tây Hồ,"[30, 40)",E0_reviewed,14,882683.549948832,19425.422340048477
+nha_tro,Tây Hồ,"[30, 40)",E5,14,746628.4670677355,18195.158983025565
+nha_tro,Tây Hồ,"[30, 40)",E6_pooled_log,14,842584.4580526834,15433.075472059394
+nha_tro,Tây Hồ,"[30, 40)",E9_bathrooms,14,893866.500530906,45400.20991216473
+nha_tro,Tây Hồ,"[40, 60)",E0_reviewed,6,,
+nha_tro,Tây Hồ,"[40, 60)",E5,6,,
+nha_tro,Tây Hồ,"[40, 60)",E6_pooled_log,6,,
+nha_tro,Tây Hồ,"[40, 60)",E9_bathrooms,6,,
+nha_tro,Tây Hồ,"[60, inf)",E0_reviewed,1,,
+nha_tro,Tây Hồ,"[60, inf)",E5,1,,
+nha_tro,Tây Hồ,"[60, inf)",E6_pooled_log,1,,
+nha_tro,Tây Hồ,"[60, inf)",E9_bathrooms,1,,
+nha_tro,Đan Phượng,"[0, 20)",E0_reviewed,1,,
+nha_tro,Đan Phượng,"[0, 20)",E5,1,,
+nha_tro,Đan Phượng,"[0, 20)",E6_pooled_log,1,,
+nha_tro,Đan Phượng,"[0, 20)",E9_bathrooms,1,,
+nha_tro,Đan Phượng,"[30, 40)",E0_reviewed,1,,
+nha_tro,Đan Phượng,"[30, 40)",E5,1,,
+nha_tro,Đan Phượng,"[30, 40)",E6_pooled_log,1,,
+nha_tro,Đan Phượng,"[30, 40)",E9_bathrooms,1,,
+nha_tro,Đông Anh,"[0, 20)",E0_reviewed,1,,
+nha_tro,Đông Anh,"[0, 20)",E5,1,,
+nha_tro,Đông Anh,"[0, 20)",E6_pooled_log,1,,
+nha_tro,Đông Anh,"[0, 20)",E9_bathrooms,1,,
+nha_tro,Đông Anh,"[20, 30)",E0_reviewed,2,,
+nha_tro,Đông Anh,"[20, 30)",E5,2,,
+nha_tro,Đông Anh,"[20, 30)",E6_pooled_log,2,,
+nha_tro,Đông Anh,"[20, 30)",E9_bathrooms,2,,
+nha_tro,Đông Anh,"[30, 40)",E0_reviewed,1,,
+nha_tro,Đông Anh,"[30, 40)",E5,1,,
+nha_tro,Đông Anh,"[30, 40)",E6_pooled_log,1,,
+nha_tro,Đông Anh,"[30, 40)",E9_bathrooms,1,,
+nha_tro,Đống Đa,Unknown,E0_reviewed,211,1287348.4641746692,-342488.75769831287
+nha_tro,Đống Đa,Unknown,E5,211,1240582.2618344815,-301635.63003558957
+nha_tro,Đống Đa,Unknown,E6_pooled_log,211,1142017.1791629074,-280088.5442795209
+nha_tro,Đống Đa,Unknown,E9_bathrooms,211,1141173.0841519346,-280965.3634186904
+nha_tro,Đống Đa,"[0, 20)",E0_reviewed,30,806962.7660739598,-316673.61146493006
+nha_tro,Đống Đa,"[0, 20)",E5,30,762385.394977357,-384122.5530760081
+nha_tro,Đống Đa,"[0, 20)",E6_pooled_log,30,806003.6973952751,-255540.73060562226
+nha_tro,Đống Đa,"[0, 20)",E9_bathrooms,30,809650.2013351087,-258442.65394268543
+nha_tro,Đống Đa,"[20, 30)",E0_reviewed,68,824168.484412916,-130786.52042942317
+nha_tro,Đống Đa,"[20, 30)",E5,68,704589.624943476,-95619.94483612149
+nha_tro,Đống Đa,"[20, 30)",E6_pooled_log,68,803008.0248883127,-238668.55059078036
+nha_tro,Đống Đa,"[20, 30)",E9_bathrooms,68,808859.6000259554,-245784.0118731819
+nha_tro,Đống Đa,"[30, 40)",E0_reviewed,25,1761031.3191304805,-345143.6422002388
+nha_tro,Đống Đa,"[30, 40)",E5,25,1631451.2756902806,-377583.7564866707
+nha_tro,Đống Đa,"[30, 40)",E6_pooled_log,25,1535127.019326935,-237358.22945249866
+nha_tro,Đống Đa,"[30, 40)",E9_bathrooms,25,1520920.628752754,-228643.34727663238
+nha_tro,Đống Đa,"[40, 60)",E0_reviewed,14,1934877.39782357,-95046.2937486978
+nha_tro,Đống Đa,"[40, 60)",E5,14,952011.8678170602,280671.1165647363
+nha_tro,Đống Đa,"[40, 60)",E6_pooled_log,14,1235701.271264048,-216409.6742753045
+nha_tro,Đống Đa,"[40, 60)",E9_bathrooms,14,1195655.7163529654,-265852.5711365779
+nha_tro,Đống Đa,"[60, inf)",E0_reviewed,3,,
+nha_tro,Đống Đa,"[60, inf)",E5,3,,
+nha_tro,Đống Đa,"[60, inf)",E6_pooled_log,3,,
+nha_tro,Đống Đa,"[60, inf)",E9_bathrooms,3,,

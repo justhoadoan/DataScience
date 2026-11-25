@@ -1,0 +1,373 @@
+{
+  "rows": 7623,
+  "eligible_rows": 7623,
+  "posting_start": "2026-09-30",
+  "posting_end": "2026-11-23",
+  "source_counts": {
+    "nhatot": 6142,
+    "alonhadat": 1481
+  },
+  "districts": [
+    {
+      "category": "can_ho_chung_cu",
+      "district": "Ba Đình",
+      "n": 177,
+      "median_vnd": 11300000.0,
+      "q25_vnd": 8000000.0,
+      "q75_vnd": 16000000.0,
+      "area_median": 56.0
+    },
+    {
+      "category": "can_ho_chung_cu",
+      "district": "Bắc Từ Liêm",
+      "n": 105,
+      "median_vnd": 5800000.0,
+      "q25_vnd": 4100000.0,
+      "q75_vnd": 14000000.0,
+      "area_median": 70.0
+    },
+    {
+      "category": "can_ho_chung_cu",
+      "district": "Chương Mỹ",
+      "n": 1,
+      "median_vnd": 6000000.0,
+      "q25_vnd": 6000000.0,
+      "q75_vnd": 6000000.0,
+      "area_median": 61.0
+    },
+    {
+      "category": "can_ho_chung_cu",
+      "district": "Cầu Giấy",
+      "n": 596,
+      "median_vnd": 13500000.0,
+      "q25_vnd": 8000000.0,
+      "q75_vnd": 16000000.0,
+      "area_median": 81.0
+    },
+    {
+      "category": "can_ho_chung_cu",
+      "district": "Gia Lâm",
+      "n": 914,
+      "median_vnd": 7750000.0,
+      "q25_vnd": 6700000.0,
+      "q75_vnd": 9375000.0,
+      "area_median": 55.0
+    },
+    {
+      "category": "can_ho_chung_cu",
+      "district": "Hai Bà Trưng",
+      "n": 93,
+      "median_vnd": 9000000.0,
+      "q25_vnd": 6200000.0,
+      "q75_vnd": 14500000.0,
+      "area_median": 60.0
+    },
+    {
+      "category": "can_ho_chung_cu",
+      "district": "Hoài Đức",
+      "n": 48,
+      "median_vnd": 10000000.0,
+      "q25_vnd": 8000000.0,
+      "q75_vnd": 12000000.0,
+      "area_median": 83.0
+    },
+    {
+      "category": "can_ho_chung_cu",
+      "district": "Hoàn Kiếm",
+      "n": 25,
+      "median_vnd": 10000000.0,
+      "q25_vnd": 7000000.0,
+      "q75_vnd": 14000000.0,
+      "area_median": 45.0
+    },
+    {
+      "category": "can_ho_chung_cu",
+      "district": "Hoàng Mai",
+      "n": 288,
+      "median_vnd": 11000000.0,
+      "q25_vnd": 8500000.0,
+      "q75_vnd": 13000000.0,
+      "area_median": 72.0
+    },
+    {
+      "category": "can_ho_chung_cu",
+      "district": "Hà Đông",
+      "n": 115,
+      "median_vnd": 9500000.0,
+      "q25_vnd": 5450000.0,
+      "q75_vnd": 13000000.0,
+      "area_median": 70.0
+    },
+    {
+      "category": "can_ho_chung_cu",
+      "district": "Long Biên",
+      "n": 324,
+      "median_vnd": 8500000.0,
+      "q25_vnd": 7000000.0,
+      "q75_vnd": 11000000.0,
+      "area_median": 70.0
+    },
+    {
+      "category": "can_ho_chung_cu",
+      "district": "Nam Từ Liêm",
+      "n": 1086,
+      "median_vnd": 10000000.0,
+      "q25_vnd": 7500000.0,
+      "q75_vnd": 14000000.0,
+      "area_median": 70.0
+    },
+    {
+      "category": "can_ho_chung_cu",
+      "district": "Sóc Sơn",
+      "n": 1,
+      "median_vnd": 2500000.0,
+      "q25_vnd": 2500000.0,
+      "q75_vnd": 2500000.0,
+      "area_median": 20.0
+    },
+    {
+      "category": "can_ho_chung_cu",
+      "district": "Thanh Trì",
+      "n": 27,
+      "median_vnd": 10000000.0,
+      "q25_vnd": 8000000.0,
+      "q75_vnd": 11750000.0,
+      "area_median": 77.5
+    },
+    {
+      "category": "can_ho_chung_cu",
+      "district": "Thanh Xuân",
+      "n": 475,
+      "median_vnd": 14500000.0,
+      "q25_vnd": 12000000.0,
+      "q75_vnd": 17000000.0,
+      "area_median": 90.0
+    },
+    {
+      "category": "can_ho_chung_cu",
+      "district": "Tây Hồ",
+      "n": 207,
+      "median_vnd": 12500000.0,
+      "q25_vnd": 8500000.0,
+      "q75_vnd": 16000000.0,
+      "area_median": 65.0
+    },
+    {
+      "category": "can_ho_chung_cu",
+      "district": "Đan Phượng",
+      "n": 1,
+      "median_vnd": 6000000.0,
+      "q25_vnd": 6000000.0,
+      "q75_vnd": 6000000.0,
+      "area_median": 60.0
+    },
+    {
+      "category": "can_ho_chung_cu",
+      "district": "Đông Anh",
+      "n": 3,
+      "median_vnd": 5000000.0,
+      "q25_vnd": 5000000.0,
+      "q75_vnd": 11000000.0,
+      "area_median": 73.0
+    },
+    {
+      "category": "can_ho_chung_cu",
+      "district": "Đống Đa",
+      "n": 241,
+      "median_vnd": 9800000.0,
+      "q25_vnd": 6500000.0,
+      "q75_vnd": 15000000.0,
+      "area_median": 60.0
+    },
+    {
+      "category": "nha_tro",
+      "district": "Ba Đình",
+      "n": 94,
+      "median_vnd": 4250000.0,
+      "q25_vnd": 2725000.0,
+      "q75_vnd": 5275000.0,
+      "area_median": 25.0
+    },
+    {
+      "category": "nha_tro",
+      "district": "Bắc Từ Liêm",
+      "n": 167,
+      "median_vnd": 3700000.0,
+      "q25_vnd": 3200000.0,
+      "q75_vnd": 4500000.0,
+      "area_median": 25.0
+    },
+    {
+      "category": "nha_tro",
+      "district": "Cầu Giấy",
+      "n": 290,
+      "median_vnd": 4300000.0,
+      "q25_vnd": 3200000.0,
+      "q75_vnd": 5000000.0,
+      "area_median": 25.0
+    },
+    {
+      "category": "nha_tro",
+      "district": "Gia Lâm",
+      "n": 12,
+      "median_vnd": 2050000.0,
+      "q25_vnd": 2000000.0,
+      "q75_vnd": 2750000.0,
+      "area_median": 23.0
+    },
+    {
+      "category": "nha_tro",
+      "district": "Hai Bà Trưng",
+      "n": 197,
+      "median_vnd": 4200000.0,
+      "q25_vnd": 3000000.0,
+      "q75_vnd": 5200000.0,
+      "area_median": 25.0
+    },
+    {
+      "category": "nha_tro",
+      "district": "Hoài Đức",
+      "n": 33,
+      "median_vnd": 2950000.0,
+      "q25_vnd": 2200000.0,
+      "q75_vnd": 3500000.0,
+      "area_median": 25.0
+    },
+    {
+      "category": "nha_tro",
+      "district": "Hoàn Kiếm",
+      "n": 23,
+      "median_vnd": 3500000.0,
+      "q25_vnd": 2600000.0,
+      "q75_vnd": 4500000.0,
+      "area_median": 25.0
+    },
+    {
+      "category": "nha_tro",
+      "district": "Hoàng Mai",
+      "n": 611,
+      "median_vnd": 4000000.0,
+      "q25_vnd": 3200000.0,
+      "q75_vnd": 4800000.0,
+      "area_median": 25.0
+    },
+    {
+      "category": "nha_tro",
+      "district": "Hà Đông",
+      "n": 189,
+      "median_vnd": 3300000.0,
+      "q25_vnd": 2800000.0,
+      "q75_vnd": 3800000.0,
+      "area_median": 25.0
+    },
+    {
+      "category": "nha_tro",
+      "district": "Long Biên",
+      "n": 48,
+      "median_vnd": 3100000.0,
+      "q25_vnd": 2200000.0,
+      "q75_vnd": 4000000.0,
+      "area_median": 25.0
+    },
+    {
+      "category": "nha_tro",
+      "district": "Nam Từ Liêm",
+      "n": 290,
+      "median_vnd": 3900000.0,
+      "q25_vnd": 3400000.0,
+      "q75_vnd": 4500000.0,
+      "area_median": 25.0
+    },
+    {
+      "category": "nha_tro",
+      "district": "Sóc Sơn",
+      "n": 1,
+      "median_vnd": 1500000.0,
+      "q25_vnd": 1500000.0,
+      "q75_vnd": 1500000.0,
+      "area_median": 20.0
+    },
+    {
+      "category": "nha_tro",
+      "district": "Thanh Oai",
+      "n": 1,
+      "median_vnd": 2800000.0,
+      "q25_vnd": 2800000.0,
+      "q75_vnd": 2800000.0,
+      "area_median": null
+    },
+    {
+      "category": "nha_tro",
+      "district": "Thanh Trì",
+      "n": 120,
+      "median_vnd": 3350000.0,
+      "q25_vnd": 2600000.0,
+      "q75_vnd": 3900000.0,
+      "area_median": 25.0
+    },
+    {
+      "category": "nha_tro",
+      "district": "Thanh Xuân",
+      "n": 373,
+      "median_vnd": 4000000.0,
+      "q25_vnd": 3200000.0,
+      "q75_vnd": 4800000.0,
+      "area_median": 25.0
+    },
+    {
+      "category": "nha_tro",
+      "district": "Thạch Thất",
+      "n": 1,
+      "median_vnd": 1900000.0,
+      "q25_vnd": 1900000.0,
+      "q75_vnd": 1900000.0,
+      "area_median": 16.0
+    },
+    {
+      "category": "nha_tro",
+      "district": "Tây Hồ",
+      "n": 83,
+      "median_vnd": 4300000.0,
+      "q25_vnd": 3200000.0,
+      "q75_vnd": 5000000.0,
+      "area_median": 25.0
+    },
+    {
+      "category": "nha_tro",
+      "district": "Đan Phượng",
+      "n": 3,
+      "median_vnd": 2000000.0,
+      "q25_vnd": 1900000.0,
+      "q75_vnd": 2000000.0,
+      "area_median": 30.0
+    },
+    {
+      "category": "nha_tro",
+      "district": "Đông Anh",
+      "n": 4,
+      "median_vnd": 1750000.0,
+      "q25_vnd": 1650000.0,
+      "q75_vnd": 2100000.0,
+      "area_median": 21.5
+    },
+    {
+      "category": "nha_tro",
+      "district": "Đống Đa",
+      "n": 356,
+      "median_vnd": 4500000.0,
+      "q25_vnd": 3600000.0,
+      "q75_vnd": 5300000.0,
+      "area_median": 25.0
+    }
+  ],
+  "area_distribution": [
+    0.01999475547397404,
+    0.11006948996984398,
+    0.1012849088763603,
+    0.07112888422708798,
+    0.1322276124295267,
+    0.09813819326078406,
+    0.009767929723351252,
+    0.4573882260390717
+  ]
+}

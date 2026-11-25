@@ -1,19 +1,19 @@
 """Grouped regression experiments with frozen splits and original-scale evaluation."""
 
+import json
+import time
 from datetime import datetime, timezone
 from hashlib import sha256
 from importlib.metadata import version
 from itertools import product
 from pathlib import Path
-import json
-import time
 
 import joblib
 import numpy as np
 import pandas as pd
 from sklearn.base import BaseEstimator, RegressorMixin, TransformerMixin
 from sklearn.compose import ColumnTransformer
-from sklearn.ensemble import RandomForestRegressor, HistGradientBoostingRegressor
+from sklearn.ensemble import HistGradientBoostingRegressor, RandomForestRegressor
 from sklearn.linear_model import Ridge
 from sklearn.model_selection import GroupKFold, StratifiedGroupKFold
 from sklearn.pipeline import Pipeline
@@ -21,9 +21,10 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.utils.validation import check_is_fitted
 from threadpoolctl import threadpool_limits
 
-from hanoi_rentals.analysis.audit import ROOT, CATEGORIES, SEED, normalize
+from hanoi_rentals.analysis.audit import CATEGORIES, ROOT, SEED, normalize
 from hanoi_rentals.analysis.reporting import load_analysis
 from hanoi_rentals.features.bedrooms import layout_error
+from hanoi_rentals.features.dates import DateFeatures, parse_dates
 from hanoi_rentals.paths import source_files
 
 CORE = ["category", "district_analysis", "area_analysis_m2"]
@@ -33,7 +34,20 @@ FEATURE_SETS = {
     "C": CORE + ["bedrooms_analysis", "furniture_analysis"],
 }
 NUMERIC = ["area_analysis_m2", "bedrooms_analysis"]
-ALLOWED = set(FEATURE_SETS["C"] + ["source"])
+ALLOWED = set(
+    FEATURE_SETS["C"]
+    + [
+        "source",
+        "valuation_date",
+        "ward_key",
+        "project_id",
+        "area_origin",
+        "recovered_bedrooms_origin",
+        "area_original_missing",
+        "bedrooms_original_missing",
+        "bathroom_count",
+    ]
+)
 DEPS = ["scikit-learn", "numpy", "pandas", "scipy", "joblib"]
 
 
@@ -104,12 +118,22 @@ class RentalPriceEstimator(RegressorMixin, BaseEstimator):
     """Serializable input validation, preprocessing, regression, inverse target and clipping."""
 
     def __init__(
-        self, family="ridge", features=tuple(CORE), target="direct", params=None
+        self,
+        family="ridge",
+        features=tuple(CORE),
+        target="direct",
+        params=None,
+        date_seasonal=True,
+        adaptive_bedrooms=True,
+        native_missing=False,
     ):
         self.family = family
         self.features = features
         self.target = target
         self.params = params
+        self.date_seasonal = date_seasonal
+        self.adaptive_bedrooms = adaptive_bedrooms
+        self.native_missing = native_missing
 
     def _frame(self, X):
         if not isinstance(X, pd.DataFrame):
@@ -131,7 +155,9 @@ class RentalPriceEstimator(RegressorMixin, BaseEstimator):
             raise ValueError("A nonempty district name is required.")
         frame["district_analysis"] = frame.district_analysis.map(normalize)
         for col in self.features:
-            if col in NUMERIC:
+            if col == "valuation_date":
+                parse_dates(frame[col])
+            elif col in NUMERIC:
                 value = pd.to_numeric(frame[col], errors="coerce").astype(float)
                 bad = frame[col].notna() & (value.isna() | ~np.isfinite(value))
                 if col == "area_analysis_m2":
@@ -166,6 +192,8 @@ class RentalPriceEstimator(RegressorMixin, BaseEstimator):
         if self.target not in ["direct", "log"]:
             raise ValueError("Unknown target transform.")
         self.districts_ = set(frame.district_analysis)
+        if "valuation_date" in frame:
+            self.date_range_ = (frame.valuation_date.min(), frame.valuation_date.max())
         area = (
             frame.area_analysis_m2.dropna()
             if "area_analysis_m2" in frame
@@ -187,7 +215,8 @@ class RentalPriceEstimator(RegressorMixin, BaseEstimator):
                 features = list(self.features)
                 # Sparse/ambiguous room counts must not borrow apartment effects.
                 if (
-                    "bedrooms_analysis" in features
+                    getattr(self, "adaptive_bedrooms", True)
+                    and "bedrooms_analysis" in features
                     and frame.loc[mask, "bedrooms_analysis"].notna().mean() < 0.35
                 ):
                     features.remove("bedrooms_analysis")
@@ -196,13 +225,17 @@ class RentalPriceEstimator(RegressorMixin, BaseEstimator):
                     features=tuple(features),
                     target=self.target,
                     params=self.params,
+                    date_seasonal=getattr(self, "date_seasonal", True),
+                    native_missing=getattr(self, "native_missing", False),
                 )
                 self.category_models_[category] = child.fit(
                     frame.loc[mask], y[mask.to_numpy()]
                 )
             return self
         numeric = [c for c in self.features if c in NUMERIC]
-        categorical = [c for c in self.features if c not in NUMERIC]
+        categorical = [
+            c for c in self.features if c not in NUMERIC and c != "valuation_date"
+        ]
         numeric_steps = [("impute_and_indicate", MedianIndicators())]
         if self.family == "ridge":
             numeric_steps.append(("scale", StandardScaler()))
@@ -227,6 +260,44 @@ class RentalPriceEstimator(RegressorMixin, BaseEstimator):
                 ),
             ]
         )
+        if getattr(self, "native_missing", False):
+            if self.family != "monotone_single":
+                raise ValueError(
+                    "Native missing-value experiment requires histogram boosting."
+                )
+            preprocessor.transformers[0] = ("numeric", "passthrough", numeric)
+        locations = [name for name in ("ward_key", "project_id") if name in categorical]
+        if locations:
+            ordinary = [name for name in categorical if name not in locations]
+            preprocessor.transformers[1] = (
+                "categorical",
+                OneHotEncoder(handle_unknown="ignore", sparse_output=False),
+                ordinary,
+            )
+            preprocessor.transformers.append(
+                (
+                    "locations",
+                    OneHotEncoder(
+                        min_frequency=20,
+                        handle_unknown="infrequent_if_exist",
+                        sparse_output=False,
+                    ),
+                    locations,
+                )
+            )
+        if "valuation_date" in self.features:
+            # Dates follow property numerics, so monotonic constraints never apply to time.
+            date_steps = [
+                (
+                    "calendar",
+                    DateFeatures(seasonal=getattr(self, "date_seasonal", True)),
+                )
+            ]
+            if self.family == "ridge":
+                date_steps.append(("scale", StandardScaler()))
+            preprocessor.transformers.append(
+                ("date", Pipeline(date_steps), ["valuation_date"])
+            )
         self.pipeline_ = Pipeline(
             [("preprocess", preprocessor), ("regressor", estimator)]
         )
@@ -297,6 +368,7 @@ class RentalPriceEstimator(RegressorMixin, BaseEstimator):
         furnishing="Unknown",
         area_unit="m2",
         source=None,
+        valuation_date=None,
     ):
         if area_unit not in ["m2", "m²"]:
             raise ValueError("Area must be supplied in m2 or m².")
@@ -324,6 +396,7 @@ class RentalPriceEstimator(RegressorMixin, BaseEstimator):
                     "bedrooms_analysis": bedrooms,
                     "furniture_analysis": furnishing,
                     "source": source,
+                    "valuation_date": valuation_date,
                 }
             ]
         )

@@ -29,6 +29,8 @@ def behavior_probe(model):
                             }
                         )
     frame = pd.DataFrame(rows)
+    if "valuation_date" in model.features:
+        frame["valuation_date"] = model.date_range_[1]
     frame["prediction"] = model.predict(frame)
     bedroom_violations = 0
     for _, group in frame.dropna(subset=["bedrooms_analysis"]).groupby(

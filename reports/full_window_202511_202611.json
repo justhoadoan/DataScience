@@ -1,0 +1,409 @@
+{
+  "requested_since": "2025-11-01",
+  "requested_until": "2026-11-30",
+  "effective_until": "2026-11-23",
+  "crawl": {
+    "collected_at": "2026-11-23T10:54:56.925356+07:00",
+    "since": "2025-11-01",
+    "until": "2026-11-23",
+    "requested_until": "2026-11-30",
+    "future_collection_pending": true,
+    "reserved_observations": 0,
+    "previous_rows": 6132,
+    "dropped_implausible_rows": 8,
+    "added_rows": 2292,
+    "total_rows": 8424,
+    "added_early_month": 927,
+    "added_by_source": {
+      "nhatot": 1967,
+      "alonhadat": 325
+    },
+    "coverage": [
+      {
+        "source": "nhatot",
+        "category": "can_ho_chung_cu",
+        "pages": 34,
+        "stop_reason": "end_of_results",
+        "window_boundary_reached": true,
+        "oldest_seen": "2026-10-24"
+      },
+      {
+        "source": "nhatot",
+        "category": "nha_tro",
+        "pages": 27,
+        "stop_reason": "end_of_results",
+        "window_boundary_reached": true,
+        "oldest_seen": "2026-10-24"
+      },
+      {
+        "source": "alonhadat",
+        "category": "can_ho_chung_cu",
+        "pages": 37,
+        "stop_reason": "error",
+        "window_boundary_reached": false,
+        "oldest_seen": "2026-11-22",
+        "error": "Fetch failed after retry: https://alonhadat.com.vn/cho-thue-can-ho-chung-cu/ha-noi/trang-38"
+      },
+      {
+        "source": "alonhadat",
+        "category": "nha_tro",
+        "pages": 3,
+        "stop_reason": "error",
+        "window_boundary_reached": false,
+        "oldest_seen": "2026-11-21",
+        "error": "Fetch failed after retry: https://alonhadat.com.vn/cho-thue-phong-tro-nha-tro/ha-noi/trang-4"
+      }
+    ],
+    "all_boundaries_reached": false,
+    "limit": "Only currently accessible ads; deleted ads and original publication dates cannot be reconstructed.",
+    "raw_manifest": "reports/raw_manifest_latest.json",
+    "raw_manifest_sha256": "7de6ed2913403ed621c79ada4d73b7bf04b47ae65c00ef20e969f6223baa00cd"
+  },
+  "months": [
+    {
+      "month": "2025-11",
+      "stored_unique_listings_by_posting_month": 0,
+      "evidenced_price_observations": 0,
+      "unique_properties_observed": 0,
+      "posting_source_category_counts": []
+    },
+    {
+      "month": "2025-12",
+      "stored_unique_listings_by_posting_month": 0,
+      "evidenced_price_observations": 0,
+      "unique_properties_observed": 0,
+      "posting_source_category_counts": []
+    },
+    {
+      "month": "2026-01",
+      "stored_unique_listings_by_posting_month": 0,
+      "evidenced_price_observations": 0,
+      "unique_properties_observed": 0,
+      "posting_source_category_counts": []
+    },
+    {
+      "month": "2026-02",
+      "stored_unique_listings_by_posting_month": 0,
+      "evidenced_price_observations": 0,
+      "unique_properties_observed": 0,
+      "posting_source_category_counts": []
+    },
+    {
+      "month": "2026-03",
+      "stored_unique_listings_by_posting_month": 0,
+      "evidenced_price_observations": 0,
+      "unique_properties_observed": 0,
+      "posting_source_category_counts": []
+    },
+    {
+      "month": "2026-04",
+      "stored_unique_listings_by_posting_month": 0,
+      "evidenced_price_observations": 0,
+      "unique_properties_observed": 0,
+      "posting_source_category_counts": []
+    },
+    {
+      "month": "2026-05",
+      "stored_unique_listings_by_posting_month": 0,
+      "evidenced_price_observations": 0,
+      "unique_properties_observed": 0,
+      "posting_source_category_counts": []
+    },
+    {
+      "month": "2026-06",
+      "stored_unique_listings_by_posting_month": 0,
+      "evidenced_price_observations": 0,
+      "unique_properties_observed": 0,
+      "posting_source_category_counts": []
+    },
+    {
+      "month": "2026-07",
+      "stored_unique_listings_by_posting_month": 1,
+      "evidenced_price_observations": 0,
+      "unique_properties_observed": 0,
+      "posting_source_category_counts": [
+        {
+          "source": "alonhadat",
+          "category": "can_ho_chung_cu",
+          "n": 1
+        }
+      ]
+    },
+    {
+      "month": "2026-08",
+      "stored_unique_listings_by_posting_month": 53,
+      "evidenced_price_observations": 0,
+      "unique_properties_observed": 0,
+      "posting_source_category_counts": [
+        {
+          "source": "alonhadat",
+          "category": "can_ho_chung_cu",
+          "n": 5
+        },
+        {
+          "source": "alonhadat",
+          "category": "nha_tro",
+          "n": 14
+        },
+        {
+          "source": "nhatot",
+          "category": "can_ho_chung_cu",
+          "n": 26
+        },
+        {
+          "source": "nhatot",
+          "category": "nha_tro",
+          "n": 8
+        }
+      ]
+    },
+    {
+      "month": "2026-09",
+      "stored_unique_listings_by_posting_month": 1841,
+      "evidenced_price_observations": 0,
+      "unique_properties_observed": 0,
+      "posting_source_category_counts": [
+        {
+          "source": "alonhadat",
+          "category": "can_ho_chung_cu",
+          "n": 418
+        },
+        {
+          "source": "alonhadat",
+          "category": "nha_tro",
+          "n": 243
+        },
+        {
+          "source": "nhatot",
+          "category": "can_ho_chung_cu",
+          "n": 372
+        },
+        {
+          "source": "nhatot",
+          "category": "nha_tro",
+          "n": 808
+        }
+      ]
+    },
+    {
+      "month": "2026-10",
+      "stored_unique_listings_by_posting_month": 3956,
+      "evidenced_price_observations": 4182,
+      "unique_properties_observed": 4182,
+      "posting_source_category_counts": [
+        {
+          "source": "alonhadat",
+          "category": "can_ho_chung_cu",
+          "n": 663
+        },
+        {
+          "source": "alonhadat",
+          "category": "nha_tro",
+          "n": 42
+        },
+        {
+          "source": "nhatot",
+          "category": "can_ho_chung_cu",
+          "n": 1694
+        },
+        {
+          "source": "nhatot",
+          "category": "nha_tro",
+          "n": 1557
+        }
+      ]
+    },
+    {
+      "month": "2026-11",
+      "stored_unique_listings_by_posting_month": 2573,
+      "evidenced_price_observations": 3777,
+      "unique_properties_observed": 3747,
+      "posting_source_category_counts": [
+        {
+          "source": "alonhadat",
+          "category": "can_ho_chung_cu",
+          "n": 332
+        },
+        {
+          "source": "alonhadat",
+          "category": "nha_tro",
+          "n": 39
+        },
+        {
+          "source": "nhatot",
+          "category": "can_ho_chung_cu",
+          "n": 1248
+        },
+        {
+          "source": "nhatot",
+          "category": "nha_tro",
+          "n": 954
+        }
+      ]
+    }
+  ],
+  "total_evidenced_observations": 7959,
+  "missing_posting_months": [
+    "2025-11",
+    "2025-12",
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05",
+    "2026-06"
+  ],
+  "missing_price_observation_months": [
+    "2025-11",
+    "2025-12",
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05",
+    "2026-06",
+    "2026-07",
+    "2026-08",
+    "2026-09"
+  ],
+  "training_status": "preview_ready",
+  "previous_candidate": "1e4516ee33ab4165",
+  "candidate": "110fedfe13164ed4",
+  "audit": {
+    "dated_observations_before_audit": 7929,
+    "excluded_by_price_audit": 128,
+    "benchmark_peer_observations_quarantined": 180,
+    "eligible_observations": 7623,
+    "price_date_origins": {
+      "verified_manifest_day": 4018,
+      "live_collection": 3605
+    },
+    "legacy_parser_dates_used": false
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "training_end": "2026-10-30",
+      "validation_date": "2026-11-23",
+      "training_n": 2905,
+      "validation_n": 3605,
+      "purged_training_rows": 1113,
+      "group_overlap": 0
+    }
+  ],
+  "comparisons": {
+    "calendar": {
+      "overall": {
+        "n": 3605,
+        "mae_vnd": 1734380.4347100009,
+        "rmse_vnd": 2980052.4248035196,
+        "r2": 0.6918126080059874,
+        "median_ae_vnd": 1055063.6693216804,
+        "p90_ae_vnd": 3990315.670974918,
+        "median_price_vnd": 7000000.0,
+        "nmae_pct": 24.77686335300001
+      },
+      "categories": {
+        "can_ho_chung_cu": {
+          "n": 2286,
+          "mae_vnd": 2198474.364387669,
+          "rmse_vnd": 3463295.147918599,
+          "r2": 0.5432186074077814,
+          "median_ae_vnd": 1478473.504813144,
+          "p90_ae_vnd": 4955131.8217568435,
+          "median_price_vnd": 10000000.0,
+          "nmae_pct": 21.984743643876694
+        },
+        "nha_tro": {
+          "n": 1319,
+          "mae_vnd": 930044.7840328593,
+          "rmse_vnd": 1866617.4028030122,
+          "r2": 0.1865902915291764,
+          "median_ae_vnd": 658744.69719976,
+          "p90_ae_vnd": 1951697.9069060276,
+          "median_price_vnd": 3900000.0,
+          "nmae_pct": 23.8473021546887
+        }
+      }
+    },
+    "elapsed": {
+      "overall": {
+        "n": 3605,
+        "mae_vnd": 1734380.4347100009,
+        "rmse_vnd": 2980052.4248035196,
+        "r2": 0.6918126080059874,
+        "median_ae_vnd": 1055063.6693216804,
+        "p90_ae_vnd": 3990315.670974918,
+        "median_price_vnd": 7000000.0,
+        "nmae_pct": 24.77686335300001
+      },
+      "categories": {
+        "can_ho_chung_cu": {
+          "n": 2286,
+          "mae_vnd": 2198474.364387669,
+          "rmse_vnd": 3463295.147918599,
+          "r2": 0.5432186074077814,
+          "median_ae_vnd": 1478473.504813144,
+          "p90_ae_vnd": 4955131.8217568435,
+          "median_price_vnd": 10000000.0,
+          "nmae_pct": 21.984743643876694
+        },
+        "nha_tro": {
+          "n": 1319,
+          "mae_vnd": 930044.7840328593,
+          "rmse_vnd": 1866617.4028030122,
+          "r2": 0.1865902915291764,
+          "median_ae_vnd": 658744.69719976,
+          "p90_ae_vnd": 1951697.9069060276,
+          "median_price_vnd": 3900000.0,
+          "nmae_pct": 23.8473021546887
+        }
+      }
+    },
+    "no_date": {
+      "overall": {
+        "n": 3605,
+        "mae_vnd": 1734380.4347100009,
+        "rmse_vnd": 2980052.4248035196,
+        "r2": 0.6918126080059874,
+        "median_ae_vnd": 1055063.6693216804,
+        "p90_ae_vnd": 3990315.670974918,
+        "median_price_vnd": 7000000.0,
+        "nmae_pct": 24.77686335300001
+      },
+      "categories": {
+        "can_ho_chung_cu": {
+          "n": 2286,
+          "mae_vnd": 2198474.364387669,
+          "rmse_vnd": 3463295.147918599,
+          "r2": 0.5432186074077814,
+          "median_ae_vnd": 1478473.504813144,
+          "p90_ae_vnd": 4955131.8217568435,
+          "median_price_vnd": 10000000.0,
+          "nmae_pct": 21.984743643876694
+        },
+        "nha_tro": {
+          "n": 1319,
+          "mae_vnd": 930044.7840328593,
+          "rmse_vnd": 1866617.4028030122,
+          "r2": 0.1865902915291764,
+          "median_ae_vnd": 658744.69719976,
+          "p90_ae_vnd": 1951697.9069060276,
+          "median_price_vnd": 3900000.0,
+          "nmae_pct": 23.8473021546887
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Exhausting accessible listing pages does not reconstruct expired ads or earlier prices.",
+    "Posting dates and evidenced price observation dates describe different coverage.",
+    "November 24–30 requires future collection; December remains reserved and unscored."
+  ],
+  "same_observation_validation_comparison": {
+    "n": 384,
+    "before_mae_vnd": 1653981.1268286563,
+    "after_mae_vnd": 1680100.7733021302,
+    "note": "Matched observations only; purging a larger validation set also changes the earlier training population."
+  }
+}
