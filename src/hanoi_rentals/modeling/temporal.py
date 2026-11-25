@@ -299,7 +299,9 @@ def train_temporal(root):
         "property_feature_contract": "Shared pooled log-target monotone histogram, feature set C; missing numerics use training medians and indicators. Reviewed E6 architecture.",
         "location_fallback": "District. Ward and project were assessed only in development.",
         "config_sha256": {
-            name: digest for name, digest in code.items() if name.startswith("config/")
+            name: digest
+            for name, digest in code.items()
+            if name == "features/reference.py"
         },
         "date_features": ["elapsed_days"]
         + (["month_sin", "month_cos"] if selected == "calendar" else []),

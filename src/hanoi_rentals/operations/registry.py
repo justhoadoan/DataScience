@@ -16,6 +16,7 @@ from hanoi_rentals.modeling import metrics
 from hanoi_rentals.paths import source_files
 
 DEFAULT_POLICY = {
+    "require_valuation_date": True,
     "min_development_rows": 500,
     "min_benchmark_rows": 100,
     "min_category_rows": 30,
@@ -48,7 +49,7 @@ def write_json(path, value):
 
 def evaluate_gate(candidate, baseline, categories, quality, champion=None, policy=None):
     """Gate saved holdout metrics; never tune candidates against the benchmark."""
-    policy = policy or DEFAULT_POLICY
+    policy = {**DEFAULT_POLICY, **(policy or {})}
     reasons = []
     if policy.get("require_valuation_date") and not quality.get(
         "date_features_in_both_categories"
@@ -211,7 +212,7 @@ def register(root, run_root, quality):
                 benchmark.price_month_vnd.to_numpy()[mask], prediction[mask]
             )
     policy_path = root / "config/promotion.json"
-    policy = read_json(policy_path, DEFAULT_POLICY)
+    policy = {**DEFAULT_POLICY, **read_json(policy_path, {})}
     fitted = joblib.load(run_root / "artifacts/rental_price_pipeline.joblib")
     candidate_behavior = behavior_probe(fitted)
     quality["date_features_in_both_categories"] = all(

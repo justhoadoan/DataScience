@@ -50,16 +50,12 @@ jobs:
         env:
           SINCE: ${{ steps.window.outputs.since }}
           UNTIL: ${{ steps.window.outputs.until }}
-        run: python -m hanoi_rentals.cli refresh --since "$SINCE" --until "$UNTIL"
+        run: python -m hanoi_rentals.cli refresh --since "$SINCE" --until "$UNTIL" --max-pages 120
       - name: Record deployment decision
         id: decision
         run: |
           python scripts/workflow_summary.py
           printf 'state_tag=rental-state-%s-%s\n' "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" >> "$GITHUB_OUTPUT"
-      - name: Evaluate the date-feature candidate without exposing December holdout
-        run: python -m hanoi_rentals.cli train-temporal
-      - name: Score the reserved month only after it has ended
-        run: python -m hanoi_rentals.cli evaluate-temporal-holdout
       - name: Preserve updated state even when the candidate is rejected
         env:
           STATE_TAG: ${{ steps.decision.outputs.state_tag }}

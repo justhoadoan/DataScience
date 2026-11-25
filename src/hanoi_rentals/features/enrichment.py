@@ -1,11 +1,10 @@
 """Join only exact archived versions and retain evidence for recovered features."""
 
-import csv
-
 import numpy as np
 import pandas as pd
 
 from hanoi_rentals.features.bedrooms import maximum_bedrooms
+from hanoi_rentals.features.reference import WARD_SCHEMES
 from hanoi_rentals.features.title_attributes import (
     area_claim,
     bedroom_claim,
@@ -17,7 +16,6 @@ from hanoi_rentals.ingestion.normalization import (
     strip_admin_prefix,
 )
 from hanoi_rentals.ingestion.observations import load_observations
-from hanoi_rentals.paths import PROJECT_ROOT
 
 
 def match_versions(root, frame):
@@ -68,8 +66,7 @@ def match_versions(root, frame):
 
 def enrich(frame):
     frame = frame.copy()
-    with (PROJECT_ROOT / "config/location_crosswalk.csv").open() as handle:
-        schemes = {row["source"]: row["scheme"] for row in csv.DictReader(handle)}
+    schemes = {row["source"]: row["scheme"] for row in WARD_SCHEMES}
     features = []
     for row in frame.itertuples():
         body = row.body if isinstance(row.body, str) else ""

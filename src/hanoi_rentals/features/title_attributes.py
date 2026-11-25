@@ -1,12 +1,11 @@
 """Auditable explicit claims for individual rental units."""
 
-import csv
 import re
 import unicodedata
 from functools import lru_cache
 
 from hanoi_rentals.features.bedrooms import explicit_bedrooms
-from hanoi_rentals.paths import PROJECT_ROOT
+from hanoi_rentals.features.reference import PROJECT_ALIASES
 
 
 def plain(text):
@@ -64,8 +63,7 @@ def bedroom_claim(text):
 
 @lru_cache(maxsize=1)
 def aliases():
-    with (PROJECT_ROOT / "config/project_aliases.csv").open() as handle:
-        return sorted(csv.DictReader(handle), key=lambda row: -len(row["alias"]))
+    return sorted(PROJECT_ALIASES, key=lambda row: -len(row["alias"]))
 
 
 def project_claim(text):
