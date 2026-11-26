@@ -16,7 +16,10 @@ from hanoi_rentals.modeling import metrics
 from hanoi_rentals.paths import source_files
 
 DEFAULT_POLICY = {
-    "require_valuation_date": True,
+    # Monthly `train` has no date feature; dated models are judged by the December holdout.
+    "require_valuation_date": False,
+    # Paired bootstrap on the benchmark: the gain's 95% lower bound must exceed zero.
+    "require_significant_champion_gain": True,
     "min_development_rows": 500,
     "min_benchmark_rows": 100,
     "min_category_rows": 30,
@@ -45,6 +48,15 @@ def write_json(path, value):
         json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n"
     )
     temporary.replace(path)
+
+
+def gain_lower_bound(champion_errors, candidate_errors, repeats=2000, seed=42):
+    """2.5th percentile of the paired-bootstrap MAE gain (%) over the champion."""
+    old = np.asarray(champion_errors, dtype=float)
+    new = np.asarray(candidate_errors, dtype=float)
+    index = np.random.default_rng(seed).integers(0, len(old), (repeats, len(old)))
+    gains = 100 * (1 - new[index].mean(axis=1) / old[index].mean(axis=1))
+    return float(np.percentile(gains, 2.5))
 
 
 def evaluate_gate(candidate, baseline, categories, quality, champion=None, policy=None):
@@ -104,6 +116,15 @@ def evaluate_gate(candidate, baseline, categories, quality, champion=None, polic
             reasons.append("Contract repair exceeds the allowed MAE regression budget")
         elif not repairing and champion_gain < policy["min_champion_improvement_pct"]:
             reasons.append("Candidate does not improve champion enough")
+        elif (
+            not repairing
+            and policy.get("require_significant_champion_gain")
+            and champion.get("gain_ci_low_pct") is not None
+            and champion["gain_ci_low_pct"] <= 0
+        ):
+            reasons.append(
+                "Gain over champion is within benchmark noise (bootstrap 95% lower bound <= 0)"
+            )
         for category, old in champion["categories"].items():
             current = categories.get(category)
             if current and current["mae_vnd"] > old["mae_vnd"] * (
@@ -205,6 +226,10 @@ def register(root, run_root, quality):
             "overall": metrics(benchmark.price_month_vnd, prediction),
             "categories": {},
             "behavior": behavior_probe(model),
+            "gain_ci_low_pct": gain_lower_bound(
+                np.abs(prediction - benchmark.price_month_vnd.to_numpy()),
+                np.abs(pred.prediction_vnd.to_numpy() - pred.actual_vnd.to_numpy()),
+            ),
         }
         for category in categories:
             mask = benchmark.category.eq(category).to_numpy()
@@ -218,7 +243,7 @@ def register(root, run_root, quality):
     quality["date_features_in_both_categories"] = all(
         "valuation_date" in fitted.features_for_category(c) for c in categories
     )
-    quality = {**quality, "behavior_violations": candidate_behavior["violations"]}
+    quality["behavior_violations"] = candidate_behavior["violations"]
     decision = evaluate_gate(
         overall, baseline.to_dict(), categories, quality, champion_scores, policy
     )

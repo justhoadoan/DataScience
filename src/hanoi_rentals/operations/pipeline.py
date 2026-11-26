@@ -5,10 +5,8 @@ import shutil
 from datetime import UTC, datetime
 from pathlib import Path
 
-import joblib
 import numpy as np
 
-from hanoi_rentals.modeling.behavior import behavior_probe
 from hanoi_rentals.analysis.audit import run_audit
 from hanoi_rentals.analysis.reporting import generate_figures, write_report
 from hanoi_rentals.modeling import run_modeling
@@ -54,10 +52,8 @@ def train(root, crawl_summary=None):
     analysis = eda(run)
     meta = run_modeling(run)
     generate_modeling_report(run)
+    # register() adds behavior_violations and date-feature coverage to this dict.
     quality = {
-        "behavior_violations": behavior_probe(
-            joblib.load(run / "artifacts/rental_price_pipeline.joblib")
-        )["violations"],
         "development_n": meta["development_n"],
         "exclusion_rate": float((~analysis.include_price).mean()),
         "area_missing_rate": float(

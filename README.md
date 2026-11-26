@@ -15,11 +15,11 @@ A rental-price estimation app for Hanoi, built with FastAPI and React.
 | `frontend/src/` | React views, forms, API requests and styling. |
 | `data/` | Files used by collection, analysis and training. |
 | `artifacts/` | Saved model bundles and the active-model registry. |
-| `reports/` | Generated reports and figures. |
+| `reports/` | Generated reports and figures (created by the pipeline; not tracked). |
 | `scripts/` | Local startup and workflow utilities. |
 | `config/` | Model promotion settings. |
 | `.github/workflows/` | Scheduled data collection and model evaluation. |
-| `docs/` | Team documentation and plans. |
+| `docs/` | Local team documentation and plans (not tracked). |
 
 The command-line entry point is `src/hanoi_rentals/cli.py`. Shared repository paths are defined in `src/hanoi_rentals/paths.py`.
 
@@ -51,6 +51,10 @@ After local setup, run a small collection and an isolated date-feature experimen
 Open **http://127.0.0.1:8001** when training reports `preview_ready`. This preview uses its own model registry. The regular app continues to use the approved model.
 
 Use `temporal-coverage` for the collection report. Run `evaluate-temporal-holdout` after December 2026 to evaluate the candidate frozen before December; earlier runs return `pending`.
+
+The candidate is frozen only when `train-temporal` succeeds before 1 December 2026 (Hanoi time), on the machine that holds the daily observations (`data/processed/observations.sqlite3`). The monthly workflow starts on 1 December and cannot freeze it. The holdout also needs prices observed during December, so daily collection must continue through the month.
+
+A monthly candidate replaces the champion only if it passes the quality budgets in `config/promotion.json` and its gain over the champion is clear of benchmark noise: the 95% lower bound of a paired bootstrap must be above zero.
 
 ### Crawl and resume
 

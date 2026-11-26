@@ -42,6 +42,7 @@ jobs:
           INPUT_UNTIL: ${{ inputs.until }}
         run: python scripts/month_window.py >> "$GITHUB_OUTPUT"
       - name: Restore durable dataset, benchmark and registry
+        id: restore
         run: python scripts/github_state.py restore
       - name: Crawl, audit, EDA, train and apply the promotion policy
         env:
@@ -54,7 +55,9 @@ jobs:
         run: python -m hanoi_rentals.cli train-temporal
       - name: Score the reserved month only after it has ended
         run: python -m hanoi_rentals.cli evaluate-temporal-holdout
-      - name: Preserve updated state even when the candidate is rejected
+      - name: Preserve updated state even when the candidate is rejected or a later step fails
+        # Never save after a failed restore: that would replace good state with a partial one.
+        if: ${{ !cancelled() && steps.restore.outcome == 'success' }}
         run: python scripts/github_state.py save --tag "rental-state-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()

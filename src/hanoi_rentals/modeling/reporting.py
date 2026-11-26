@@ -2,7 +2,6 @@
 
 from pathlib import Path
 import json
-import numpy as np
 import pandas as pd
 import matplotlib
 
@@ -169,7 +168,6 @@ def generate_modeling_report(root=ROOT):
     final_scores = scores[scores.partition.eq("internal_test")]
     final = final_scores[final_scores.model.eq(selected)].iloc[0]
     base = final_scores[final_scores.model.eq("baseline_category")].iloc[0]
-    dev_selected = oof[oof.model.eq(selected)].iloc[0]
     sections = [
         "# Modeling report — Hanoi rental asking-price estimation",
         f"**Selected model: {selected}.** Internal-test MAE: **{final.mae_vnd / 1e6:.3f} million VND/month**, compared with **{base.mae_vnd / 1e6:.3f} million** for the category-median baseline ({final.improvement_vs_category_baseline_pct:+.1f}% improvement). RMSE: {final.rmse_vnd / 1e6:.3f} million; R²: {final.r2:.3f}. MAE is primary; R² is supplementary.",

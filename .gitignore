@@ -37,6 +37,7 @@ docs/presentations/**/*.fdb_latexmk
 
 # Generated collection state and experiment outputs stay local.
 /artifacts/temporal/
+# Evaluated bundles stay local; the served champion and its history are added with `git add -f`.
 /artifacts/models/*
 /data/processed/observations.sqlite3*
 /data/processed/crawl_runs/

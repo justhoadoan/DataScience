@@ -1,5 +1,6 @@
 {
-  "require_valuation_date": true,
+  "require_valuation_date": false,
+  "require_significant_champion_gain": true,
   "min_development_rows": 500,
   "min_benchmark_rows": 100,
   "min_category_rows": 30,

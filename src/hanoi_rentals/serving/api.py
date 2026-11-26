@@ -18,6 +18,7 @@ from fastapi.responses import PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field, ValidationInfo, field_validator
 
+from hanoi_rentals.analysis.audit import normalize
 from hanoi_rentals.features.bedrooms import LAYOUT_POLICY, layout_error
 from hanoi_rentals.features.dates import ZONE, today_hanoi, valuation_date_limits
 from hanoi_rentals.operations.registry import champion_directory, read_json
@@ -76,6 +77,10 @@ class ModelService:
         self.model = joblib.load(bundle / "model.joblib")
         self.market = read_json(bundle / "market.json")
         self.support = pd.DataFrame(read_json(bundle / "support.json", []))
+        self.districts = {
+            normalize(name).casefold(): name
+            for name in self.metadata["supported_districts"]
+        }
         if (
             self.metadata.get("prediction_contract_version", 1) >= 2
             and self.metadata["layout_policy"] != LAYOUT_POLICY
@@ -146,7 +151,8 @@ class ModelService:
                 ],
             )
         valuation_date = chosen.isoformat()
-        if payload.district not in self.metadata["supported_districts"]:
+        district = self.districts.get(normalize(payload.district).casefold())
+        if district is None:
             raise HTTPException(
                 422,
                 detail=[
@@ -156,17 +162,22 @@ class ModelService:
                     }
                 ],
             )
+        payload = payload.model_copy(update={"district": district})
         inputs = {**payload.estimator_inputs(), "valuation_date": valuation_date}
         result = self.model.predict_details(pd.DataFrame([inputs])).iloc[0].to_dict()
         warnings = []
         used = self.model.features_for_category(payload.category)
         if "valuation_date" not in used:
             warnings.append("Phiên bản hiện tại chưa học ảnh hưởng của ngày định giá.")
-        elif (
-            not self.model.date_range_[0] <= valuation_date <= self.model.date_range_[1]
-        ):
+        elif valuation_date > self.model.date_range_[1]:
+            # Tree models cannot extrapolate time: later dates reuse the last learned level.
             warnings.append(
-                "Ngày định giá nằm ngoài thời gian huấn luyện; chưa có bằng chứng về độ chính xác ở thời điểm này."
+                f"Ngày định giá sau dữ liệu huấn luyện (đến {self.model.date_range_[1]}); "
+                "mô hình không dự báo xu hướng mà dùng mức giá của ngày cuối cùng đó."
+            )
+        elif valuation_date < self.model.date_range_[0]:
+            warnings.append(
+                "Ngày định giá trước thời gian huấn luyện; chưa có bằng chứng về độ chính xác ở thời điểm này."
             )
         if self.metadata.get("preview_only"):
             warnings.append(
