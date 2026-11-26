@@ -4,6 +4,7 @@ import logging
 import os
 from collections import Counter
 from contextlib import asynccontextmanager
+from datetime import date
 from hashlib import sha256
 from importlib.metadata import version
 from pathlib import Path
@@ -18,7 +19,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field, ValidationInfo, field_validator
 
 from hanoi_rentals.features.bedrooms import LAYOUT_POLICY, layout_error
-from hanoi_rentals.features.dates import today_hanoi
+from hanoi_rentals.features.dates import ZONE, today_hanoi, valuation_date_limits
 from hanoi_rentals.operations.registry import champion_directory, read_json
 
 LOGGER = logging.getLogger(__name__)
@@ -32,6 +33,14 @@ class PredictionRequest(BaseModel):
     area_m2: float = Field(gt=5, le=500)
     bedrooms: int | None = Field(default=None, ge=0, le=6, strict=True)
     furnishing: Literal["Unknown", "Furnished", "Unfurnished"] = "Unknown"
+    valuation_date: str | None = Field(default=None, pattern=r"^\d{4}-\d{2}-\d{2}$")
+
+    @field_validator("valuation_date")
+    @classmethod
+    def valid_calendar_date(cls, value):
+        if value is not None:
+            date.fromisoformat(value)
+        return value
 
     def estimator_inputs(self):
         return {
@@ -119,7 +128,24 @@ class ModelService:
         }
 
     def predict(self, payload):
-        valuation_date = today_hanoi().isoformat()
+        today = today_hanoi()
+        chosen = (
+            date.fromisoformat(payload.valuation_date)
+            if payload.valuation_date
+            else today
+        )
+        first, last = valuation_date_limits(today)
+        if not first <= chosen <= last:
+            raise HTTPException(
+                422,
+                detail=[
+                    {
+                        "loc": ["body", "valuation_date"],
+                        "msg": f"Chọn ngày từ {first:%d/%m/%Y} đến {last:%d/%m/%Y} (giờ Hà Nội).",
+                    }
+                ],
+            )
+        valuation_date = chosen.isoformat()
         if payload.district not in self.metadata["supported_districts"]:
             raise HTTPException(
                 422,
@@ -288,18 +314,31 @@ def create_app(root=None):
     @app.get("/api/schema")
     def schema(request: Request):
         value = service(request)
+        today = today_hanoi()
+        first, last = valuation_date_limits(today)
         return {
             "categories": [
                 {"value": k, "label": v} for k, v in CATEGORY_LABELS.items()
             ],
             "districts": value.metadata["supported_districts"],
             "required": ["category", "district", "area_m2"],
-            "optional": ["bedrooms", "furnishing"],
+            "optional": ["bedrooms", "furnishing", "valuation_date"],
             "layout_policy": LAYOUT_POLICY,
             "bedrooms_help": "Đếm phòng ngủ riêng có ngăn phòng. Studio/phòng khép kín có giường, bếp và WC nhưng không ngăn phòng ngủ là 0; chưa rõ thì để trống.",
             "area_unit": "m²",
             "currency": "VND/month",
-            "valuation_date": {"source": "server", "timezone": "Asia/Ho_Chi_Minh"},
+            "valuation_date": {
+                "source": "client_or_server",
+                "timezone": ZONE.key,
+                "today": today.isoformat(),
+                "min": first.isoformat(),
+                "max": last.isoformat(),
+                "supported_categories": [
+                    category
+                    for category in CATEGORY_LABELS
+                    if "valuation_date" in value.model.features_for_category(category)
+                ],
+            },
             "furnishing": [
                 {"value": "Unknown", "label": "Chưa rõ"},
                 {"value": "Furnished", "label": "Đầy đủ"},

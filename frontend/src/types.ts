@@ -9,6 +9,12 @@ export type Schema = {
     category_max_bedrooms: Record<Category, number>;
   };
   bedrooms_help: string;
+  valuation_date?: {
+    today: string;
+    min: string;
+    max: string;
+    supported_categories: Category[];
+  };
 };
 export type Score = {
   n: number;
@@ -90,4 +96,5 @@ export type Draft = {
   area: string;
   bedrooms: string;
   furnishing: string;
+  valuation_date: string;
 };

@@ -12,6 +12,7 @@ import LayoutPreview from "./LayoutPreview";
 
 const categoryName = (value: string) =>
   value === "can_ho_chung_cu" ? "Căn hộ / chung cư" : "Phòng trọ";
+const calendarDate = (value: string) => value.split("-").reverse().join("/");
 const bedroomName = (value: string) =>
   value === ""
     ? "Chưa rõ phòng ngủ riêng"
@@ -41,6 +42,7 @@ export default function EstimatorWorkspace({
     stale,
     maximum,
     invalidLayout,
+    valuationDates,
   } = useEstimate(schema);
   const fields = model?.category_feature_schema[draft.category] || [];
   const bedroomUsed = fields.includes("bedrooms_analysis");
@@ -211,6 +213,34 @@ export default function EstimatorWorkspace({
               <ChevronDown size={15} />
             </div>
           </div>
+          {valuationDates && (
+            <div className="field">
+              <label htmlFor="valuation_date">Ngày định giá</label>
+              <input
+                id="valuation_date"
+                type="date"
+                min={valuationDates.min}
+                max={valuationDates.max}
+                value={draft.valuation_date || valuationDates.today}
+                onChange={(event) => update("valuation_date", event.target.value)}
+                aria-invalid={!!errors.valuation_date}
+                aria-describedby={
+                  errors.valuation_date
+                    ? "valuation-date-error valuation-date-help"
+                    : "valuation-date-help"
+                }
+              />
+              <p id="valuation-date-help" className="field-help">
+                Chọn từ {calendarDate(valuationDates.min)} đến{" "}
+                {calendarDate(valuationDates.max)} (giờ Hà Nội).
+              </p>
+              {errors.valuation_date && (
+                <p id="valuation-date-error" className="field-error" role="alert">
+                  {errors.valuation_date}
+                </p>
+              )}
+            </div>
+          )}
           {errors.form && (
             <p className="field-error" role="alert">
               {errors.form}
@@ -265,7 +295,7 @@ export default function EstimatorWorkspace({
                   )?.label || submitted.furnishing}
                   <br />
                   Ngày định giá: <time dateTime={estimate.valuation_date}>
-                    {estimate.valuation_date.split("-").reverse().join("/")}
+                    {calendarDate(estimate.valuation_date)}
                   </time> (giờ Việt Nam)
                 </div>
                 <div className="price" data-testid="quote-price">

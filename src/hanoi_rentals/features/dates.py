@@ -1,6 +1,6 @@
 """One calendar contract for observed prices and server-generated valuation dates."""
 
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from zoneinfo import ZoneInfo
 
 import numpy as np
@@ -15,6 +15,14 @@ HOLDOUT_START = date(2026, 12, 1)
 
 def today_hanoi():
     return datetime.now(ZONE).date()
+
+
+def valuation_date_limits(today: date) -> tuple[date, date]:
+    def month_start(offset):
+        year, month = divmod(today.year * 12 + today.month - 1 + offset, 12)
+        return date(year, month + 1, 1)
+
+    return month_start(-2), month_start(3) - timedelta(days=1)
 
 
 def parse_dates(values):

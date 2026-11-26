@@ -1,4 +1,5 @@
 {
+  "require_valuation_date": true,
   "min_development_rows": 500,
   "min_benchmark_rows": 100,
   "min_category_rows": 30,

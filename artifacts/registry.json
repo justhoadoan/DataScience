@@ -30,6 +30,40 @@
       "reasons": [],
       "baseline_improvement_pct": 40.093486138515,
       "champion_improvement_pct": 0.9514441039965127
+    },
+    {
+      "candidate": "9dd8a8c5b69bea8b",
+      "previous_champion": "ec9a7bf02b42ae3b",
+      "evaluated_at": "2026-11-25T16:37:11.830104+00:00",
+      "promoted": false,
+      "reasons": [
+        "Candidate lacks the required valuation date predictor for both categories",
+        "Candidate does not improve champion enough"
+      ],
+      "baseline_improvement_pct": 39.34269823825333,
+      "champion_improvement_pct": -1.8533067872439135
+    },
+    {
+      "candidate": "04b6187fec447a3d",
+      "previous_champion": "ec9a7bf02b42ae3b",
+      "evaluated_at": "2026-11-25T16:39:06.522369+00:00",
+      "promoted": false,
+      "reasons": [
+        "Candidate lacks the required valuation date predictor for both categories"
+      ],
+      "baseline_improvement_pct": 41.798822900795415,
+      "champion_improvement_pct": 2.1269831370350656
+    },
+    {
+      "candidate": "82ab00211a0d728e",
+      "previous_champion": "ec9a7bf02b42ae3b",
+      "evaluated_at": "2026-11-26T12:01:19.097795+00:00",
+      "promoted": false,
+      "reasons": [
+        "Candidate lacks the required valuation date predictor for both categories"
+      ],
+      "baseline_improvement_pct": 42.214119233876126,
+      "champion_improvement_pct": 2.14545884150672
     }
   ]
 }

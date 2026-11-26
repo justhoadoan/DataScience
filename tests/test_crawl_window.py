@@ -109,6 +109,18 @@ class ArchivedPriceTests(TestCase):
 
 
 class Phongtro123Tests(TestCase):
+    def test_legacy_listing_url_uses_the_card_id(self):
+        from bs4 import BeautifulSoup
+
+        from hanoi_rentals.ingestion.phongtro123 import listing
+
+        card = BeautifulSoup(
+            '<li><h3><a href="/tinh-thanh/ha-noi/cho-thue-phong.html">Phòng trọ</a></h3>'
+            '<button data-post-id="271992"></button></li>',
+            "lxml",
+        ).li
+        self.assertEqual(listing(card, "nha_tro")["listing_id"], "271992")
+
     def test_crawl_from_selected_page_replays_without_duplicate_observations(self):
         import contextlib
         import io

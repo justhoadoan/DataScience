@@ -23,6 +23,7 @@ export function useEstimate(schema: Schema | null) {
     area: "50",
     bedrooms: "",
     furnishing: "Unknown",
+    valuation_date: "",
   });
   const [estimate, setEstimate] = useState<Estimate | null>(null);
   const [submitted, setSubmitted] = useState<Draft | null>(null);
@@ -35,6 +36,11 @@ export function useEstimate(schema: Schema | null) {
   const maximum = maxBedrooms(draft, schema);
   const invalidLayout =
     draft.bedrooms !== "" && Number(draft.bedrooms) > maximum;
+  const valuationDates = schema?.valuation_date?.supported_categories?.includes(
+    draft.category,
+  )
+    ? schema.valuation_date
+    : undefined;
 
   function update<K extends keyof Draft>(key: K, value: Draft[K]) {
     setDraft((current) => ({ ...current, [key]: value }));
@@ -62,6 +68,13 @@ export function useEstimate(schema: Schema | null) {
         invalidLayout)
     )
       next.bedrooms = `Diện tích này hỗ trợ tối đa ${maximum} phòng ngủ riêng. Chọn 0 nếu là studio.`;
+    if (
+      valuationDates &&
+      draft.valuation_date &&
+      (draft.valuation_date < valuationDates.min ||
+        draft.valuation_date > valuationDates.max)
+    )
+      next.valuation_date = "Ngày định giá nằm ngoài khoảng cho phép.";
     setErrors(next);
     if (Object.keys(next).length) {
       const key = Object.keys(next)[0];
@@ -87,6 +100,9 @@ export function useEstimate(schema: Schema | null) {
           area_m2: Number(sent.area),
           bedrooms: sent.bedrooms === "" ? null : Number(sent.bedrooms),
           furnishing: sent.furnishing,
+          valuation_date: valuationDates
+            ? sent.valuation_date || undefined
+            : undefined,
         }),
       });
       const body = await response.json();
@@ -128,5 +144,6 @@ export function useEstimate(schema: Schema | null) {
     stale,
     maximum,
     invalidLayout,
+    valuationDates,
   };
 }

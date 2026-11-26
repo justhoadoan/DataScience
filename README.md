@@ -18,8 +18,7 @@ A rental-price estimation app for Hanoi, built with FastAPI and React.
 | `reports/` | Generated reports and figures. |
 | `scripts/` | Local startup and workflow utilities. |
 | `config/` | Model promotion settings. |
-| `deploy/` | Production containers, reverse proxy and deployment scripts. |
-| `.github/workflows/` | Build, monthly pipeline and deployment automation. |
+| `.github/workflows/` | Scheduled data collection and model evaluation. |
 | `docs/` | Team documentation and plans. |
 
 The command-line entry point is `src/hanoi_rentals/cli.py`. Shared repository paths are defined in `src/hanoi_rentals/paths.py`.

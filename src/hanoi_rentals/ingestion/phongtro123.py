@@ -64,11 +64,16 @@ def listing(card, category):
     link = card.select_one("h3 a[href]")
     url = urljoin(BASE, link["href"]) if link else ""
     target = urlsplit(url)
-    identity = LISTING_ID.search(target.path)
+    url_id = LISTING_ID.search(target.path)
+    save_button = card.select_one("button[data-post-id]")
+    card_id = save_button["data-post-id"] if save_button else ""
+    identity = url_id[1] if url_id else card_id
     if (
-        not identity
+        not re.fullmatch(r"\d+", identity)
         or target.netloc != urlsplit(BASE).netloc
         or target.scheme != "https"
+        or not target.path.endswith(".html")
+        or (card_id and card_id != identity)
     ):
         raise ValueError("Phongtro123 listing card has no valid listing URL.")
     script = card.select_one('script[type="application/ld+json"]')
@@ -91,7 +96,7 @@ def listing(card, category):
     posted, date_label = displayed_date(card)
     description = card.select_one("p.line-clamp-2")
     return {
-        "listing_id": identity[1],
+        "listing_id": identity,
         "category": category,
         "url": url,
         "title": link.get_text(" ", strip=True),

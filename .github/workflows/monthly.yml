@@ -27,9 +27,6 @@ jobs:
       contents: write
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    outputs:
-      promoted: ${{ steps.decision.outputs.promoted }}
-      state_tag: ${{ steps.decision.outputs.state_tag }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
@@ -50,29 +47,18 @@ jobs:
         env:
           SINCE: ${{ steps.window.outputs.since }}
           UNTIL: ${{ steps.window.outputs.until }}
-        run: python -m hanoi_rentals.cli refresh --since "$SINCE" --until "$UNTIL" --max-pages 120
-      - name: Record deployment decision
-        id: decision
-        run: |
-          python scripts/workflow_summary.py
-          printf 'state_tag=rental-state-%s-%s\n' "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" >> "$GITHUB_OUTPUT"
+        run: python -m hanoi_rentals.cli refresh --since "$SINCE" --until "$UNTIL"
+      - name: Record model evaluation
+        run: python scripts/workflow_summary.py
+      - name: Evaluate the date-feature candidate without exposing December holdout
+        run: python -m hanoi_rentals.cli train-temporal
+      - name: Score the reserved month only after it has ended
+        run: python -m hanoi_rentals.cli evaluate-temporal-holdout
       - name: Preserve updated state even when the candidate is rejected
-        env:
-          STATE_TAG: ${{ steps.decision.outputs.state_tag }}
-        run: python scripts/github_state.py save --tag "$STATE_TAG"
+        run: python scripts/github_state.py save --tag "rental-state-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: monthly-evaluation-${{ github.run_id }}
           path: reports/
           retention-days: 90
-  publish:
-    needs: evaluate
-    if: needs.evaluate.outputs.promoted == 'true' && vars.ENABLE_IMAGE_PUBLISH == 'true'
-    uses: ./.github/workflows/deploy.yml
-    permissions:
-      contents: read
-      packages: write
-    with:
-      state_tag: ${{ needs.evaluate.outputs.state_tag }}
-    secrets: inherit

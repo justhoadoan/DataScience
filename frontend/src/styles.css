@@ -309,7 +309,8 @@ legend {
   align-items: center;
 }
 .select-wrap select,
-.number-wrap input {
+.number-wrap input,
+input[type="date"] {
   width: 100%;
   min-width: 0;
   height: 44px;
