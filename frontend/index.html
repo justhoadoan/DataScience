@@ -1,14 +1,30 @@
 <!doctype html>
-<html lang="vi">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#174e43" />
+    <script>
+      (() => {
+        let theme = "system";
+        try {
+          theme = localStorage.getItem("hanoirent-theme") || "system";
+        } catch {}
+        const resolved =
+          theme === "dark" ||
+          (theme !== "light" &&
+            matchMedia("(prefers-color-scheme: dark)").matches)
+            ? "dark"
+            : "light";
+        document.documentElement.dataset.theme = resolved;
+        document.documentElement.style.colorScheme = resolved;
+      })();
+    </script>
     <meta
       name="description"
-      content="Ước lượng giá chào thuê căn hộ và phòng trọ tại Hà Nội bằng dữ liệu tin đăng. Hiểu mức giá tham khảo trước khi thuê."
+      content="Explore Hanoi's rental market and estimate apartment and room asking rents using checked listing data."
     />
-    <title>Hanoi Rent Insight — Hiểu giá trước khi thuê</title>
+    <title>Hanoi Rent Insight — Rental estimates & market data</title>
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23174e43'/%3E%3Cpath d='M10 27V17l10-8 10 8v10h-7v-8h-6v8z' fill='%23e5f4c8'/%3E%3C/svg%3E"

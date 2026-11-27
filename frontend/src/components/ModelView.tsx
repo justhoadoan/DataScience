@@ -5,102 +5,123 @@ import { money, count, fullDate } from "../format";
 export default function ModelView({ model }: { model: Model | null }) {
   return (
     <section className="inner-page">
-      <h1>Về mô hình</h1>
+      <h1>About the model</h1>
       <p className="page-lead">
-        Mô hình học từ giá chào thuê. Kết quả hỗ trợ tìm hiểu mức giá, cần được
-        cân nhắc cùng việc xem căn thực tế.
+        This model learns from advertised rents. Use its estimates as context
+        alongside an in-person viewing.
       </p>
-      {model?.preview_only && <p className="stale-notice" role="status">
-        Bản thử nghiệm có ngày định giá. Kết quả kiểm định theo thời gian dùng để phát triển mô hình;
-        tập đánh giá tháng 12/2026 vẫn được giữ riêng.
-      </p>}
+      {model?.preview_only && (
+        <p className="stale-notice" role="status">
+          Preview model with valuation dates. Chronological results are used for
+          model development with data through November 2026; they are not an
+          independent future evaluation.
+        </p>
+      )}
       <div className="model-stats">
         <article>
-          <span>{model?.preview_only ? "Sai số kiểm định theo thời gian" : "Sai số trung bình trên benchmark"}</span>
+          <span>
+            {model?.preview_only
+              ? "Chronological validation error"
+              : "Average benchmark error"}
+          </span>
           <strong>
             {model ? money(model.benchmark.mae_vnd) : "—"}
-            <small> triệu đ/tháng</small>
+            <small> million VND / month</small>
           </strong>
           <p>
-            Đơn vị gốc, đo trên {model?.internal_test_n || "—"} {model?.preview_only ? "lần quan sát kiểm định." : "tin cố định."}
+            Measured in the original currency across{" "}
+            {model?.internal_test_n || "—"}{" "}
+            {model?.preview_only
+              ? "validation observations."
+              : "fixed benchmark listings."}
           </p>
         </article>
         <article>
-          <span>Dữ liệu dùng để huấn luyện</span>
+          <span>Training observations</span>
           <strong>
             {model ? count(model.development_n) : "—"}
-            <small> tin</small>
+            <small> listings</small>
           </strong>
           <p>
-            Tin trong benchmark và các nhóm trùng liên quan được tách khỏi huấn
-            luyện.
+            Benchmark listings and their related duplicate groups are excluded
+            from training.
           </p>
         </article>
         <article>
-          <span>Phiên bản đang phục vụ</span>
+          <span>Serving version</span>
           <strong className="version-text">
             {model?.version.slice(0, 8) || "—"}
           </strong>
-          <p>Đánh giá ngày {model ? fullDate(model.evaluated_at) : "—"}.</p>
+          <p>Evaluated on {model ? fullDate(model.evaluated_at) : "—"}.</p>
         </article>
       </div>
       <div className="model-explanation">
         <div>
-          <h2>Phòng ngủ riêng khác số giường</h2>
+          <h2>Bedrooms are not beds</h2>
           <p>
-            Studio hoặc phòng khép kín không ngăn phòng ngủ được nhập là 0.
-            “Chưa rõ” là dữ liệu thiếu, không được thay bằng 0. Với phòng trọ,
-            số phòng ngủ chỉ được dùng khi dữ liệu đủ độ phủ và phiên bản mô
-            hình chọn trường này. Kết quả công khai các thông tin thực sự được
-            dùng.
+            Enter 0 for a studio with no separate bedroom. An unspecified count
+            stays missing. For rooms, the bedroom count is only used when
+            coverage is sufficient and the model includes that feature. Each
+            result lists the features it actually uses.
           </p>
           {model?.behavior && (
             <p className="behavior-note">
-              {count(model.behavior.checked_rows)} tổ hợp kiểm tra ·{" "}
-              {model.behavior.violations} vi phạm tăng diện tích/phòng ngủ làm
-              giảm giá.
+              {count(model.behavior.checked_rows)} combinations checked ·{" "}
+              {model.behavior.violations} violations where increasing area or
+              bedrooms lowers the prediction.
             </p>
           )}
-          <h2>Thông tin nào ảnh hưởng giá?</h2>
+          <h2>Which details affect the estimate?</h2>
           <p>
-            Loại căn, quận/huyện và diện tích tạo thành thông tin cơ bản. Phòng
-            ngủ và nội thất được dùng khi phiên bản mô hình có chọn các trường
-            này.
+            Property type, district and area form the core inputs. Bedrooms and
+            furnishing are used when included in the model's feature set.
           </p>
-          {model?.feature_schema.includes("valuation_date") && <p>
-            Ngày định giá được hệ thống tự lấy theo giờ Việt Nam. Mô hình dùng đặc trưng thời gian
-            đã học từ ngày quan sát giá; thêm ngày không đảm bảo giá luôn tăng theo thời gian.
-          </p>}
-          <h2>Mô hình mới được chọn thế nào?</h2>
+          {model?.feature_schema.includes("valuation_date") && (
+            <p>
+              The valuation date defaults to today in Hanoi. You can choose
+              within two calendar months of the current month. Time features are
+              learned from observed prices; adding a date does not mean rent
+              always increases over time.
+            </p>
+          )}
+          {model?.feature_schema.includes("ward_key") && (
+            <p>
+              This preview also uses ward, development and bathroom counts.
+              Leave uncertain details unspecified; they are handled using the
+              model's learned missing-value treatment.
+            </p>
+          )}
+          <h2>How are new models selected?</h2>
           <p>
-            Luồng định kỳ kiểm tra dữ liệu, huấn luyện các ứng viên và so sánh
-            sai số tổng cùng sai số từng loại căn. Phiên bản mới chỉ thay phiên
-            bản đang phục vụ khi đạt các điều kiện đã đặt trước.
+            The regular pipeline checks the data, trains candidates and compares
+            overall and per-category errors. A candidate replaces the serving
+            model only when it meets the predefined criteria.
           </p>
-          <h2>Điều mô hình chưa biết</h2>
+          <h2>What the model cannot see</h2>
           <p>
-            Vị trí chính xác, tình trạng căn, ánh sáng, tiện ích, phí dịch vụ và
-            khả năng thương lượng có thể tạo khác biệt đáng kể. Dữ liệu không
-            bao gồm nhà riêng hoặc giá bán.
+            Exact location, condition, natural light, amenities, service charges
+            and negotiation can make a substantial difference. The data does not
+            cover detached houses or sale prices.
           </p>
         </div>
         <aside>
           <CircleHelp size={25} />
-          <h3>Sai số được hiểu thế nào?</h3>
+          <h3>Understanding the error</h3>
           <p>
-            MAE là độ lệch tuyệt đối trung bình giữa giá dự đoán và giá chào
-            trong tập kiểm tra. Sai số của từng căn có thể lớn hơn con số này.
+            MAE is the average absolute difference between predicted and
+            advertised rents in validation. The error for an individual property
+            can be larger.
           </p>
           <p>
             {model?.preview_only
-              ? "Các lần kiểm định huấn luyện bằng quan sát cũ hơn và tách nhóm tin trùng. Chưa có kết quả trên tập tương lai tháng 12."
-              : "Benchmark được tái dùng để kiểm tra hồi quy; kết quả chưa chứng minh độ chính xác cho một đợt tin mới trong tương lai."}
+              ? "Chronological folds train on earlier observations and separate duplicate groups. November has already been used during development."
+              : "The benchmark is reused for regression checks. Its results do not establish accuracy for a future batch of listings."}
           </p>
           {model &&
             Object.entries(model.category_metrics).map(([c, s]) => (
               <div className="source-row" key={c}>
-                <span>{c === "nha_tro" ? "Phòng trọ" : "Căn hộ"}</span>
-                <strong>{money(s.mae_vnd)} triệu</strong>
+                <span>{c === "nha_tro" ? "Room" : "Apartment"}</span>
+                <strong>{money(s.mae_vnd)} million VND</strong>
               </div>
             ))}
         </aside>

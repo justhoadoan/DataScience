@@ -14,7 +14,7 @@ from pathlib import Path
 import pandas as pd
 from curl_cffi import requests
 
-from hanoi_rentals.features.dates import HOLDOUT_START, TARGET_END, ZONE
+from hanoi_rentals.features.dates import TARGET_END, ZONE
 
 from .http import FetchError, fetch
 from .normalization import (
@@ -26,7 +26,7 @@ from .observations import coverage_report, record_response
 from .pagination import parse_page
 from .phongtro123 import page_url as phongtro123_page_url
 from .sources import ALONHADAT_PATHS, NHATOT_CATEGORIES
-from .temporal_policy import ensure_protocol
+from .temporal_policy import ensure_protocol, reserved_rows
 
 CATEGORIES = tuple(NHATOT_CATEGORIES)
 DEFAULT_SOURCES = ("nhatot", "phongtro123")
@@ -85,11 +85,7 @@ class Progress:
         frame = SOURCE_ADAPTERS[source](pd.DataFrame(rows))
         before = len(frame)
         frame = drop_implausible(frame)[COMMON_COLUMNS]
-        posted = frame.posted_date.dt.strftime("%Y-%m-%d")
-        observed = frame.scraped_at.astype(str).str[:10]
-        reserved = posted.between(
-            str(HOLDOUT_START), str(TARGET_END)
-        ) | observed.between(str(HOLDOUT_START), str(TARGET_END))
+        reserved = reserved_rows(frame)
         with self.lock:
             new = frame.loc[
                 ~frame.listing_id.isin(self.ids) & ~reserved
@@ -387,14 +383,19 @@ def _crawl(root, since, until, max_pages, resume, sources, categories, start_pag
         date.fromisoformat(str(until)),
     )
     today = datetime.now(ZONE).date()
-    if since > requested_until or since > today or max_pages < 0 or start_page < 1:
+    if (
+        since > requested_until
+        or since > min(today, TARGET_END)
+        or max_pages < 0
+        or start_page < 1
+    ):
         raise ValueError(
             "Invalid crawl window or page limit (0 means no artificial page cap)."
         )
     categories = list(dict.fromkeys(categories or CATEGORIES))
     if not set(categories).issubset(CATEGORIES):
         raise ValueError("Unknown crawl category.")
-    until = min(requested_until, today)
+    until = min(requested_until, today, TARGET_END)
     if resume:
         if not re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{6}\d{6}", resume):
             raise ValueError("Use the run_id from a new crawler checkpoint to resume.")
@@ -415,7 +416,7 @@ def _crawl(root, since, until, max_pages, resume, sources, categories, start_pag
             raise ValueError(
                 "Raw responses for this run are missing; restore them or start a fresh run."
             )
-        until = date.fromisoformat(config["until"])
+        until = min(date.fromisoformat(config["until"]), TARGET_END)
         run_id = resume
     else:
         sources = list(dict.fromkeys(sources or DEFAULT_SOURCES))
@@ -474,7 +475,7 @@ def _crawl(root, since, until, max_pages, resume, sources, categories, start_pag
         "collected_at": datetime.now(ZONE).isoformat(),
         "mode": "resume" if resume else "fresh",
         "status": "complete" if exhausted else "partial",
-        "future_collection_pending": requested_until > today,
+        "future_collection_pending": min(requested_until, TARGET_END) > today,
         "previous_rows": progress.previous_rows,
         "added_rows": sum(progress.added.values()),
         "total_rows": len(progress.ids),

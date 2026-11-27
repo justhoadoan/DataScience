@@ -1,46 +1,45 @@
-"""Persist the reservation before future data arrive; never silently renew it."""
+"""Version the collection window and the retrospective temporal evaluation."""
 
 import json
 from datetime import datetime
 from pathlib import Path
 
-from hanoi_rentals.features.dates import (
-    EPOCH,
-    HOLDOUT_START,
-    TARGET_END,
-    ZONE,
-    today_hanoi,
-)
+import pandas as pd
+
+from hanoi_rentals.features.dates import EPOCH, TARGET_END, ZONE
 
 
 def ensure_protocol(root):
     path = Path(root) / "data/benchmark/temporal_protocol.json"
-    if path.exists():
-        return json.loads(path.read_text())
+    previous = json.loads(path.read_text()) if path.exists() else None
+    if (
+        previous
+        and previous.get("version") == 2
+        and previous.get("target_until") == str(TARGET_END)
+    ):
+        return previous
     protocol = {
-        "version": 1,
-        "reserved_at": datetime.now(ZONE).isoformat(),
+        "version": 2,
+        "updated_at": datetime.now(ZONE).isoformat(),
         "target_since": str(EPOCH),
         "target_until": str(TARGET_END),
-        "holdout_since": str(HOLDOUT_START),
-        "holdout_until": str(TARGET_END),
-        "reserved_before_collection_window": today_hanoi() < HOLDOUT_START,
-        "training_rule": "Only evidenced observations before 2026-12-01. Never use December rows for fitting, feature selection or development validation.",
-        "holdout_rule": "Prospective assessment requires reservation before December and exclusion of properties/duplicate groups used in development or the old benchmark.",
-        "status": "reserved_unscored"
-        if today_hanoi() < HOLDOUT_START
-        else "late_reservation_not_untouched",
+        "evaluation_kind": "retrospective_chronological_development",
+        "evaluation_month": "2026-11",
+        "status": "retrospective",
+        "training_rule": "Use evidenced observation dates through 30 November 2026. Each chronological fold fits earlier dates and purges validation property groups.",
+        "assessment_rule": "November has already been used in development. Report its chronological validation errors and category counts.",
     }
+    if previous:
+        protocol["previous_protocol"] = previous
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("x") as handle:
-        json.dump(protocol, handle, ensure_ascii=False, indent=2)
-        handle.write("\n")
+    temporary = path.with_suffix(".json.tmp")
+    temporary.write_text(json.dumps(protocol, ensure_ascii=False, indent=2) + "\n")
+    temporary.replace(path)
     return protocol
 
 
 def reserved_rows(frame):
-    posted = frame.posted_date.astype(str).str[:10]
-    collected = frame.scraped_at.astype(str).str[:10]
-    return posted.between(str(HOLDOUT_START), str(TARGET_END)) | collected.between(
-        str(HOLDOUT_START), str(TARGET_END)
-    )
+    """Exclude postings and collected prices beyond the collection deadline."""
+    posted = pd.to_datetime(frame.posted_date, errors="coerce")
+    collected = pd.to_datetime(frame.scraped_at, errors="coerce")
+    return posted.gt(pd.Timestamp(TARGET_END)) | collected.gt(pd.Timestamp(TARGET_END))

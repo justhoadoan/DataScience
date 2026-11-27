@@ -43,16 +43,18 @@ After local setup, run a small collection and an isolated date-feature experimen
 
 ```bash
 .venv/bin/python -m hanoi_rentals.cli replay-observations
-.venv/bin/python -m hanoi_rentals.cli crawl --since 2025-11-01 --until 2026-12-31 --max-pages 3
+.venv/bin/python -m hanoi_rentals.cli crawl --since 2025-11-01 --until 2026-11-30 --max-pages 3
 .venv/bin/python -m hanoi_rentals.cli train-temporal
 .venv/bin/python -m hanoi_rentals.cli --root .work/temporal-preview serve --port 8001
 ```
 
 Open **http://127.0.0.1:8001** when training reports `preview_ready`. This preview uses its own model registry. The regular app continues to use the approved model.
 
-Use `temporal-coverage` for the collection report. Run `evaluate-temporal-holdout` after December 2026 to evaluate the candidate frozen before December; earlier runs return `pending`.
+Collection targets **1 November 2025 through 30 November 2026**, covering 13 calendar months. Live collection is bounded by today in Hanoi and the project deadline.
 
-The candidate is frozen only when `train-temporal` succeeds before 1 December 2026 (Hanoi time), on the machine that holds the daily observations (`data/processed/observations.sqlite3`). The monthly workflow starts on 1 December and cannot freeze it. The holdout also needs prices observed during December, so daily collection must continue through the month.
+Use `temporal-coverage` for the monthly collection inventory. After `train-temporal`, run `evaluate-temporal` to summarize November chronological validation in `reports/temporal/november_evaluation.json`. Each fold trains on earlier prices and purges validation property groups. November has already been used during development, so its results are retrospective. Before month-end, the report covers the observations available so far. The former `evaluate-temporal-holdout` command calls the same assessment for compatibility.
+
+Run `.venv/bin/python -m hanoi_rentals.cli train-temporal --enriched` to try ward, project and bathroom inputs together with recovered area/bedroom/furnishing values from each observation's own archived text. It compares the dated baseline, recovered inputs alone, and the full enriched model on identical chronological folds. This command exports the enriched trial to the same preview, even if its validation scores are worse; it does not promote it. The preview form reads optional fields and location choices from the trained artifact. Identically named wards in the same district use the most observed source-specific key in the form; training keys remain separate across sources. Missing fields remain unknown, and extraction provenance is not a predictor.
 
 A monthly candidate replaces the champion only if it passes the quality budgets in `config/promotion.json` and its gain over the champion is clear of benchmark noise: the 95% lower bound of a paired bootstrap must be above zero.
 

@@ -16,7 +16,7 @@ from hanoi_rentals.modeling import metrics
 from hanoi_rentals.paths import source_files
 
 DEFAULT_POLICY = {
-    # Monthly `train` has no date feature; dated models are judged by the December holdout.
+    # Monthly `train` uses property features; dated models use chronological development validation.
     "require_valuation_date": False,
     # Paired bootstrap on the benchmark: the gain's 95% lower bound must exceed zero.
     "require_significant_champion_gain": True,

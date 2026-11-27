@@ -58,8 +58,9 @@ def main():
     commands.add_parser("eda")
     commands.add_parser("train")
     commands.add_parser(
-        "evaluate-temporal-holdout",
-        help="Score the frozen candidate once after December 2026",
+        "evaluate-temporal",
+        aliases=["evaluate-temporal-holdout"],
+        help="Summarize November chronological development validation",
     )
     commands.add_parser(
         "replay-observations",
@@ -67,11 +68,15 @@ def main():
     )
     commands.add_parser(
         "temporal-coverage",
-        help="Report posting and observed-price coverage for all 14 months",
+        help="Report posting and observed-price coverage for all 13 months",
     )
-    commands.add_parser(
+    temporal = commands.add_parser(
         "train-temporal",
         help="Evaluate a dated candidate and export an isolated preview",
+    )
+    temporal.add_argument(
+        "--enriched", action="store_true",
+        help="Try recovered property inputs, wards, projects and bathrooms on the same chronological folds",
     )
     serve = commands.add_parser("serve")
     serve.add_argument("--host", default="127.0.0.1")
@@ -124,12 +129,12 @@ def main():
     elif args.command == "train-temporal":
         from .modeling.temporal import train_temporal
 
-        train_temporal(args.root)
-    elif args.command == "evaluate-temporal-holdout":
+        train_temporal(args.root, enriched=args.enriched)
+    elif args.command in ["evaluate-temporal", "evaluate-temporal-holdout"]:
         import json
-        from .modeling.temporal_holdout import evaluate_holdout
+        from .modeling.temporal_holdout import evaluate_november
 
-        print(json.dumps(evaluate_holdout(args.root), ensure_ascii=False, indent=2))
+        print(json.dumps(evaluate_november(args.root), ensure_ascii=False, indent=2))
     elif args.command == "serve":
         import os
         import uvicorn

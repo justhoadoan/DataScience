@@ -13,10 +13,10 @@ export default function LayoutPreview({
         role="img"
         aria-label={
           count === null
-            ? "Bố trí chưa rõ"
+            ? "Layout not specified"
             : count === 0
-              ? "Studio không có phòng ngủ riêng"
-              : `${count} phòng ngủ riêng, sơ đồ khái niệm`
+              ? "Studio with no separate bedroom"
+              : `${count} separate bedrooms, conceptual diagram`
         }
       >
         <rect
@@ -76,19 +76,19 @@ export default function LayoutPreview({
       <div>
         <strong>
           {invalid
-            ? "Bố trí chưa phù hợp"
+            ? "Layout exceeds the area limit"
             : count === null
-              ? "Bố trí chưa rõ"
+              ? "Layout not specified"
               : count === 0
-                ? "Studio · không ngăn phòng ngủ"
-                : `${count} phòng ngủ riêng`}
+                ? "Studio · open plan"
+                : `${count} separate bedroom${count === 1 ? "" : "s"}`}
         </strong>
         <p>
           {count === 0
-            ? "Giường, bếp và WC có thể cùng trong một phòng khép kín."
-            : "Đếm phòng có ngăn riêng để ngủ, không đếm giường hoặc khu bếp."}
+            ? "A bed, kitchen and bathroom can share one self-contained space."
+            : "Count enclosed sleeping rooms, rather than beds or kitchen areas."}
         </p>
-        <small>Minh hoạ khái niệm, không phải mặt bằng thực.</small>
+        <small>Conceptual diagram, not an actual floor plan.</small>
       </div>
     </div>
   );

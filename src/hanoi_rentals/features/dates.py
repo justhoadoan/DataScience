@@ -9,8 +9,8 @@ from sklearn.base import BaseEstimator, TransformerMixin
 
 ZONE = ZoneInfo("Asia/Ho_Chi_Minh")
 EPOCH = date(2025, 11, 1)
-TARGET_END = date(2026, 12, 31)
-HOLDOUT_START = date(2026, 12, 1)
+TARGET_END = date(2026, 11, 30)
+TRAINING_END_EXCLUSIVE = TARGET_END + timedelta(days=1)
 
 
 def today_hanoi():

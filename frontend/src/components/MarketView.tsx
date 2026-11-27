@@ -17,33 +17,34 @@ export default function MarketView({
     .sort((a, b) => b.n - a.n);
   return (
     <section className="inner-page">
-      <h1>Thị trường thuê</h1>
+      <h1>Market overview</h1>
       <p className="page-lead">
-        Giá chào trong mẫu tin đã qua kiểm tra. Số liệu phản ánh cơ cấu nguồn
-        thu thập và chưa đại diện cho toàn Hà Nội.
+        Explore asking rents from checked listings. This sample reflects the
+        sources collected and does not represent all of Hanoi.
       </p>
       <div className="segmented">
         {(["can_ho_chung_cu", "nha_tro"] as const).map((c) => (
           <button
             key={c}
             className={marketCategory === c ? "selected" : ""}
+            aria-pressed={marketCategory === c}
             onClick={() => setMarketCategory(c)}
           >
-            {c === "can_ho_chung_cu" ? "Căn hộ / chung cư" : "Phòng trọ"}
+            {c === "can_ho_chung_cu" ? "Apartment" : "Room"}
           </button>
         ))}
       </div>
       <div className="market-layout">
         <div className="market-table">
           <div className="table-heading">
-            <h2>Giá chào theo khu vực</h2>
-            <span>triệu đồng / tháng</span>
+            <h2>Asking rents by district</h2>
+            <span>million VND / month</span>
           </div>
           <div className="district-grid table-head">
-            <span>Quận / huyện</span>
-            <span>Trung vị</span>
-            <span>50% tin ở giữa</span>
-            <span>Số tin</span>
+            <span>District</span>
+            <span>Median</span>
+            <span>Middle 50%</span>
+            <span>Listings</span>
           </div>
           {districts.map((d) => (
             <div className="district-grid" key={d.district}>
@@ -57,34 +58,42 @@ export default function MarketView({
           ))}
           {!districts.length && (
             <p className="table-empty">
-              {loadError ? "Chưa tải được dữ liệu." : "Đang tải dữ liệu…"}
+              {loadError
+                ? "Data could not be loaded. Use Try again above."
+                : "Loading market data…"}
             </p>
           )}
           <p className="table-note">
-            Chỉ hiển thị nhóm có từ 10 tin. Nhóm dưới 30 tin chỉ mang tính khám
-            phá; khác biệt diện tích và nội thất chưa được kiểm soát.
+            Only groups with at least 10 listings are shown. Groups below 30 are
+            exploratory; area and furnishing differences are not controlled.
           </p>
         </div>
         <aside className="market-aside">
           <Database size={26} />
-          <h3>Đọc số liệu đúng cách</h3>
+          <h3>Reading the market</h3>
           <p>
-            Trung vị là mức nằm giữa mẫu tin, không phải giá chuẩn cho mọi căn
-            trong quận.
+            The median is the middle asking rent in the sample, not a standard
+            price for every property in a district.
           </p>
           <div className="aside-stat">
             <strong>{market ? count(market.eligible_rows) : "—"}</strong>
-            <span>tin trong tập giá</span>
+            <span>listings in the price sample</span>
           </div>
           {market &&
             Object.entries(market.source_counts).map(([s, n]) => (
               <div className="source-row" key={s}>
-                <span>{s === "nhatot" ? "Nhatot" : "Alonhadat"}</span>
+                <span>
+                  {{
+                    nhatot: "Nhatot",
+                    alonhadat: "Alonhadat",
+                    phongtro123: "Phongtro123",
+                  }[s] || s}
+                </span>
                 <strong>{count(n)}</strong>
               </div>
             ))}
           <p className="field-help">
-            Khoảng ngày đăng:{" "}
+            Listing dates:{" "}
             {market
               ? `${fullDate(market.posting_start)} – ${fullDate(market.posting_end)}`
               : "—"}

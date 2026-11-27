@@ -9,6 +9,12 @@ export type Schema = {
     category_max_bedrooms: Record<Category, number>;
   };
   bedrooms_help: string;
+  optional: string[];
+  property_options?: {
+    wards?: { value: string; label: string; district: string }[];
+    projects?: { value: string; label: string; districts: string[] }[];
+    bathrooms?: number[];
+  };
   valuation_date?: {
     today: string;
     min: string;
@@ -97,4 +103,7 @@ export type Draft = {
   bedrooms: string;
   furnishing: string;
   valuation_date: string;
+  ward_key: string;
+  project_id: string;
+  bathrooms: string;
 };

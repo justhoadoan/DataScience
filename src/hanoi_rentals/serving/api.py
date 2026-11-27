@@ -19,12 +19,17 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field, ValidationInfo, field_validator
 
 from hanoi_rentals.analysis.audit import normalize
-from hanoi_rentals.features.bedrooms import LAYOUT_POLICY, layout_error
+from hanoi_rentals.features.bedrooms import (
+    LAYOUT_POLICY,
+    layout_error,
+    maximum_bedrooms,
+)
 from hanoi_rentals.features.dates import ZONE, today_hanoi, valuation_date_limits
+from hanoi_rentals.features.property_inputs import bathroom_value
 from hanoi_rentals.operations.registry import champion_directory, read_json
 
 LOGGER = logging.getLogger(__name__)
-CATEGORY_LABELS = {"can_ho_chung_cu": "Căn hộ / chung cư", "nha_tro": "Phòng trọ"}
+CATEGORY_LABELS = {"can_ho_chung_cu": "Apartment", "nha_tro": "Room"}
 
 
 class PredictionRequest(BaseModel):
@@ -35,6 +40,9 @@ class PredictionRequest(BaseModel):
     bedrooms: int | None = Field(default=None, ge=0, le=6, strict=True)
     furnishing: Literal["Unknown", "Furnished", "Unfurnished"] = "Unknown"
     valuation_date: str | None = Field(default=None, pattern=r"^\d{4}-\d{2}-\d{2}$")
+    ward_key: str = Field(default="Unknown", min_length=1, max_length=240)
+    project_id: str = Field(default="Unknown", min_length=1, max_length=240)
+    bathrooms: int | None = Field(default=None, ge=0, le=10, strict=True)
 
     @field_validator("valuation_date")
     @classmethod
@@ -50,6 +58,9 @@ class PredictionRequest(BaseModel):
             "area_analysis_m2": self.area_m2,
             "bedrooms_analysis": self.bedrooms,
             "furniture_analysis": self.furnishing,
+            "ward_key": self.ward_key,
+            "project_id": self.project_id,
+            "bathroom_count": bathroom_value(self.bathrooms),
         }
 
     @field_validator("bedrooms")
@@ -58,7 +69,18 @@ class PredictionRequest(BaseModel):
         if value is not None and "category" in info.data and "area_m2" in info.data:
             message = layout_error(info.data["category"], info.data["area_m2"], value)
             if message:
-                raise ValueError(message)
+                maximum = maximum_bedrooms(info.data["category"], info.data["area_m2"])
+                raise ValueError(
+                    f"For {info.data['area_m2']:g} m², this app supports up to {maximum} separate bedrooms. "
+                    "Choose 0 for a studio, or leave blank if unsure."
+                )
+        return value
+
+    @field_validator("bathrooms")
+    @classmethod
+    def bathroom_count(cls, value, info: ValidationInfo):
+        if value is not None and info.data.get("category") == "nha_tro" and value > 5:
+            raise ValueError("Rooms support at most 5 bathrooms / WC.")
         return value
 
 
@@ -146,7 +168,7 @@ class ModelService:
                 detail=[
                     {
                         "loc": ["body", "valuation_date"],
-                        "msg": f"Chọn ngày từ {first:%d/%m/%Y} đến {last:%d/%m/%Y} (giờ Hà Nội).",
+                        "msg": f"Choose a date from {first:%d %b %Y} to {last:%d %b %Y} (Hanoi time).",
                     }
                 ],
             )
@@ -158,30 +180,75 @@ class ModelService:
                 detail=[
                     {
                         "loc": ["body", "district"],
-                        "msg": "Quận/huyện chưa có đủ dữ liệu. Vui lòng chọn từ danh sách.",
+                        "msg": "This district has insufficient data. Choose a district from the list.",
                     }
                 ],
             )
         payload = payload.model_copy(update={"district": district})
+        used = self.model.features_for_category(payload.category)
+        options = self.metadata.get("property_options", {})
+        for field, feature, selected, choices in [
+            (
+                "ward_key",
+                "ward_key",
+                payload.ward_key,
+                [
+                    r["value"]
+                    for r in options.get("wards", [])
+                    if r["district"] == district
+                ],
+            ),
+            (
+                "project_id",
+                "project_id",
+                payload.project_id,
+                [
+                    r["value"]
+                    for r in options.get("projects", [])
+                    if district in r["districts"]
+                ],
+            ),
+        ]:
+            if selected != "Unknown" and (
+                feature not in used or selected not in choices
+            ):
+                raise HTTPException(
+                    422,
+                    detail=[
+                        {
+                            "loc": ["body", field],
+                            "msg": "Choose an available option for the current model and district.",
+                        }
+                    ],
+                )
+        if payload.bathrooms is not None and "bathroom_count" not in used:
+            raise HTTPException(
+                422,
+                detail=[
+                    {
+                        "loc": ["body", "bathrooms"],
+                        "msg": "The current model does not use bathroom counts.",
+                    }
+                ],
+            )
         inputs = {**payload.estimator_inputs(), "valuation_date": valuation_date}
         result = self.model.predict_details(pd.DataFrame([inputs])).iloc[0].to_dict()
         warnings = []
-        used = self.model.features_for_category(payload.category)
         if "valuation_date" not in used:
-            warnings.append("Phiên bản hiện tại chưa học ảnh hưởng của ngày định giá.")
+            warnings.append("This model does not use valuation dates.")
         elif valuation_date > self.model.date_range_[1]:
             # Tree models cannot extrapolate time: later dates reuse the last learned level.
             warnings.append(
-                f"Ngày định giá sau dữ liệu huấn luyện (đến {self.model.date_range_[1]}); "
-                "mô hình không dự báo xu hướng mà dùng mức giá của ngày cuối cùng đó."
+                f"The valuation date is beyond the training data (through {self.model.date_range_[1]}). "
+                "The model uses the last learned price level; it does not forecast future trends."
             )
         elif valuation_date < self.model.date_range_[0]:
             warnings.append(
-                "Ngày định giá trước thời gian huấn luyện; chưa có bằng chứng về độ chính xác ở thời điểm này."
+                "The valuation date predates the training data. Accuracy for this period has not been established."
             )
         if self.metadata.get("preview_only"):
             warnings.append(
-                "Bản thử nghiệm theo thời gian, chưa được duyệt thay thế model đang sử dụng."
+                "This is a chronological preview model, not the approved production model."
             )
         support = self.local_evidence(payload)
         if (
@@ -189,16 +256,16 @@ class ModelService:
             and support["nearby_training_n"] < 10
         ):
             warnings.append(
-                f"Chỉ có {support['nearby_training_n']} tin huấn luyện cùng loại/quận và gần diện tích này; chưa đủ để suy ra mức giá đáng tin cho mọi bố trí."
+                f"Only {support['nearby_training_n']} training listings have the same type and district with a similar area. Evidence for different layouts is limited."
             )
         if payload.bedrooms is not None and "bedrooms_analysis" not in used:
             reason = (
-                "vì độ phủ dữ liệu còn thấp"
+                "because data coverage is low"
                 if "bedrooms_analysis" in self.model.features
-                else "trong bộ đặc trưng được chọn của phiên bản này"
+                else "in its selected feature set"
             )
             warnings.append(
-                f"Model của loại căn này chưa dùng số phòng ngủ riêng {reason}. Bố trí đã nhập không được dùng để cộng/trừ giá."
+                f"The model does not use bedroom counts for this property type {reason}. The entered layout will not adjust the predicted rent."
             )
         elif (
             payload.bedrooms is not None
@@ -206,7 +273,7 @@ class ModelService:
             and support["bedroom_training_n"] < 5
         ):
             warnings.append(
-                f"Chỉ có {support['bedroom_training_n']} tin huấn luyện gần diện tích này ghi rõ cùng số phòng ngủ; ảnh hưởng của bố trí còn ít bằng chứng tại khu vực này."
+                f"Only {support['bedroom_training_n']} similar-size training listings have this bedroom count. The local layout effect has limited evidence."
             )
         low, high = self.model.area_range_
         if (
@@ -215,7 +282,7 @@ class ModelService:
             and not low <= payload.area_m2 <= high
         ):
             warnings.append(
-                "Diện tích nằm ngoài khoảng đã thấy khi huấn luyện; dự đoán có thể kém tin cậy."
+                "The area is outside the training range. This estimate may be less reliable."
             )
         similar = next(
             (
@@ -228,20 +295,23 @@ class ModelService:
         )
         if similar is None or similar["n"] < 30:
             warnings.append(
-                "Nhóm loại căn và quận/huyện này có ít hơn 30 tin trong mẫu."
+                "Fewer than 30 listings in the sample have this property type and district."
             )
         if payload.bedrooms is None and "bedrooms_analysis" in used:
             warnings.append(
-                "Chưa có số phòng ngủ; mô hình sử dụng cách xử lý thiếu dữ liệu đã học từ tập huấn luyện."
+                "Bedrooms were not specified. The model uses its learned missing-value treatment."
             )
         stats = self.metadata["category_metrics"][payload.category]
         feature_names = {
-            "category": "Loại căn",
-            "district_analysis": "Quận/huyện",
-            "area_analysis_m2": "Diện tích",
-            "bedrooms_analysis": "Phòng ngủ riêng",
-            "furniture_analysis": "Nội thất",
-            "valuation_date": "Ngày định giá",
+            "category": "Property type",
+            "district_analysis": "District",
+            "area_analysis_m2": "Area",
+            "bedrooms_analysis": "Bedrooms",
+            "furniture_analysis": "Furnishing",
+            "valuation_date": "Valuation date",
+            "ward_key": "Ward / commune",
+            "project_id": "Development",
+            "bathroom_count": "Bathrooms / WC",
         }
         LOGGER.info(
             "prediction model=%s valuation_date=%s date_feature_used=%s",
@@ -264,13 +334,13 @@ class ModelService:
                 "mae_vnd": stats["mae_vnd"],
                 "median_ae_vnd": stats["median_ae_vnd"],
                 "n": stats["n"],
-                "note": "Sai số kiểm định theo thời gian trong phát triển, chưa phải đánh giá tương lai độc lập."
+                "note": "Chronological development error, not an independent future evaluation."
                 if self.metadata.get("preview_only")
-                else "Sai số trên benchmark đã lưu, không phải khoảng tin cậy cho căn này.",
+                else "Error on the saved benchmark, not a confidence interval for this property.",
             },
             "district_sample": similar,
             "support": support,
-            "scope_note": "Ước lượng giá chào thuê theo tháng cho một căn/phòng tại Hà Nội.",
+            "scope_note": "Estimated monthly asking rent for one apartment or room in Hanoi.",
         }
 
 
@@ -313,7 +383,7 @@ def create_app(root=None):
         if value is None:
             raise HTTPException(
                 503,
-                "Model chưa sẵn sàng. Hãy chạy pipeline và kiểm tra deployment gate.",
+                "The estimation service is not ready. Please try again later.",
             )
         return value
 
@@ -333,9 +403,19 @@ def create_app(root=None):
             ],
             "districts": value.metadata["supported_districts"],
             "required": ["category", "district", "area_m2"],
-            "optional": ["bedrooms", "furnishing", "valuation_date"],
+            "optional": ["bedrooms", "furnishing", "valuation_date"]
+            + [
+                field
+                for field, feature in [
+                    ("ward_key", "ward_key"),
+                    ("project_id", "project_id"),
+                    ("bathrooms", "bathroom_count"),
+                ]
+                if feature in value.model.features
+            ],
+            "property_options": value.metadata.get("property_options", {}),
             "layout_policy": LAYOUT_POLICY,
-            "bedrooms_help": "Đếm phòng ngủ riêng có ngăn phòng. Studio/phòng khép kín có giường, bếp và WC nhưng không ngăn phòng ngủ là 0; chưa rõ thì để trống.",
+            "bedrooms_help": "Count enclosed sleeping rooms. Enter 0 for a studio with no separate bedroom, or leave blank if unsure.",
             "area_unit": "m²",
             "currency": "VND/month",
             "valuation_date": {
@@ -351,9 +431,9 @@ def create_app(root=None):
                 ],
             },
             "furnishing": [
-                {"value": "Unknown", "label": "Chưa rõ"},
-                {"value": "Furnished", "label": "Đầy đủ"},
-                {"value": "Unfurnished", "label": "Nhà trống"},
+                {"value": "Unknown", "label": "Not specified"},
+                {"value": "Furnished", "label": "Furnished"},
+                {"value": "Unfurnished", "label": "Unfurnished"},
             ],
         }
 

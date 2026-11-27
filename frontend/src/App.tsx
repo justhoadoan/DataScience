@@ -6,14 +6,19 @@ import {
   ArrowUpRight,
   RefreshCw,
   MapPin,
+  Sun,
+  Moon,
+  Monitor,
 } from "lucide-react";
 import type { Schema, Model, Market } from "./types";
 import { fullDate } from "./format";
 import MarketView from "./components/MarketView";
 import ModelView from "./components/ModelView";
 import EstimatorWorkspace from "./components/EstimatorWorkspace";
+import { useTheme } from "./useTheme";
 
 export default function App() {
+  const { theme, setTheme } = useTheme();
   const [view, setView] = useState<"estimate" | "market" | "model">("estimate");
   const [schema, setSchema] = useState<Schema | null>(null);
   const [model, setModel] = useState<Model | null>(null);
@@ -26,14 +31,14 @@ export default function App() {
         ["/api/schema", "/api/model", "/api/market"].map((url) => fetch(url)),
       );
       if (responses.some((r) => !r.ok))
-        throw new Error("Dịch vụ chưa sẵn sàng. Vui lòng thử lại.");
+        throw new Error("The service is unavailable. Please try again.");
       const [s, m, k] = await Promise.all(responses.map((r) => r.json()));
       setSchema(s);
       setModel(m);
       setMarket(k);
     } catch (e) {
       setLoadError(
-        e instanceof Error ? e.message : "Không thể kết nối dịch vụ.",
+        e instanceof Error ? e.message : "Unable to connect to the service.",
       );
     }
   }
@@ -43,13 +48,13 @@ export default function App() {
   return (
     <div className="app-shell">
       <a className="skip-link" href="#main">
-        Đến nội dung chính
+        Skip to main content
       </a>
       <aside className="sidebar">
         <button
           className="brand"
           onClick={() => setView("estimate")}
-          aria-label="Hanoi Rent, trang chủ"
+          aria-label="Hanoi Rent home"
         >
           <House size={22} />
           <span>
@@ -58,14 +63,14 @@ export default function App() {
         </button>
         <div className="workspace-name">
           <MapPin size={14} />
-          Thị trường thuê · Hà Nội
+          Hanoi rental market
         </div>
-        <nav aria-label="Điều hướng chính">
+        <nav aria-label="Main navigation">
           {(
             [
-              ["estimate", "Ước tính giá", House],
-              ["market", "Thị trường", ChartNoAxesCombined],
-              ["model", "Về mô hình", CircleHelp],
+              ["estimate", "Rent estimator", House],
+              ["market", "Market overview", ChartNoAxesCombined],
+              ["model", "About the model", CircleHelp],
             ] as const
           ).map(([key, label, Icon]) => (
             <button
@@ -80,28 +85,63 @@ export default function App() {
           ))}
         </nav>
         <div className="sidebar-foot">
-          <span>Dữ liệu đến</span>
-          <strong>{market ? fullDate(market.posting_end) : "Đang tải…"}</strong>
-          <p>Giá chào thuê từ Nhatot và Alonhadat.</p>
+          <span>Latest listing date</span>
+          <strong>{market ? fullDate(market.posting_end) : "Loading…"}</strong>
+          <p>
+            Asking rents from{" "}
+            {market
+              ? Object.keys(market.source_counts)
+                  .map(
+                    (s) =>
+                      ({
+                        nhatot: "Nhatot",
+                        alonhadat: "Alonhadat",
+                        phongtro123: "Phongtro123",
+                      })[s] || s,
+                  )
+                  .join(", ")
+              : "rental listings"}
+            .
+          </p>
           <button className="text-link" onClick={() => setView("model")}>
-            Cách đọc kết quả <ArrowUpRight size={14} />
+            How to read your estimate <ArrowUpRight size={14} />
           </button>
         </div>
       </aside>
       <div className="app-content">
         <header className="topbar">
           <span>
-            Hà Nội{" "}
+            Hanoi{" "}
             <span className="breadcrumb">
               /{" "}
               {view === "estimate"
-                ? "Ước tính"
+                ? "Estimator"
                 : view === "market"
-                  ? "Thị trường"
-                  : "Mô hình"}
+                  ? "Market"
+                  : "Model"}
             </span>
           </span>
-          <span className="topbar-scope">Căn hộ & phòng trọ</span>
+          <div className="theme-picker" role="group" aria-label="Appearance">
+            {(
+              [
+                ["light", "Light", Sun],
+                ["dark", "Dark", Moon],
+                ["system", "System", Monitor],
+              ] as const
+            ).map(([value, label, Icon]) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => setTheme(value)}
+                aria-pressed={theme === value}
+                aria-label={`${label} theme`}
+                title={`${label} theme`}
+              >
+                <Icon size={15} />
+                <span>{label}</span>
+              </button>
+            ))}
+          </div>
         </header>
         <main id="main" className="main-canvas">
           {loadError && (
@@ -109,7 +149,7 @@ export default function App() {
               <span>{loadError}</span>
               <button onClick={() => void load()}>
                 <RefreshCw size={15} />
-                Thử lại
+                Try again
               </button>
             </div>
           )}
@@ -127,7 +167,7 @@ export default function App() {
           {view === "model" && <ModelView model={model} />}
           <footer className="page-footer">
             <span>Hanoi Rent Insight</span>
-            <span>Giá chào tham khảo · Không bao gồm nhà riêng</span>
+            <span>Asking rents, for reference · Apartments & rooms only</span>
           </footer>
         </main>
       </div>

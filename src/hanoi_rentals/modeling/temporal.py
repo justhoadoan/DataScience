@@ -1,7 +1,7 @@
 """Evidence-dated experiments with purged chronological validation and a preview bundle.
 
-The old benchmark remains quarantined. December is reserved before collection;
-neither its labels nor its features are loaded by this training path.
+The old benchmark remains quarantined. Chronological comparisons use verified
+price observations through November 2026.
 """
 
 import json
@@ -16,14 +16,15 @@ import pandas as pd
 
 from hanoi_rentals.analysis.audit import CATEGORIES, prepare_analysis, read_reviews
 from hanoi_rentals.features.bedrooms import LAYOUT_POLICY
-from hanoi_rentals.features.enrichment import match_versions
 from hanoi_rentals.features.dates import (
     EPOCH,
-    HOLDOUT_START,
     TARGET_END,
+    TRAINING_END_EXCLUSIVE,
     ZONE,
     today_hanoi,
 )
+from hanoi_rentals.features.enrichment import enrich, match_versions
+from hanoi_rentals.features.property_inputs import bathroom_value, property_options
 from hanoi_rentals.ingestion.observations import coverage_report, load_observations
 from hanoi_rentals.ingestion.temporal_policy import ensure_protocol, reserved_rows
 from hanoi_rentals.modeling.behavior import CONTRACT_VERSION, behavior_probe
@@ -39,9 +40,11 @@ from hanoi_rentals.paths import source_files
 
 def dated_population(root):
     root = Path(root)
-    observations = load_observations(root, before=HOLDOUT_START)
+    observations = load_observations(root, before=TRAINING_END_EXCLUSIVE)
     if observations.empty:
-        return observations, {"reason": "No evidenced pre-December observations"}
+        return observations, {
+            "reason": "No evidenced observations within the collection window"
+        }
     observations = observations.loc[
         observations.date_origin.isin(
             ["live_collection", "verified_manifest_day", "verified_archive_capture"]
@@ -51,7 +54,7 @@ def dated_population(root):
         )
         & (
             observations.posted_date.astype(str).between(
-                str(EPOCH), str(HOLDOUT_START), inclusive="left"
+                str(EPOCH), str(TRAINING_END_EXCLUSIVE), inclusive="left"
             )
             | (
                 observations.date_origin.eq("verified_archive_capture")
@@ -158,6 +161,8 @@ def chronological_folds(data):
 
 def estimator(kind):
     features = FEATURE_SETS["C"] + ([] if kind == "no_date" else ["valuation_date"])
+    if kind == "enriched":
+        features += ["ward_key", "project_id", "bathroom_count"]
     return RentalPriceEstimator(
         family="monotone_single",
         target="log",
@@ -167,23 +172,42 @@ def estimator(kind):
     )
 
 
-def train_temporal(root):
+def variant_frame(data, kind):
+    if kind not in ("recovered", "enriched"):
+        return data
+    return data.assign(
+        area_analysis_m2=data.recovered_area,
+        bedrooms_analysis=data.recovered_bedrooms,
+        furniture_analysis=data.recovered_furnishing,
+        bathroom_count=data.toilets_analysis.map(bathroom_value),
+    )
+
+
+def train_temporal(root, *, enriched=False):
     root = Path(root).resolve()
     report = root / "reports/temporal"
     report.mkdir(parents=True, exist_ok=True)
     coverage_report(root)
     protocol = ensure_protocol(root)
     data, audit = dated_population(root)
+    if enriched and not data.empty:
+        # These descriptions/attributes belong to the same evidenced observation,
+        # unlike joining a newer live page onto an older price label.
+        data = enrich(data)
     base = {
         "created_at": datetime.now(ZONE).isoformat(),
         "audit": audit,
         "target_since": str(EPOCH),
         "target_until": str(TARGET_END),
-        "reserved_holdout": [str(HOLDOUT_START), str(TARGET_END)],
-        "holdout_status": protocol["status"],
+        "evaluation_month": protocol["evaluation_month"],
+        "protocol_status": protocol["status"],
         "promoted": False,
         "evaluation_kind": "retrospective_chronological_development",
-        "selection_rule": "Dated variants only; prefer elapsed days within 1% of the best MAE. No-date is diagnostic.",
+        "selection_rule": (
+            "Explicit enriched trial requested: elapsed days, recovered inputs, ward, project and bathrooms. Baselines use identical folds; no automatic production promotion."
+            if enriched
+            else "Dated variants only; prefer elapsed days within 1% of the best MAE. No-date is diagnostic."
+        ),
     }
     folds = list(chronological_folds(data)) if not data.empty else []
     if not folds:
@@ -215,8 +239,12 @@ def train_temporal(root):
             ].copy()
             assignment["fold"], assignment["role"] = fold, role
             assignments.append(assignment)
-        for kind in ["no_date", "elapsed", "calendar"]:
-            model = estimator(kind).fit(train, train.price_month_vnd)
+        for kind in ["no_date", "elapsed", "calendar"] + (
+            ["recovered", "enriched"] if enriched else []
+        ):
+            model = estimator(kind).fit(
+                variant_frame(train, kind), train.price_month_vnd
+            )
             pred = valid[
                 [
                     "observation_id",
@@ -228,7 +256,7 @@ def train_temporal(root):
                     "price_month_vnd",
                 ]
             ].copy()
-            pred["prediction_vnd"] = model.predict(valid)
+            pred["prediction_vnd"] = model.predict(variant_frame(valid, kind))
             pred["variant"], pred["fold"] = kind, fold
             records.append(pred)
             print(
@@ -247,12 +275,17 @@ def train_temporal(root):
         for name, group in predictions.groupby("variant")
     }
     selected = (
-        "elapsed"
-        if comparisons["elapsed"]["overall"]["mae_vnd"]
-        <= 1.01 * comparisons["calendar"]["overall"]["mae_vnd"]
-        else "calendar"
+        "enriched"
+        if enriched
+        else (
+            "elapsed"
+            if comparisons["elapsed"]["overall"]["mae_vnd"]
+            <= 1.01 * comparisons["calendar"]["overall"]["mae_vnd"]
+            else "calendar"
+        )
     )
-    model = estimator(selected).fit(data, data.price_month_vnd)
+    training = variant_frame(data, selected)
+    model = estimator(selected).fit(training, data.price_month_vnd)
     behavior = behavior_probe(model)
     if behavior["violations"]:
         raise ValueError("Dated candidate failed the area/bedroom behavior contract.")
@@ -262,7 +295,8 @@ def train_temporal(root):
         for name, path in source_files().items()
     }
     digest = sha256(
-        population_bytes + json.dumps(code, sort_keys=True).encode()
+        population_bytes
+        + json.dumps({"code": code, "variant": selected}, sort_keys=True).encode()
     ).hexdigest()
     version_id = digest[:16]
     # Explicitly isolated preview: this never writes the production champion registry.
@@ -271,7 +305,7 @@ def train_temporal(root):
     destination.mkdir(parents=True, exist_ok=True)
     model_path = destination / "model.joblib"
     joblib.dump(model, model_path, compress=3)
-    profile = market_profile(data)
+    profile = market_profile(training)
     score = comparisons[selected]
     metadata = {
         "version": version_id,
@@ -296,8 +330,16 @@ def train_temporal(root):
             "verified_manifest_day",
             "verified_archive_capture",
         ],
-        "property_feature_contract": "Shared pooled log-target monotone histogram, feature set C; missing numerics use training medians and indicators. Reviewed E6 architecture.",
-        "location_fallback": "District. Ward and project were assessed only in development.",
+        "property_feature_contract": "Pooled log-target monotone histogram; numeric medians/indicators and categorical encoders fit on training only."
+        + (
+            " Recovered area/bedrooms/furnishing plus source-scoped ward, project and categorical bathroom count; provenance is not a price predictor."
+            if enriched
+            else " Feature set C."
+        ),
+        "location_fallback": "District when ward/project are unknown. Unseen ward/project keys use the training encoder's infrequent bucket."
+        if enriched
+        else "District. Ward and project were assessed only in development.",
+        "property_options": property_options(data) if enriched else {},
         "config_sha256": {
             name: digest
             for name, digest in code.items()
@@ -329,6 +371,8 @@ def train_temporal(root):
             benchmark.include_price & benchmark.raw_match_status.eq("exact_version")
         ].copy()
         benchmark["valuation_date"] = benchmark.scraped_at
+        if enriched and len(benchmark):
+            benchmark = variant_frame(enrich(benchmark), selected)
         assessment = {
             "frozen_ids": len(frozen),
             "matched_ids": len(benchmark),
@@ -354,7 +398,7 @@ def train_temporal(root):
         write_json(benchmark_file, assessment)
     write_json(destination / "metadata.json", metadata)
     write_json(destination / "market.json", profile)
-    support = data[
+    support = training[
         [
             "category",
             "district_analysis",
@@ -380,11 +424,9 @@ def train_temporal(root):
         preview / "artifacts/registry.json",
         {"champion": version_id, "history": [], "preview_only": True},
     )
-    if today_hanoi() < HOLDOUT_START:
-        protocol["frozen_candidate"] = version_id
-        protocol["candidate_frozen_at"] = datetime.now(ZONE).isoformat()
-        protocol["candidate_sha256"] = metadata["model_sha256"]
-        write_json(root / "data/benchmark/temporal_protocol.json", protocol)
+    protocol["latest_candidate"] = version_id
+    protocol["candidate_updated_at"] = datetime.now(ZONE).isoformat()
+    write_json(root / "data/benchmark/temporal_protocol.json", protocol)
     if (root / "frontend/dist").exists():
         shutil.copytree(
             root / "frontend/dist", preview / "frontend/dist", dirs_exist_ok=True
@@ -403,16 +445,18 @@ def train_temporal(root):
             ["variant", "valuation_date", "category"]
         ):
             chronological.append(
-                dict(
-                    scope=scope,
-                    variant=kind,
-                    date=day,
-                    category=category,
-                    n=len(g),
-                    mae_vnd=float((g.price_month_vnd - g.prediction_vnd).abs().mean())
+                {
+                    "scope": scope,
+                    "variant": kind,
+                    "date": day,
+                    "category": category,
+                    "n": len(g),
+                    "mae_vnd": float(
+                        (g.price_month_vnd - g.prediction_vnd).abs().mean()
+                    )
                     if len(g) >= 10
                     else None,
-                )
+                }
             )
     pd.DataFrame(chronological).to_csv(
         report / "chronological_by_category.csv", index=False
@@ -442,11 +486,26 @@ def train_temporal(root):
         "date_range": list(model.date_range_),
         "behavior": behavior,
         "preview_root": str(preview),
+        "feature_coverage": {
+            "n": len(data),
+            "ward_known": int(data.ward_key.ne("Unknown").sum()),
+            "project_known": int(data.project_id.ne("Unknown").sum()),
+            "bathrooms_known": int(data.toilets_analysis.notna().sum()),
+            "bedrooms_before": int(data.bedrooms_analysis.notna().sum()),
+            "bedrooms_after": int(data.recovered_bedrooms.notna().sum()),
+            "furnishing_before": int(data.furniture_analysis.ne("Unknown").sum()),
+            "furnishing_after": int(data.recovered_furnishing.ne("Unknown").sum()),
+        }
+        if enriched
+        else {},
         "promotion_blockers": [
-            "December prospective holdout remains reserved and unscored.",
+            "November results are retrospective chronological development evidence.",
             "Chronological development scores are not the frozen production benchmark; no automatic promotion is authorized by these scores.",
         ],
     }
     write_json(report / "evaluation.json", result)
+    from .temporal_holdout import evaluate_november
+
+    evaluate_november(root)
     print(json.dumps(result, ensure_ascii=False, indent=2), flush=True)
     return result

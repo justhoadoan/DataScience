@@ -15,7 +15,7 @@ from urllib.request import urlopen
 
 from bs4 import BeautifulSoup
 
-from hanoi_rentals.features.dates import ZONE, today_hanoi
+from hanoi_rentals.features.dates import TARGET_END, ZONE, today_hanoi
 
 from .crawler import Progress, write_json
 from .observations import coverage_report, record_response
@@ -50,7 +50,9 @@ def retrieve(url):
 
 def captured_day(label, captured):
     """Use a relative time only when its entire rounded interval falls on one Hanoi day."""
-    match = re.fullmatch(r"(\d+)\s+(giây|phút|giờ) trước", str(label).strip(), re.IGNORECASE)
+    match = re.fullmatch(
+        r"(\d+)\s+(giây|phút|giờ) trước", str(label).strip(), re.IGNORECASE
+    )
     if not match:
         return None
     seconds = {"giây": 1, "phút": 60, "giờ": 3600}[match[2].lower()]
@@ -139,7 +141,7 @@ def capture(root, entry):
 def run(root, since, until):
     root = Path(root).resolve()
     start = date.fromisoformat(since)
-    end = min(date.fromisoformat(until), today_hanoi())
+    end = min(date.fromisoformat(until), today_hanoi(), TARGET_END)
     if start > end:
         raise ValueError("Empty historical window")
     report = {

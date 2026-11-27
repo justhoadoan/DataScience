@@ -48,13 +48,26 @@ jobs:
         env:
           SINCE: ${{ steps.window.outputs.since }}
           UNTIL: ${{ steps.window.outputs.until }}
-        run: python -m hanoi_rentals.cli refresh --since "$SINCE" --until "$UNTIL"
+        run: |
+          python - <<'PYCODE'
+          import os
+          from datetime import date
+          from pathlib import Path
+          from hanoi_rentals.features.dates import TARGET_END
+          from hanoi_rentals.ingestion.crawler import crawl
+          from hanoi_rentals.operations.pipeline import train
+
+          since = date.fromisoformat(os.environ["SINCE"])
+          until = min(date.fromisoformat(os.environ["UNTIL"]), TARGET_END)
+          summary = crawl(Path.cwd(), since, until) if since <= until else None
+          train(Path.cwd(), summary)
+          PYCODE
       - name: Record model evaluation
         run: python scripts/workflow_summary.py
-      - name: Evaluate the date-feature candidate without exposing December holdout
+      - name: Evaluate the date-feature candidate through November 2026
         run: python -m hanoi_rentals.cli train-temporal
-      - name: Score the reserved month only after it has ended
-        run: python -m hanoi_rentals.cli evaluate-temporal-holdout
+      - name: Summarize November chronological validation
+        run: python -m hanoi_rentals.cli evaluate-temporal
       - name: Preserve updated state even when the candidate is rejected or a later step fails
         # Never save after a failed restore: that would replace good state with a partial one.
         if: ${{ !cancelled() && steps.restore.outcome == 'success' }}

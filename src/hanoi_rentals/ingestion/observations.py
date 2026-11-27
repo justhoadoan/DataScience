@@ -11,7 +11,6 @@ import pandas as pd
 
 from hanoi_rentals.features.dates import (
     EPOCH,
-    HOLDOUT_START,
     TARGET_END,
     ZONE,
     today_hanoi,
@@ -177,11 +176,17 @@ def replay_archives(root):
             records = [
                 row
                 for row in records
-                if since <= str(row.get("posted_raw", ""))[:10] <= until
+                if since
+                <= str(row.get("posted_raw", ""))[:10]
+                <= min(until, str(TARGET_END))
             ]
             if source == "phongtro123":
                 for row in records:
                     row["scraped_at"] = evidence["price_observed_date"]
+            if evidence and str(evidence.get("price_observed_date") or "") > str(
+                TARGET_END
+            ):
+                continue
             added += record_response(root, path, raw, records, source, evidence)
         except (ValueError, KeyError, TypeError) as exc:
             errors.append({"path": str(path.relative_to(root)), "error": str(exc)})
@@ -271,7 +276,8 @@ def coverage_report(root):
         "target_since": str(EPOCH),
         "target_until": str(TARGET_END),
         "as_of": str(today),
-        "holdout_start": str(HOLDOUT_START),
+        "evaluation_month": "2026-11",
+        "evaluation_kind": "retrospective_chronological_development",
         "observations": len(frame),
         "undated_observations": int(frame.price_observed_date.isna().sum())
         if len(frame)

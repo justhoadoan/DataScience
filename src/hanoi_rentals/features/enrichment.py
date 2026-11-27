@@ -3,6 +3,7 @@
 import numpy as np
 import pandas as pd
 
+from hanoi_rentals.features.dates import TRAINING_END_EXCLUSIVE
 from hanoi_rentals.features.bedrooms import maximum_bedrooms
 from hanoi_rentals.features.reference import WARD_SCHEMES
 from hanoi_rentals.features.title_attributes import (
@@ -19,7 +20,7 @@ from hanoi_rentals.ingestion.observations import load_observations
 
 
 def match_versions(root, frame):
-    obs = load_observations(root, before="2026-12-01")
+    obs = load_observations(root, before=TRAINING_END_EXCLUSIVE)
     attrs = [
         "body",
         "source_project_id",
